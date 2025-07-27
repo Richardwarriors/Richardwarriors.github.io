@@ -7,75 +7,76 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #ffffff;
+      background-color: #fdfdfd;
       color: #333;
+      line-height: 1.6;
     }
     header {
-      background-color: #f8f8f8;
-      padding: 20px 40px;
-      border-bottom: 1px solid #ddd;
+      background-color: #fff;
+      padding: 30px 60px;
+      border-bottom: 2px solid #eee;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
     header h1 {
-      margin: 0;
-      font-size: 24px;
+      font-size: 28px;
+      color: #111;
     }
     nav a {
-      margin-left: 20px;
+      margin-left: 30px;
       text-decoration: none;
       color: #333;
-      font-weight: bold;
+      font-weight: 600;
     }
     .container {
       display: flex;
-      padding: 40px;
-      max-width: 1000px;
+      flex-wrap: wrap;
+      padding: 50px 60px;
+      max-width: 1200px;
       margin: auto;
+      background-color: #fff;
     }
     .left-column {
       width: 30%;
       text-align: center;
-      padding-right: 40px;
+      padding: 20px;
     }
     .left-column img {
-      width: 160px;
+      width: 180px;
       border-radius: 50%;
       margin-bottom: 20px;
     }
     .left-column h2 {
-      margin: 10px 0 5px;
+      margin: 15px 0 5px;
     }
     .left-column p {
       margin: 5px 0;
-      color: #777;
+      color: #666;
     }
     .icons a {
-      margin: 0 8px;
+      margin: 0 10px;
       color: #0056d2;
-      font-size: 24px;
-      text-decoration: none;
-    }
-    .icons a:hover {
-      color: #000;
+      font-size: 22px;
     }
     .right-column {
       width: 70%;
+      padding: 20px 40px;
     }
     .section-title {
-      font-size: 22px;
-      margin-top: 0;
-      margin-bottom: 10px;
+      font-size: 26px;
+      margin-bottom: 15px;
       border-bottom: 2px solid #ddd;
-      padding-bottom: 5px;
+      padding-bottom: 6px;
     }
     .two-column {
       display: flex;
       justify-content: space-between;
+      gap: 30px;
     }
     .column {
       width: 48%;
@@ -83,11 +84,14 @@
     ul {
       padding-left: 20px;
     }
+    li {
+      margin-bottom: 8px;
+    }
     .school-logo {
       width: 18px;
       height: 18px;
       vertical-align: text-bottom;
-      margin-right: 5px;
+      margin-right: 6px;
     }
   </style>
 </head>
@@ -97,7 +101,7 @@
   <h1>Richard He</h1>
   <nav>
     <a href="#home">Home</a>
-    <a href="#about">AboutMe</a>
+    <a href="#about">About Me</a>
     <a href="#publications">Publications</a>
     <a href="#cv">CV</a>
   </nav>
@@ -120,16 +124,21 @@
   <div class="right-column">
     <h2 class="section-title">Biography</h2>
     <p>
-      I am a PhD student at University of Maryland, Baltimore County, working on privacy in recommender systems, unlearning methods, and security-aware AI. During my undergraduate studies at University XYZ, I worked on membership inference attacks and differential privacy with Prof. ABC. I am currently seeking 2025 summer internship opportunities. Feel free to reach out to me via LinkedIn or email.
+      I am a PhD student in Computer Science at University of Maryland, Baltimore County (UMBC), working on developing advanced Recommender Systems (RecSys), including LLM-based and multimodal RecSys, as well as user privacy problems in industrial RecSys under the guidance of Prof. Keke Chen.
+    </p>
+    <p>
+      Before joining UMBC, I worked as a researcher in the Computer Science Department at Marquette University and served as a data scientist at <strong>HireBeat Inc.</strong>.
     </p>
 
     <div class="two-column">
       <div class="column">
         <h2 class="section-title">Interests</h2>
         <ul>
-          <li>Privacy in Recommender Systems</li>
+          <li>Privacy and Security</li>
           <li>Machine Unlearning</li>
-          <li>Differential Privacy</li>
+          <li>Recommender Systems</li>
+          <li>Large Language Models and Multimodal Learning</li>
+          <li>LLM Agents</li>
         </ul>
       </div>
 
