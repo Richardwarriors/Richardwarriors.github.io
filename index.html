@@ -3,83 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jiajie He | Personal Website</title>
+  <title>Richard He | Personal Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px auto;
-      max-width: 800px;
-      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
       color: #333;
     }
-    .title {
-      font-size: 36px;
-      font-weight: bold;
-      text-align: center;
+    header {
+      background-color: #f8f8f8;
+      padding: 20px 40px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .subtitle {
-      font-size: 18px;
-      color: #555;
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    .container {
+      display: flex;
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .left-column {
+      width: 30%;
       text-align: center;
-      margin-bottom: 30px;
+      padding-right: 40px;
+    }
+    .left-column img {
+      width: 160px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    .left-column h2 {
+      margin: 10px 0 5px;
+    }
+    .left-column p {
+      margin: 5px 0;
+      color: #777;
+    }
+    .icons a {
+      margin: 0 8px;
+      color: #0056d2;
+      font-size: 24px;
+      text-decoration: none;
+    }
+    .icons a:hover {
+      color: #000;
+    }
+    .right-column {
+      width: 70%;
     }
     .section-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 40px;
-      border-bottom: 2px solid #ccc;
+      font-size: 22px;
+      margin-top: 0;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #ddd;
       padding-bottom: 5px;
+    }
+    .two-column {
+      display: flex;
+      justify-content: space-between;
+    }
+    .column {
+      width: 48%;
     }
     ul {
       padding-left: 20px;
-    }
-    .contact-icons img {
-      width: 24px;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-    .center {
-      text-align: center;
-    }
-    .profile-img {
-      width: 150px;
-      border-radius: 50%;
-      display: block;
-      margin: 0 auto 20px;
     }
   </style>
 </head>
 <body>
 
-  <img class="profile-img" src="your-photo.jpg" alt="Profile Photo">
-  <div class="title">Jiajie He</div>
-  <div class="subtitle">PhD Student in [Your Field]<br>[Your University]</div>
+<header>
+  <h1>Richard He</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">AboutMe</a>
+    <a href="#publications">Publications</a>
+    <a href="#cv">CV</a>
+  </nav>
+</header>
 
-  <div class="section-title">Biography</div>
-  <p>
-    I am a PhD student at [University], working on [your research topics]. During my undergraduate study at [University], I worked with [Prof. Name] on [your project]. I am passionate about applying machine learning to [field].
-  </p>
-
-  <div class="section-title">Interests</div>
-  <ul>
-    <li>Privacy in Recommender Systems</li>
-    <li>Machine Unlearning</li>
-    <li>Differential Privacy</li>
-  </ul>
-
-  <div class="section-title">Education</div>
-  <ul>
-    <li><b>Ph.D. in [Field]</b>, [University], [Year]–Present</li>
-    <li><b>M.S. in [Field]</b>, [University], [Year]–[Year]</li>
-    <li><b>B.S. in [Field]</b>, [University], [Year]–[Year]</li>
-  </ul>
-
-  <div class="section-title">Contact</div>
-  <div class="center contact-icons">
-    <a href="mailto:your@email.com"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/gmail.svg" alt="Email"></a>
-    <a href="https://linkedin.com/in/yourprofile"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/linkedin.svg" alt="LinkedIn"></a>
-    <a href="your-cv.pdf"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/readthedocs.svg" alt="CV"></a>
+<div class="container">
+  <div class="left-column">
+    <img src="jiajie_he.jpg" alt="Richard He">
+    <h2>Richard He</h2>
+    <p>PhD student in Computer Science</p>
+    <p>University of Maryland, Baltimore County</p>
+    <div class="icons">
+      <a href="mailto:jiajieh1@umbc.edu" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/jiajie-he-672673243/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://scholar.google.com/citations?hl=en&user=LJQkxOUAAAAJ" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+      <a href="jiajie_he_cv.pdf" title="CV"><i class="fas fa-file-alt"></i></a>
+    </div>
   </div>
+
+  <div class="right-column">
+    <h2 class="section-title">Biography</h2>
+    <p>
+      I am a PhD student at University of Maryland, Baltimore County, working on privacy in recommender systems, unlearning methods, and security-aware AI. During my undergraduate studies at University XYZ, I worked on membership inference attacks and differential privacy with Prof. ABC. I am currently seeking 2025 summer internship opportunities. Feel free to reach out to me via LinkedIn or email.
+    </p>
+
+    <div class="two-column">
+      <div class="column">
+        <h2 class="section-title">Interests</h2>
+        <ul>
+          <li>Privacy in Recommender Systems</li>
+          <li>Machine Unlearning</li>
+          <li>Differential Privacy</li>
+        </ul>
+      </div>
+
+    <div class="two-column">
+      <div class="column">
+        <h2 class="section-title">Interests</h2>
+        <ul>
+          <li>Privacy in Recommender Systems</li>
+          <li>Machine Unlearning</li>
+          <li>Differential Privacy</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h2 class="section-title">Education</h2>
+        <ul>
+          <li><b>Ph.D. in Computer Science</b>, <a href="https://umbc.edu" target="_blank"><img class="school-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e0/UMBC_Retrievers_logo.svg/1200px-UMBC_Retrievers_logo.svg.png" alt="UMBC">University of Maryland, Baltimore County</a>, 2023–Present</li>
+          <li><b>M.S. in Electrical and Computer Engineering</b>, <a href="https://www.usc.edu" target="_blank"><img class="school-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/USC_Trojans_logo.svg/1200px-USC_Trojans_logo.svg.png" alt="USC">University of Southern California</a>, 2021–2023</li>
+          <li><b>B.S. in Optics</b>, <a href="https://www.usnews.com/education/best-global-universities/changchun-university-of-science-technology-529860" target="_blank"><img class="school-logo" src="https://zh.wikipedia.org/zh-hans/%E9%95%BF%E6%98%A5%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6#/media/File:Cust_logo.jpg" alt="CUST">Changchun University of Science and Technology</a>, 2017–2021</li>
+          <li><b>Summer School in Electrical Engineering</b>, <a href="https://www.ucla.edu" target="_blank"><img class="school-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/UCLA_Logo.svg/1920px-UCLA_Logo.svg.png" alt="UCLA">University of California, Los Angeles</a>, Summer 2019</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
