@@ -70,19 +70,26 @@
     }
 
     .pub-container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
-      padding: 0 20px 40px;
+      padding: 0 20px 60px;
+    }
+
+    .pub-year-group {
+      margin-bottom: 30px;
+    }
+
+    .pub-year-header {
+      font-size: 24px;
+      font-weight: bold;
+      color: #e0e0e0;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
     }
 
     .pub-block {
-      border-top: 1px solid #ddd;
-      padding: 20px 0;
-      position: relative;
-    }
-
-    .pub-block:last-child {
-      border-bottom: 1px solid #ddd;
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
     }
 
     .pub-title {
@@ -96,17 +103,8 @@
       margin-bottom: 4px;
     }
 
-    .pub-year {
-      position: absolute;
-      top: 20px;
-      right: 0;
-      font-size: 24px;
-      color: #e0e0e0;
-      font-weight: bold;
-    }
-
     .pub-buttons {
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .pub-buttons button {
@@ -139,66 +137,72 @@
 
   <h1>PUBLICATIONS</h1>
   <div class="pub-container">
-    <div class="pub-block">
-      <div class="pub-title">RecPS: Privacy Risk Scoring for Recommender Systems (ACM RecSys'25)</div>
-      <div class="pub-authors"><strong>Jiajie He</strong>, Yuechun Gu and Keke Chen</div>
-      <div class="pub-year">2025</div>
-      <div class="pub-buttons">
-        <button>ABS</button>
-        <button>BIB</button>
-        <button>PDF</button>
+
+    <!-- 2025 -->
+    <div class="pub-year-group">
+      <div class="pub-year-header">2025</div>
+
+      <div class="pub-block">
+        <div class="pub-title">RecPS: Privacy Risk Scoring for Recommender Systems (ACM RecSys'25)</div>
+        <div class="pub-authors"><strong>Jiajie He</strong>, Yuechun Gu and Keke Chen</div>
+        <div class="pub-buttons">
+          <button>ABS</button><button>BIB</button><button>PDF</button>
+        </div>
+      </div>
+
+      <div class="pub-block">
+        <div class="pub-title">Adaptive Domain Inference Attack with Concept Hierarchy (SIGKDD'25)</div>
+        <div class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong> and Keke Chen</div>
+        <div class="pub-buttons">
+          <button>ABS</button><button>BIB</button><button>PDF</button>
+        </div>
+      </div>
+
+      <div class="pub-block">
+        <div class="pub-title">Volume-Wise Task fMRI Decoding with Deep Learning (arxiv)</div>
+        <div class="pub-authors">Yueyang Wu, Sinan Yang, Yanming Wang, <strong>Jiajie He</strong>, et al.</div>
+        <div class="pub-buttons">
+          <button>ABS</button><button>PDF</button>
+        </div>
       </div>
     </div>
 
-    <div class="pub-block">
-      <div class="pub-title">Adaptive Domain Inference Attack with Concept Hierarchy (SIGKDD'25)</div>
-      <div class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong> and Keke Chen</div>
-      <div class="pub-year">2025</div>
-      <div class="pub-buttons">
-        <button>ABS</button>
-        <button>BIB</button>
-        <button>PDF</button>
+    <!-- 2024 -->
+    <div class="pub-year-group">
+      <div class="pub-year-header">2024</div>
+
+      <div class="pub-block">
+        <div class="pub-title">FT-PrivacyScore: Personalized Privacy Scoring Service for Machine Learning Participation (ACM CCS'24)</div>
+        <div class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</div>
+        <div class="pub-buttons">
+          <button>ABS</button><button>PDF</button>
+        </div>
       </div>
     </div>
 
-    <div class="pub-block">
-      <div class="pub-title">Volume-Wise Task fMRI Decoding with Deep Learning: Enhancing Temporal Resolution and Cognitive Function Analysis (arxiv)</div>
-      <div class="pub-authors">Yueyang Wu, Sinan Yang, Yanming Wang, <strong>Jiajie He</strong>, Muhammad Mohsin Pathan, Bensheng Qiu, and Xiaoxiao Wang</div>
-      <div class="pub-year">2025</div>
-      <div class="pub-buttons">
-        <button>ABS</button>
-        <button>PDF</button>
+    <!-- 2021 -->
+    <div class="pub-year-group">
+      <div class="pub-year-header">2021</div>
+
+      <div class="pub-block">
+        <div class="pub-title">White matter hyperintensities induce distal deficits in the connected fibers (Human Brain Mapping)</div>
+        <div class="pub-authors">Yanpeng Liu, Yiwei Xia, Xiaoxiao Wang, <strong>Jiajie He</strong>, et al.</div>
+        <div class="pub-buttons">
+          <button>ABS</button><button>PDF</button>
+        </div>
       </div>
     </div>
 
-    <div class="pub-block">
-      <div class="pub-title">FT-PrivacyScore: Personalized Privacy Scoring Service for Machine Learning Participation (ACM CCS'24)</div>
-      <div class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</div>
-      <div class="pub-year">2024</div>
-      <div class="pub-buttons">
-        <button>ABS</button>
-        <button>PDF</button>
-      </div>
-    </div>
+    <!-- 2020 -->
+    <div class="pub-year-group">
+      <div class="pub-year-header">2020</div>
 
-    <div class="pub-block">
-      <div class="pub-title">White matter hyperintensities induce distal deficits in the connected fibers (Human Brain Mapping)</div>
-      <div class="pub-authors">Yanpeng Liu, Yiwei Xia, Xiaoxiao Wang, Yanming Wang, Du Zhang, Benedictor Alexander Nguchu, <strong>Jiajie He</strong>, Yi Wang, Lumeng Yang, Yiqing Wang, Yunqing Ying, Xiaoniu Liang, Qianhua Zhao, Jianjun Wu, Zonghui Liang, Ding Ding, Qiang Dong, Bensheng Qiu, Xin Cheng, Jia‐Hong Gao</div>
-      <div class="pub-year">2021</div>
-      <div class="pub-buttons">
-        <button>ABS</button>
-        <button>PDF</button>
-      </div>
-    </div>
-
-    <div class="pub-block">
-      <div class="pub-title">Comparison between The ultra-wide band gap semiconductor AlGaN and GaN (IOP Conference Series: Materials Science and Engineering)</div>
-      <div class="pub-authors"><strong>Jiajie He</strong></em></div>
-      <div class="pub-year">2020</div>
-      <div class="pub-buttons">
-        <button>ABS</button>
-        <button>BIB</button>
-        <button>PDF</button>
+      <div class="pub-block">
+        <div class="pub-title">Comparison between The ultra-wide band gap semiconductor AlGaN and GaN (IOP Conference Series)</div>
+        <div class="pub-authors"><strong>Jiajie He</strong></div>
+        <div class="pub-buttons">
+          <button>ABS</button><button>BIB</button><button>PDF</button>
+        </div>
       </div>
     </div>
 
@@ -206,8 +210,7 @@
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('nav-menu');
-      menu.classList.toggle('show');
+      document.getElementById('nav-menu').classList.toggle('show');
     }
   </script>
 </body>
