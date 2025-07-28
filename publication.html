@@ -1,52 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publication - Jiajie He</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Publications - Jiajie He</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f2f4f8;
+      background-color: #fafafa;
       margin: 0;
       padding: 0;
       color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+      background-color: #2962ff;
+      padding: 10px 20px;
+      color: white;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .navbar .menu {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .navbar .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #2962ff;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 10px 0;
+      }
+      .navbar .menu.show {
+        display: flex;
+      }
+      .navbar .menu-toggle {
+        display: block;
+      }
     }
 
     h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+      text-align: center;
+      margin: 40px 0 20px;
     }
 
-    p {
-      font-size: 20px;
-      color: #666;
+    .pub-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 0 20px 40px;
     }
 
-    .spinner {
-      margin-top: 20px;
-      width: 40px;
-      height: 40px;
-      border: 4px solid #ccc;
-      border-top: 4px solid #2962ff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .pub-block {
+      border-top: 1px solid #ddd;
+      padding: 20px 0;
+      position: relative;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .pub-block:last-child {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .pub-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .pub-authors {
+      color: #444;
+      margin-bottom: 4px;
+    }
+
+    .pub-year {
+      position: absolute;
+      top: 20px;
+      right: 0;
+      font-size: 24px;
+      color: #e0e0e0;
+      font-weight: bold;
+    }
+
+    .pub-buttons {
+      margin-top: 10px;
+    }
+
+    .pub-buttons button {
+      margin-right: 10px;
+      padding: 6px 12px;
+      border: 1px solid #2962ff;
+      background: white;
+      color: #2962ff;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .pub-buttons button:hover {
+      background-color: #2962ff;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <h1>Portfolio</h1>
-  <p>Page under construction. Please stay tuned!</p>
-  <div class="spinner"></div>
+  <nav class="navbar">
+    <div class="logo">Jiajie He</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="experience.html">Experience</a>
+      <a href="portfolio.html">Portfolio</a>
+    </div>
+  </nav>
+
+  <h1>PUBLICATIONS</h1>
+  <div class="pub-container">
+    <div class="pub-block">
+      <div class="pub-title">RecPS: Privacy Risk Scoring for Recommender Systems (ACM RecSys'25)</div>
+      <div class="pub-authors"><strong>Jiajie He</strong>, Yuechun Gu and Keke Chen</div>
+      <div class="pub-year">2025</div>
+      <div class="pub-buttons">
+        <button>ABS</button>
+        <button>BIB</button>
+        <button>PDF</button>
+      </div>
+    </div>
+
+    <div class="pub-block">
+      <div class="pub-title">Adaptive Domain Inference Attack with Concept Hierarchy (SIGKDD'25)</div>
+      <div class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong> and Keke Chen</div>
+      <div class="pub-year">2025</div>
+      <div class="pub-buttons">
+        <button>ABS</button>
+        <button>BIB</button>
+        <button>PDF</button>
+      </div>
+    </div>
+
+    <div class="pub-block">
+      <div class="pub-title">Volume-Wise Task fMRI Decoding with Deep Learning: Enhancing Temporal Resolution and Cognitive Function Analysis (arxiv)</div>
+      <div class="pub-authors">Yueyang Wu, Sinan Yang, Yanming Wang, <strong>Jiajie He</strong>, Muhammad Mohsin Pathan, Bensheng Qiu, and Xiaoxiao Wang</div>
+      <div class="pub-year">2025</div>
+      <div class="pub-buttons">
+        <button>ABS</button>
+        <button>PDF</button>
+      </div>
+    </div>
+
+    <div class="pub-block">
+      <div class="pub-title">FT-PrivacyScore: Personalized Privacy Scoring Service for Machine Learning Participation (ACM CCS'24)</div>
+      <div class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</div>
+      <div class="pub-year">2024</div>
+      <div class="pub-buttons">
+        <button>ABS</button>
+        <button>PDF</button>
+      </div>
+    </div>
+
+    <div class="pub-block">
+      <div class="pub-title">White matter hyperintensities induce distal deficits in the connected fibers (Human Brain Mapping)</div>
+      <div class="pub-authors">Yanpeng Liu, Yiwei Xia, Xiaoxiao Wang, Yanming Wang, Du Zhang, Benedictor Alexander Nguchu, <strong>Jiajie He</strong>, Yi Wang, Lumeng Yang, Yiqing Wang, Yunqing Ying, Xiaoniu Liang, Qianhua Zhao, Jianjun Wu, Zonghui Liang, Ding Ding, Qiang Dong, Bensheng Qiu, Xin Cheng, Jia‐Hong Gao</div>
+      <div class="pub-year">2021</div>
+      <div class="pub-buttons">
+        <button>ABS</button>
+        <button>PDF</button>
+      </div>
+    </div>
+
+    <div class="pub-block">
+      <div class="pub-title">Comparison between The ultra-wide band gap semiconductor AlGaN and GaN (IOP Conference Series: Materials Science and Engineering)</div>
+      <div class="pub-authors"><strong>Jiajie He</strong></em></div>
+      <div class="pub-year">2020</div>
+      <div class="pub-buttons">
+        <button>ABS</button>
+        <button>BIB</button>
+        <button>PDF</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      menu.classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
