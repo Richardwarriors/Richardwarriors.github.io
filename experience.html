@@ -2,67 +2,137 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Experience | Jiajie He</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experience - Jiajie He</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
       margin: 0;
-      padding: 0;
-      background-color: #fdfdfd;
+      padding: 40px;
       color: #333;
-      line-height: 1.6;
     }
-    header {
-      background-color: #fff;
-      padding: 30px 60px;
-      border-bottom: 2px solid #eee;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 {
-      font-size: 28px;
-    }
-    nav a {
-      margin-left: 30px;
-      text-decoration: none;
-      color: #333;
-      font-weight: 600;
-    }
-    .content {
-      padding: 40px 60px;
-      max-width: 1000px;
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
       margin: auto;
     }
-    .section-title {
-      font-size: 26px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 6px;
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: #2962ff;
+      top: 0;
+      bottom: 0;
+      left: 60px;
+      margin-left: -2px;
+    }
+
+    .timeline-item {
+      padding: 20px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 100%;
+    }
+
+    .timeline-item .timestamp {
+      position: absolute;
+      left: 0;
+      width: 60px;
+      text-align: center;
+      font-weight: bold;
+      color: #2962ff;
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-left: 80px;
+    }
+
+    .timeline-content h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .timeline-content h4 {
+      margin: 0 0 5px;
+      font-weight: normal;
+      color: #666;
+    }
+
+    .timeline-content small {
+      color: #999;
+    }
+
+    .timeline-content p {
+      margin: 6px 0;
     }
   </style>
 </head>
 <body>
+  <h1>Experience</h1>
+  <div class="timeline">
 
-<header>
-  <h1>Jiajie He</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="experience.html">Experience</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="publications.html">Publications</a>
-  </nav>
-</header>
+    <div class="timeline-item">
+      <div class="timestamp">2024</div>
+      <div class="timeline-content">
+        <h3>Graduate Research Assistant - UMBC</h3>
+        <h4>Baltimore, MD</h4>
+        <small>08/2024 – so far</small>
+      </div>
+    </div>
 
-<div class="content">
-  <h2 class="section-title">Experience</h2>
-  <ul>
-    <li><b>Research Assistant</b> – University of Maryland, Baltimore County (2024–Present)</li>
-    <li><b>Data Scientist</b> – HireBeat Inc. (Remote, 2022–2023)</li>
-    <li><b>Researcher</b> – Marquette University, Computer Science Dept. (2021–2022)</li>
-  </ul>
-</div>
+    <div class="timeline-item">
+      <div class="timestamp">2024</div>
+      <div class="timeline-content">
+        <h3>Computer Science Research Assistant - Marquette University</h3>
+        <h4>Milwaukee, WI</h4>
+        <small>05/2024 – 07/2024</small>
+      </div>
+    </div>
 
+    <div class="timeline-item">
+      <div class="timestamp">2023</div>
+      <div class="timeline-content">
+        <h3>Data Scientist - CodersData</h3>
+        <h4>Los Angeles, CA</h4>
+        <small>06/2023 – 03/2024</small>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timestamp">2023</div>
+      <div class="timeline-content">
+        <h3>Data Scientist Intern - Hirebeat Inc</h3>
+        <h4>Jersey City, NJ</h4>
+        <small>01/2023 – 05/2023</small>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timestamp">2021</div>
+      <div class="timeline-content">
+        <h3>Quant Analyst Intern - Jack Options Investment Management Co.Ltd</h3>
+        <h4>Shanghai, China</h4>
+        <small>01/2021 – 07/2021</small>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timestamp">2019</div>
+      <div class="timeline-content">
+        <h3>Researcher - University of Science and Technology of China(USTC)</h3>
+        <h4>Hefei, Anhui, China</h4>
+        <small>09/2019 – 12/2020</small>
+      </div>
+    </div>
+
+  </div>
 </body>
 </html>
+
