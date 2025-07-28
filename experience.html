@@ -30,20 +30,33 @@
       margin-left: -2px;
     }
 
+    .timeline-year {
+      position: relative;
+      padding: 20px 0;
+      text-align: left;
+      color: #2962ff;
+      font-size: 18px;
+      font-weight: bold;
+      margin-left: 20px;
+    }
+
     .timeline-item {
-      padding: 20px 40px;
+      padding: 10px 40px;
       position: relative;
       background-color: inherit;
       width: 100%;
     }
 
-    .timeline-item .timestamp {
+    .timeline-marker {
       position: absolute;
-      left: 0;
-      width: 60px;
-      text-align: center;
-      font-weight: bold;
-      color: #2962ff;
+      left: 55px;
+      width: 12px;
+      height: 12px;
+      background-color: #2962ff;
+      border-radius: 50%;
+      z-index: 1;
+      top: 20px;
+      box-shadow: 0 0 0 3px #fff;
     }
 
     .timeline-content {
@@ -52,6 +65,7 @@
       border-radius: 6px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       margin-left: 80px;
+      position: relative;
     }
 
     .timeline-content h3 {
@@ -72,32 +86,48 @@
     .timeline-content p {
       margin: 6px 0;
     }
+
+    .timeline-content a {
+      color: #2962ff;
+      text-decoration: none;
+    }
+
+    .timeline-content a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <h1>Experience</h1>
   <div class="timeline">
 
+    <div class="timeline-year">2024</div>
+
     <div class="timeline-item">
-      <div class="timestamp">2024</div>
+      <div class="timeline-marker"></div>
       <div class="timeline-content">
         <h3>Graduate Research Assistant - UMBC</h3>
+        <p style="margin: 2px 0;">
+          with <a href="https://sites.google.com/view/kekechen/researchtaic-lab?authuser=0" target="_blank">Trustworthy and Intelligent Computing Lab</a>
+        </p>
         <h4>Baltimore, MD</h4>
         <small>08/2024 – so far</small>
       </div>
     </div>
 
     <div class="timeline-item">
-      <div class="timestamp">2024</div>
+      <div class="timeline-marker"></div>
       <div class="timeline-content">
-        <h3>Computer Science Research Assistant - Marquette University</h3>
+        <h3>Computer Science Researcher - Marquette University</h3>
         <h4>Milwaukee, WI</h4>
         <small>05/2024 – 07/2024</small>
       </div>
     </div>
 
+    <div class="timeline-year">2023</div>
+
     <div class="timeline-item">
-      <div class="timestamp">2023</div>
+      <div class="timeline-marker"></div>
       <div class="timeline-content">
         <h3>Data Scientist - CodersData</h3>
         <h4>Los Angeles, CA</h4>
@@ -106,7 +136,7 @@
     </div>
 
     <div class="timeline-item">
-      <div class="timestamp">2023</div>
+      <div class="timeline-marker"></div>
       <div class="timeline-content">
         <h3>Data Scientist Intern - Hirebeat Inc</h3>
         <h4>Jersey City, NJ</h4>
@@ -114,8 +144,10 @@
       </div>
     </div>
 
+    <div class="timeline-year">2021</div>
+
     <div class="timeline-item">
-      <div class="timestamp">2021</div>
+      <div class="timeline-marker"></div>
       <div class="timeline-content">
         <h3>Quant Analyst Intern - Jack Options Investment Management Co.Ltd</h3>
         <h4>Shanghai, China</h4>
@@ -123,11 +155,16 @@
       </div>
     </div>
 
+    <div class="timeline-year">2019</div>
+
     <div class="timeline-item">
-      <div class="timestamp">2019</div>
+      <div class="timeline-marker"></div>
       <div class="timeline-content">
-        <h3>Researcher - University of Science and Technology of China(USTC)</h3>
+        <h3>Researcher - University of Science and Technology of China (USTC)</h3>
         <h4>Hefei, Anhui, China</h4>
+        <p style="margin: 2px 0;">
+          with <a href="https://faculty.ustc.edu.cn/qiubensheng/zh_CN/index.htm" target="_blank">Prof. Bensheng Qiu</a>
+        </p>
         <small>09/2019 – 12/2020</small>
       </div>
     </div>
@@ -135,4 +172,3 @@
   </div>
 </body>
 </html>
-
