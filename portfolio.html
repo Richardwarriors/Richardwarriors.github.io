@@ -1,52 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Jiajie He</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio – Jiajie He</title>
+
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
+
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f2f4f8;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+    :root {
+      --primary: #2962ff;
+      --bg: #f2f4f8;
+      --text: #333;
+      --muted: #666;
     }
 
-    h1 {
-      font-size: 36px;
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    header h1 {
+      font-size: 48px;
       margin-bottom: 10px;
     }
 
-    p {
+    header p {
       font-size: 20px;
-      color: #666;
+      color: var(--muted);
+      max-width: 600px;
     }
 
-    .spinner {
+    section {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    section h2 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    /* -------- Gallery -------- */
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* -------- Lightbox -------- */
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    /* -------- Map -------- */
+
+    #map {
+      width: 100%;
+      height: 500px;
+      border-radius: 14px;
+      margin-top: 40px;
+    }
+
+    .countries-info {
+      text-align: center;
       margin-top: 20px;
-      width: 40px;
-      height: 40px;
-      border: 4px solid #ccc;
-      border-top: 4px solid #2962ff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+      color: var(--muted);
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
-  <h1>Portfolio</h1>
-  <p>Page under construction. Please stay tuned!</p>
-  <div class="spinner"></div>
+  <!-- Hero -->
+  <header>
+    <h1>Jiajie He</h1>
+    <p>
+      Researcher & Photographer.<br />
+      Exploring the world through data, models, and a camera.
+    </p>
+  </header>
+
+  <!-- Photography -->
+  <section>
+    <h2>Photography</h2>
+    <div class="gallery-grid">
+      <!-- 替换成你自己的图片路径 -->
+      <img src="photos/japan.jpg" alt="Japan" />
+      <img src="photos/france.jpg" alt="France" />
+      <img src="photos/iceland.jpg" alt="Iceland" />
+      <img src="photos/usa.jpg" alt="USA" />
+      <img src="photos/china.jpg" alt="China" />
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Expanded view" />
+  </div>
+
+  <!-- Map -->
+  <section>
+    <h2>Countries I’ve Been To</h2>
+    <div id="map"></div>
+    <div class="countries-info">
+      Highlighted countries represent places I have visited.
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Jiajie He ·
+    <a href="mailto:your@email.com">Email</a> ·
+    <a href="https://github.com/yourname" target="_blank">GitHub</a>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    /* ---------- Lightbox ---------- */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+
+    document.querySelectorAll(".gallery-grid img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("active");
+    });
+
+    /* ---------- Map ---------- */
+    const map = L.map("map").setView([20, 0], 2);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors"
+    }).addTo(map);
+
+    // 你去过的国家（ISO Alpha-2）
+    const visitedCountries = ["JP", "FR", "IS", "US", "CN"];
+
+    fetch(
+      "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
+    )
+      .then(res => res.json())
+      .then(data => {
+        L.geoJSON(data, {
+          style: feature => {
+            const visited = visitedCountries.includes(feature.id);
+            return {
+              fillColor: visited ? "#2962ff" : "#cccccc",
+              fillOpacity: visited ? 0.7 : 0.2,
+              color: "#555",
+              weight: 1
+            };
+          },
+          onEachFeature: (feature, layer) => {
+            if (visitedCountries.includes(feature.id)) {
+              layer.bindTooltip(feature.properties.name, {
+                sticky: true
+              });
+            }
+          }
+        }).addTo(map);
+      });
+  </script>
 </body>
 </html>
