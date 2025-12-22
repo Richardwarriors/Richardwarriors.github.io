@@ -6,10 +6,7 @@
   <title>Portfolio – Jiajie He</title>
 
   <!-- Leaflet -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
   <style>
     :root {
@@ -19,13 +16,9 @@
       --muted: #666;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -62,9 +55,7 @@
       font-weight: 500;
     }
 
-    nav a:hover {
-      color: var(--primary);
-    }
+    nav a:hover { color: var(--primary); }
 
     /* -------- Hero -------- */
     header {
@@ -79,10 +70,7 @@
       padding-right: 20px;
     }
 
-    header h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
+    header h1 { font-size: 48px; margin-bottom: 10px; }
 
     header p {
       font-size: 20px;
@@ -140,9 +128,7 @@
       border-radius: 8px;
     }
 
-    .lightbox.active {
-      display: flex;
-    }
+    .lightbox.active { display: flex; }
 
     /* -------- Map -------- */
     #map {
@@ -170,14 +156,18 @@
       margin: 0 8px;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    footer a:hover { text-decoration: underline; }
+
+    /* Flag marker style */
+    .flag-marker {
+      font-size: 22px;
+      line-height: 22px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
     }
   </style>
 </head>
 
 <body>
-
   <!-- Navbar -->
   <nav>
     <div class="nav-container">
@@ -186,7 +176,7 @@
       <a href="#map-section">Map</a>
     </div>
   </nav>
-  
+
   <!-- Hero -->
   <header id="home">
     <h1>Jiajie He</h1>
@@ -248,38 +238,90 @@
     });
 
     /* ---------- Map ---------- */
-    const map = L.map("map").setView([20, 0], 2);
+    const map = L.map("map").setView([25, 0], 2);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "© OpenStreetMap contributors"
     }).addTo(map);
 
-    // China = CN, US = US, UK = GB, Canada = CA
-    const visitedCountries = ["CN", "US", "GB", "CA"];
+    // We will match BOTH alpha-2 and alpha-3 (because different geojson sources differ)
+    const visitedA2 = new Set(["CN", "US", "GB", "CA"]);
+    const visitedA3 = new Set(["CHN", "USA", "GBR", "CAN"]);
 
-    fetch(
-      "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
-    )
+    // Flag markers (rough country centers)
+    const flags = [
+      { name: "China", code: "CN", emoji: "🇨🇳", lat: 35.8617, lng: 104.1954 },
+      { name: "United States", code: "US", emoji: "🇺🇸", lat: 39.8283, lng: -98.5795 },
+      { name: "United Kingdom", code: "GB", emoji: "🇬🇧", lat: 55.3781, lng: -3.4360 },
+      { name: "Canada", code: "CA", emoji: "🇨🇦", lat: 56.1304, lng: -106.3468 }
+    ];
+
+    // Helper: detect country code from feature (robust)
+    function getCodes(feature) {
+      const id = (feature && feature.id) ? String(feature.id).toUpperCase() : "";
+      const p = (feature && feature.properties) ? feature.properties : {};
+
+      const a2 =
+        (p.iso_a2 && String(p.iso_a2).toUpperCase()) ||
+        (p.ISO_A2 && String(p.ISO_A2).toUpperCase()) ||
+        (p["Alpha-2"] && String(p["Alpha-2"]).toUpperCase()) ||
+        (id.length === 2 ? id : "");
+
+      const a3 =
+        (p.iso_a3 && String(p.iso_a3).toUpperCase()) ||
+        (p.ISO_A3 && String(p.ISO_A3).toUpperCase()) ||
+        (p["Alpha-3"] && String(p["Alpha-3"]).toUpperCase()) ||
+        (id.length === 3 ? id : "");
+
+      return { a2, a3 };
+    }
+
+    fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
       .then(res => res.json())
       .then(data => {
-        L.geoJSON(data, {
+        const layer = L.geoJSON(data, {
           style: feature => {
-            const visited = visitedCountries.includes(feature.id);
+            const { a2, a3 } = getCodes(feature);
+            const visited = visitedA2.has(a2) || visitedA3.has(a3);
+
             return {
-              fillColor: visited ? "#2962ff" : "#cccccc",
-              fillOpacity: visited ? 0.7 : 0.2,
-              color: "#555",
-              weight: 1
+              fillColor: visited ? "#2962ff" : "#d7d7d7",
+              fillOpacity: visited ? 0.6 : 0.15,
+              color: visited ? "#1f47c6" : "#666",
+              weight: visited ? 1.4 : 1
             };
           },
-          onEachFeature: (feature, layer) => {
-            if (visitedCountries.includes(feature.id)) {
-              layer.bindTooltip(feature.properties.name, {
-                sticky: true
-              });
+          onEachFeature: (feature, lyr) => {
+            const { a2, a3 } = getCodes(feature);
+            const visited = visitedA2.has(a2) || visitedA3.has(a3);
+
+            if (visited) {
+              const name =
+                (feature.properties && feature.properties.name) ||
+                (feature.properties && feature.properties.NAME) ||
+                "Visited";
+
+              lyr.bindTooltip(name, { sticky: true });
             }
           }
         }).addTo(map);
+
+        // Add flag markers on top
+        flags.forEach(f => {
+          const icon = L.divIcon({
+            className: "flag-marker",
+            html: `<div class="flag-marker" title="${f.name}">${f.emoji}</div>`,
+            iconSize: [22, 22],
+            iconAnchor: [11, 11]
+          });
+
+          L.marker([f.lat, f.lng], { icon })
+            .addTo(map)
+            .bindTooltip(f.name, { sticky: true });
+        });
+      })
+      .catch(err => {
+        console.error("Failed to load geojson:", err);
       });
   </script>
 </body>
