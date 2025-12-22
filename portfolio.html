@@ -23,6 +23,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -32,14 +36,47 @@
       line-height: 1.6;
     }
 
+    /* -------- Navbar -------- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* -------- Hero -------- */
     header {
       height: 100vh;
+      padding-top: 80px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 0 20px;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
     header h1 {
@@ -66,7 +103,6 @@
     }
 
     /* -------- Gallery -------- */
-
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -88,7 +124,6 @@
     }
 
     /* -------- Lightbox -------- */
-
     .lightbox {
       position: fixed;
       inset: 0;
@@ -110,7 +145,6 @@
     }
 
     /* -------- Map -------- */
-
     #map {
       width: 100%;
       height: 500px;
@@ -143,8 +177,18 @@
 </head>
 
 <body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-container">
+      <a href="#home">Home</a>
+      <a href="#photography">Photography</a>
+      <a href="#map-section">Map</a>
+    </div>
+  </nav>
+
   <!-- Hero -->
-  <header>
+  <header id="home">
     <h1>Jiajie He</h1>
     <p>
       Researcher & Photographer & 3.H co-founder.<br />
@@ -153,10 +197,9 @@
   </header>
 
   <!-- Photography -->
-  <section>
+  <section id="photography">
     <h2>Photography</h2>
     <div class="gallery-grid">
-      <!-- 替换成你自己的图片路径 -->
       <img src="./photos/UK.png" alt="United Kingdom" />
       <img src="./photos/canada.png" alt="Canada" />
       <img src="./photos/USA.png" alt="United States" />
@@ -170,7 +213,7 @@
   </div>
 
   <!-- Map -->
-  <section>
+  <section id="map-section">
     <h2>Countries I’ve Been To</h2>
     <div id="map"></div>
     <div class="countries-info">
@@ -211,8 +254,9 @@
       attribution: "© OpenStreetMap contributors"
     }).addTo(map);
 
-    // 你去过的国家（ISO Alpha-2）
-    const visitedCountries = ["JP", "FR", "IS", "US", "CN"];
+    // 高亮国家（ISO Alpha-2）
+    // China = CN, US = US, UK = GB, Canada = CA
+    const visitedCountries = ["CN", "US", "GB", "CA"];
 
     fetch(
       "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
