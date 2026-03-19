@@ -2,239 +2,607 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jiajie He | Personal Website</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
+    :root {
+      --bg-1: #f8fbfc;
+      --bg-2: #eef4f7;
+      --surface: rgba(255, 255, 255, 0.8);
+      --surface-strong: #ffffff;
+      --text: #142535;
+      --muted: #4f6475;
+      --brand: #0f766e;
+      --brand-2: #0284c7;
+      --accent: #f59e0b;
+      --line: rgba(20, 37, 53, 0.12);
+      --ring: rgba(2, 132, 199, 0.22);
+      --shadow: 0 18px 42px rgba(20, 37, 53, 0.12);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.65;
+      background:
+        radial-gradient(1000px circle at -12% -20%, #d9f5ff 0%, transparent 45%),
+        radial-gradient(900px circle at 100% 0%, #d2faea 0%, transparent 40%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(20, 37, 53, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 37, 53, 0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(248, 251, 252, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-family: "Optima", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
+      font-size: 1.42rem;
+      letter-spacing: 0.2px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .brand:hover {
+      text-decoration: none;
+      opacity: 0.88;
+    }
+
+    .nav-list {
+      list-style: none;
       margin: 0;
       padding: 0;
-      background-color: #fdfdfd;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: #fff;
-      padding: 30px 60px;
-      border-bottom: 2px solid #eee;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    header h1 {
-      font-size: 28px;
-      color: #111;
-    }
-
-    nav a {
-      margin-left: 30px;
-      text-decoration: none;
-      color: #333;
-      font-weight: 600;
-    }
-
-    .container {
-      display: flex;
-      padding: 50px 60px;
-      max-width: 1200px;
-      margin: auto;
-      background-color: #fff;
-    }
-
-    .left-column {
-      width: 25%;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .left-column img {
-      width: 180px;
-      border-radius: 50%;
-      margin-bottom: 20px;
-    }
-
-    .left-column h2 {
-      margin: 15px 0 5px;
-    }
-
-    .left-column p {
-      margin: 5px 0;
-      color: #666;
-    }
-
-    .icons {
-      display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 20px;
+      gap: 8px;
     }
 
-    .icon-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 22px;
-      color: #0056d2;
+    .nav-list a {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: transform 160ms ease, background-color 160ms ease;
+    }
+
+    .nav-list a:hover {
       text-decoration: none;
+      background: #ffffff;
+      transform: translateY(-1px);
     }
 
-    .icon-block span {
-      font-size: 14px;
-      margin-top: 5px;
-      color: #333;
+    .layout {
+      max-width: 1200px;
+      margin: 28px auto 34px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
     }
 
-    .right-column {
-      width: 75%;
-      padding: 20px 40px;
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .profile-card {
+      position: sticky;
+      top: 92px;
+      padding: 26px 24px;
+      text-align: center;
+      animation: fade-up 580ms ease both;
+    }
+
+    .avatar {
+      width: 184px;
+      height: 184px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid var(--surface-strong);
+      box-shadow: 0 10px 24px rgba(20, 37, 53, 0.18);
+      margin-bottom: 14px;
+    }
+
+    .avatar-fallback {
+      width: 184px;
+      height: 184px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, 0.92), rgba(2, 132, 199, 0.92)),
+        #0f766e;
+      color: #ffffff;
+      font-family: "Optima", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
+      font-size: 3.1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      box-shadow: 0 10px 24px rgba(20, 37, 53, 0.18);
+      border: 5px solid var(--surface-strong);
+    }
+
+    .profile-name {
+      margin: 0;
+      font-family: "Optima", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
+      font-size: 1.58rem;
+      line-height: 1.2;
+    }
+
+    .profile-meta {
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .icon-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 30px;
+      height: 30px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: rgba(2, 132, 199, 0.12);
+      color: var(--brand-2);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .icon-link:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      border-color: var(--ring);
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.18);
+    }
+
+    .icon-link.is-muted,
+    .icon-link[aria-disabled="true"] {
+      color: var(--muted);
+      cursor: default;
+      border-style: dashed;
+    }
+
+    .icon-link.is-muted:hover,
+    .icon-link[aria-disabled="true"]:hover {
+      transform: none;
+      box-shadow: none;
+      text-decoration: none;
+      border-color: var(--line);
+    }
+
+    .content-card {
+      padding: 28px clamp(18px, 4vw, 36px);
+      animation: fade-up 620ms 80ms ease both;
+    }
+
+    .section + .section {
+      margin-top: 30px;
     }
 
     .section-title {
-      font-size: 26px;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 6px;
+      margin: 0 0 12px;
+      font-family: "Optima", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
+      font-size: clamp(1.35rem, 2vw, 1.7rem);
+      line-height: 1.25;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    ul {
-      padding-left: 20px;
+    .section-title::after {
+      content: "";
+      width: 44px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
     }
 
-    li {
-      margin-bottom: 8px;
+    .section p {
+      margin: 0 0 12px;
+      color: #253748;
+    }
+
+    .interest-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .interest-list li {
+      padding: 8px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      color: #21384e;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .news-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 118px 1fr;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      background: var(--surface-strong);
+    }
+
+    .news-date {
+      color: var(--brand);
+      font-weight: 800;
+      font-size: 0.88rem;
+      letter-spacing: 0.35px;
+    }
+
+    .news-content {
+      color: #233a4f;
+    }
+
+    .education-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .education-list li {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--surface-strong);
+      padding: 10px 12px;
     }
 
     .school-logo {
-      width: 100px;
-      height: 40px;
-      vertical-align: middle;
-      margin-right: 8px;
+      width: 78px;
+      height: 42px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid #e5edf3;
+      padding: 3px 6px;
+    }
+
+    .school-badge {
+      width: 78px;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ffffff, #e8f2f7);
+      border: 1px solid #d8e5ee;
+      color: var(--brand);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .education-list b {
+      color: #14283b;
+    }
+
+    .section-title.news {
+      color: #9a3412;
+    }
+
+    .section-title.news::after {
+      background: linear-gradient(90deg, #f59e0b, #ea580c);
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-list {
+        width: 100%;
+        gap: 6px;
+      }
+
+      .nav-list li {
+        flex: 1 0 auto;
+      }
+
+      .nav-list a {
+        width: 100%;
+        text-align: center;
+      }
+
+      .icon-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .news-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .education-list li {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .school-logo {
+        margin: 0 auto;
+      }
     }
   </style>
 </head>
 <body>
-
-<header>
-  <h1>Jiajie He</h1>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="experience.html">Experience</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="publication.html">Publications</a>
-  </nav>
-</header>
-
-<div class="container">
-  <!-- Left Column -->
-  <div class="left-column">
-    <img src="jiajie_he.jpg" alt="Jiajie He">
-    <h2>Jiajie He</h2>
-    <p>PhD candidate in Computer Science</p>
-    <p>University of Maryland, Baltimore County</p>
-    <div class="icons">
-      <a class="icon-block" href="mailto:jiajieh1@umbc.edu" title="Email">
-        <i class="fas fa-envelope"></i><span>Email</span>
-      </a>
-      <a class="icon-block" href="https://www.linkedin.com/in/jiajie-he-672673243/" title="LinkedIn">
-        <i class="fab fa-linkedin"></i><span>LinkedIn</span>
-      </a>
-      <a class="icon-block" href="https://scholar.google.com/citations?hl=en&user=LJQkxOUAAAAJ" title="Google Scholar">
-        <i class="fas fa-graduation-cap"></i><span>Google Scholar</span>
-      </a>
-      <a class="icon-block" href="jiajie_he_cv.pdf" title="CV">
-        <i class="fas fa-file-alt"></i><span>CV</span>
-      </a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#home">Jiajie He</a>
+      <nav aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="publication.html">Publications</a></li>
+        </ul>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <!-- Right Column -->
-  <div class="right-column">
-    <h2 class="section-title">Biography</h2>
-    <p>
-      I am a second-year PhD candidate in Computer Science at University of Maryland, Baltimore County (UMBC), working on developing advanced Recommender Systems (RecSys), including LLM-based and multimodal RecSys, as well as user privacy problems in industrial RecSys under the guidance of 
-      <a href="https://scholar.google.com/citations?user=9QWbxbYAAAAJ&hl=en" target="_blank">Prof. Keke Chen</a>.
-    </p>
-    <p>
-      Also, I am the Photographer and co-founder of 3H-Studio in 🇨🇳. I have lived and studied in the 🇬🇧 🇨🇳 🇺🇸.
-    </p>
-    <p>
-      Now, I am collaborating with Prof and researchers from 中国科学技术大学(USTC), Duke University, University of Southern California (USC) and University of Cincinnati (UC) on the the following areas of interest.
-      If you want to collaborate, please feel free to contact me. 
-    </p>
+  <main id="home" class="layout">
+    <aside class="card profile-card">
+      <div class="avatar-fallback" aria-label="Jiajie He initials">JH</div>
+      <h1 class="profile-name">Jiajie He</h1>
+      <p class="profile-meta">PhD Candidate in Computer Science</p>
+      <p class="profile-meta">University of Maryland, Baltimore County</p>
 
-    <h2 class="section-title">Research Interests</h2>
-    <ul>
-      <li>Privacy and Security</li>
-      <li>Machine Unlearning</li>
-      <li>Recommender Systems</li>
-      <li>Large Language Models and Multimodal Learning</li>
-      <li>LLM Agents</li>
-      <li>Medical Imaging (fMRI)</li>
-    </ul>
-    
-    <h2 id="news" class="section-title">🎉 🎉 🎉News 🎉 🎉 🎉</h2>
-    <ul class="news-list">
-    <li class="news-item">
-      <div class="news-date">2025-10-07</div>
-      <div class="news-content">
-        I passed the oral exam and preliminary exam to become the Ph.D Candidate
+      <div class="icon-grid">
+        <a class="icon-link" href="mailto:jiajieh1@umbc.edu" aria-label="Email">
+          <span class="icon-mark" aria-hidden="true">MAIL</span>
+          <span>Email</span>
+        </a>
+        <a
+          class="icon-link"
+          href="https://www.linkedin.com/in/jiajie-he-672673243/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <span class="icon-mark" aria-hidden="true">IN</span>
+          <span>LinkedIn</span>
+        </a>
+        <a
+          class="icon-link"
+          href="https://scholar.google.com/citations?hl=en&amp;user=LJQkxOUAAAAJ"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Google Scholar"
+        >
+          <span class="icon-mark" aria-hidden="true">SCH</span>
+          <span>Scholar</span>
+        </a>
+        <span class="icon-link is-muted" aria-disabled="true">
+          <span class="icon-mark" aria-hidden="true">CV</span>
+          <span>CV PDF</span>
+        </span>
       </div>
-    <li class="news-item">
-      <div class="news-date">2025-10-06</div>
-      <div class="news-content">
-        Invited to chair a session, one of IEEE CogMI 2025
-        (<a href="https://www.sis.pitt.edu/lersais/conference/cogmi/2025/" target="_blank">IEEE CogMI 2025</a>)
-      </div>
-    <li class="news-item">
-      <div class="news-date">2025-09-30</div>
-      <div class="news-content">
-        Invited Guest talk - DARS Lab
-        (<a href="https://damslabumbc.github.io/members/" target="_blank">DARS</a>)
-      </div>
-    <li class="news-item">
-      <div class="news-date">2025-09-16</div>
-      <div class="news-content">
-        Invited talk - Global Summit on Innovating the Future of Artificial Intelligence
-        (<a href="https://innoai.yuktan.com/?kuid=1f0d94c3-7aa2-47df-99ed-3d53fd543e47-1758251650&lid=14397&kref=u0z9BUsHeOYf" target="_blank">InnoAI 2026</a>)
-      </div>
-    </li>
-    </ul>
+    </aside>
 
-    <h2 class="section-title">Education</h2>
-    <ul>
-      <li>
-        <img class="school-logo" src="umbc.png" alt="UMBC">
-        <b>Ph.D. in Computer Science</b>, 
-        <a href="https://umbc.edu" target="_blank">University of Maryland, Baltimore County</a>, 2024–present
-      </li>
-      <li>
-        <img class="school-logo" src="usc.png" alt="USC">
-        <b>M.S. in Electrical Engineering</b>, 
-        <a href="https://www.usc.edu" target="_blank">University of Southern California</a>, 2021–2023
-      </li>
-      <li>
-        <img class="school-logo" src="cust.png" alt="CUST">
-        <b>B.S. in Optics</b>, 
-        <a href="https://sie.cust.edu.cn/" target="_blank">Changchun University of Science and Technology</a>, 2017–2021
-      </li>
-        <li>
-        <img class="school-logo" src="DSU.png" alt="DSU">
-        <b>B.S. in Electrical Engineering</b>, 
-        <a href="https://www.desu.edu/" target="_blank">Delaware State University(cooperation program)</a>, 2017–2021
-      </li>
-      <li>
-        <img class="school-logo" src="ucla.png" alt="UCLA">
-        <b>Summer School</b>, 
-        <a href="https://www.ucla.edu" target="_blank">University of California, Los Angeles</a>, Summer 2019
-      </li>
-    </ul>
-  </div>
-</div>
+    <article class="card content-card">
+      <section class="section" aria-labelledby="bio-title">
+        <h2 id="bio-title" class="section-title">Biography</h2>
+        <p>
+          I am a second-year PhD candidate in Computer Science at the University of Maryland, Baltimore County (UMBC). My work focuses on advanced recommender systems, including LLM-based and multimodal RecSys, and user privacy in industrial RecSys under the guidance of
+          <a href="https://scholar.google.com/citations?user=9QWbxbYAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Prof. Keke Chen</a>.
+        </p>
+        <p>
+          I am also the photographer and co-founder of 3H-Studio in China, and I have lived and studied in the UK, China, and the US.
+        </p>
+        <p>
+          I collaborate with researchers from USTC, Duke University, USC, and the University of Cincinnati. If you are interested in collaboration, feel free to reach out.
+        </p>
+      </section>
 
+      <section class="section" aria-labelledby="interest-title">
+        <h2 id="interest-title" class="section-title">Research Interests</h2>
+        <ul class="interest-list">
+          <li>Privacy and Security</li>
+          <li>Machine Unlearning</li>
+          <li>Recommender Systems</li>
+          <li>Large Language Models</li>
+          <li>Multimodal Learning</li>
+          <li>LLM Agents</li>
+          <li>Medical Imaging (fMRI)</li>
+        </ul>
+      </section>
+
+      <section id="news" class="section" aria-labelledby="news-title">
+        <h2 id="news-title" class="section-title news">News</h2>
+        <ul class="news-list">
+          <li class="news-item">
+            <div class="news-date">2025-10-07</div>
+            <div class="news-content">
+              I passed the oral exam and preliminary exam to become a PhD candidate.
+            </div>
+          </li>
+          <li class="news-item">
+            <div class="news-date">2025-10-06</div>
+            <div class="news-content">
+              Invited to chair a session at
+              <a href="https://www.sis.pitt.edu/lersais/conference/cogmi/2025/" target="_blank" rel="noopener noreferrer">IEEE CogMI 2025</a>.
+            </div>
+          </li>
+          <li class="news-item">
+            <div class="news-date">2025-09-30</div>
+            <div class="news-content">
+              Invited guest talk at
+              <a href="https://damslabumbc.github.io/members/" target="_blank" rel="noopener noreferrer">DARS Lab</a>.
+            </div>
+          </li>
+          <li class="news-item">
+            <div class="news-date">2025-09-16</div>
+            <div class="news-content">
+              Invited talk at the Global Summit on Innovating the Future of Artificial Intelligence
+              (<a href="https://innoai.yuktan.com/?kuid=1f0d94c3-7aa2-47df-99ed-3d53fd543e47-1758251650&amp;lid=14397&amp;kref=u0z9BUsHeOYf" target="_blank" rel="noopener noreferrer">InnoAI 2026</a>).
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" aria-labelledby="edu-title">
+        <h2 id="edu-title" class="section-title">Education</h2>
+        <ul class="education-list">
+          <li>
+            <span class="school-badge" aria-hidden="true">UMBC</span>
+            <div>
+              <b>PhD in Computer Science</b>,
+              <a href="https://umbc.edu" target="_blank" rel="noopener noreferrer">University of Maryland, Baltimore County</a>, 2024-present
+            </div>
+          </li>
+          <li>
+            <span class="school-badge" aria-hidden="true">USC</span>
+            <div>
+              <b>MS in Electrical Engineering</b>,
+              <a href="https://www.usc.edu" target="_blank" rel="noopener noreferrer">University of Southern California</a>, 2021-2023
+            </div>
+          </li>
+          <li>
+            <span class="school-badge" aria-hidden="true">CUST</span>
+            <div>
+              <b>BS in Optics</b>,
+              <a href="https://sie.cust.edu.cn/" target="_blank" rel="noopener noreferrer">Changchun University of Science and Technology</a>, 2017-2021
+            </div>
+          </li>
+          <li>
+            <span class="school-badge" aria-hidden="true">DSU</span>
+            <div>
+              <b>BS in Electrical Engineering</b>,
+              <a href="https://www.desu.edu/" target="_blank" rel="noopener noreferrer">Delaware State University (cooperation program)</a>, 2017-2021
+            </div>
+          </li>
+          <li>
+            <span class="school-badge" aria-hidden="true">UCLA</span>
+            <div>
+              <b>Summer School</b>,
+              <a href="https://www.ucla.edu" target="_blank" rel="noopener noreferrer">University of California, Los Angeles</a>, Summer 2019
+            </div>
+          </li>
+        </ul>
+      </section>
+    </article>
+  </main>
 </body>
 </html>
