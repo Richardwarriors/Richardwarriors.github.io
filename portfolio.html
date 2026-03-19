@@ -352,7 +352,7 @@
 
     .story-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 22px;
     }
 
@@ -422,7 +422,7 @@
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
       margin-top: 22px;
     }
@@ -772,6 +772,10 @@
       .hero-aside {
         min-height: 260px;
       }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 760px) {
@@ -833,7 +837,7 @@
           <span class="eyebrow">Portfolio</span>
           <h1 id="page-title" class="hero-title">Photography, travel, and visual stories beyond the lab.</h1>
           <p class="hero-text">
-            I am an amateur photographer who loves documenting places, atmosphere, and memory through images. Outside research, I share personal photography work and the places I have traveled, and I am also a co-founder of 3H-Studio in China.
+            I am an amateur photographer who enjoys documenting place, atmosphere, and memory through images. Outside research, photography gives me another way to tell stories from the countries where I have lived, studied, and traveled, and it is also part of the creative work I build through 3H-Studio in China.
           </p>
           <div class="chip-row" aria-label="Highlights">
             <span class="chip"><span class="chip-mark" aria-hidden="true"></span>Amateur photographer</span>
@@ -864,11 +868,11 @@
         </div>
         <div class="stat-card">
           <span class="stat-value">3</span>
-          <span class="stat-label">Regions connected</span>
+          <span class="stat-label">Lived and studied</span>
         </div>
         <div class="stat-card">
-          <span class="stat-value">1</span>
-          <span class="stat-label">Studio story</span>
+          <span class="stat-value">6</span>
+          <span class="stat-label">Gallery frames</span>
         </div>
       </div>
     </section>
@@ -878,7 +882,7 @@
         <article class="story-card">
           <h2 class="story-title">Behind the Lens</h2>
           <p class="story-copy">
-            Photography gives me a different way to observe the world. I enjoy capturing texture, place, light, and quiet moments that feel easy to miss when life moves too quickly.
+            Photography gives me a slower way to observe the world. I enjoy capturing texture, light, architecture, and quiet moments that feel easy to miss when life moves too quickly.
           </p>
           <span class="mini-badge">Personal interest</span>
         </article>
@@ -886,16 +890,24 @@
         <article class="story-card">
           <h2 class="story-title">3H-Studio</h2>
           <p class="story-copy">
-            I am the co-founder of 3H-Studio in China, where photography is both a creative practice and a way of building shared stories. This page brings that side of my work together with the places I have traveled.
+            I co-founded and help run 3H-Studio in China, where photography is both a creative practice and a way of building shared stories. This page brings that side of my life together with the places that shaped me.
           </p>
           <span class="mini-badge">Co-founder in China</span>
+        </article>
+
+        <article class="story-card">
+          <h2 class="story-title">What I Like to Capture</h2>
+          <p class="story-copy">
+            I am especially drawn to travel scenes, city atmosphere, portraits, and the small visual details that make a place feel personal rather than generic.
+          </p>
+          <span class="mini-badge">Travel and portrait work</span>
         </article>
       </section>
 
       <section id="photography" class="section-card" aria-labelledby="photography-title">
         <h2 id="photography-title" class="section-title">Photography Works</h2>
         <p class="section-copy">
-          A small country-based gallery for travel and photography memories. If local image files are available, they appear automatically; otherwise the page keeps clean visual placeholders.
+          A small gallery shaped by travel, studio work, and visual atmosphere. If local image files are available, they appear automatically; otherwise the page keeps clean visual placeholders that still preserve the overall design.
         </p>
 
         <div class="gallery-grid">
@@ -912,7 +924,7 @@
             </div>
             <figcaption class="photo-meta">
               <h3 class="photo-title">United Kingdom</h3>
-              <p class="photo-caption">A placeholder panel that becomes your UK gallery image when `photos/UK.png` exists.</p>
+              <p class="photo-caption">Images from a place connected to your study experience and a quieter visual mood.</p>
             </figcaption>
           </figure>
 
@@ -929,7 +941,7 @@
             </div>
             <figcaption class="photo-meta">
               <h3 class="photo-title">Canada</h3>
-              <p class="photo-caption">A clean fallback card now, ready for your Canada photography work later.</p>
+              <p class="photo-caption">A travel memory slot for landscapes, city moments, and future photography work.</p>
             </figcaption>
           </figure>
 
@@ -946,7 +958,7 @@
             </div>
             <figcaption class="photo-meta">
               <h3 class="photo-title">United States</h3>
-              <p class="photo-caption">Where research life and visual storytelling continue side by side.</p>
+              <p class="photo-caption">Where your academic life and personal visual storytelling continue side by side.</p>
             </figcaption>
           </figure>
 
@@ -963,7 +975,41 @@
             </div>
             <figcaption class="photo-meta">
               <h3 class="photo-title">China</h3>
-              <p class="photo-caption">A natural home for your studio story, travel memories, and photography identity.</p>
+              <p class="photo-caption">The strongest anchor for your studio identity, home memories, and photography roots.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="photo-card" data-photo-card data-tone="rose">
+            <div class="photo-frame">
+              <img src="./photos/studio.png" alt="Studio photography work from 3H-Studio" data-photo />
+              <div class="photo-fallback">
+                <div>
+                  <span class="fallback-label">Studio series</span>
+                  <span class="fallback-title">3H-Studio</span>
+                  <span class="fallback-note">Portrait and concept work placeholder</span>
+                </div>
+              </div>
+            </div>
+            <figcaption class="photo-meta">
+              <h3 class="photo-title">3H-Studio Portraits</h3>
+              <p class="photo-caption">A dedicated slot for studio portrait work, collaborative shoots, and signature visual projects.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="photo-card" data-photo-card data-tone="slate">
+            <div class="photo-frame">
+              <img src="./photos/street.png" alt="Street and atmosphere photography work" data-photo />
+              <div class="photo-fallback">
+                <div>
+                  <span class="fallback-label">Atmosphere series</span>
+                  <span class="fallback-title">Street + Light</span>
+                  <span class="fallback-note">City mood and travel detail placeholder</span>
+                </div>
+              </div>
+            </div>
+            <figcaption class="photo-meta">
+              <h3 class="photo-title">Street Atmosphere</h3>
+              <p class="photo-caption">A place for urban scenes, quiet corners, nighttime light, and the details that make travel feel vivid.</p>
             </figcaption>
           </figure>
         </div>
@@ -972,7 +1018,7 @@
       <section id="travel" class="section-card" aria-labelledby="travel-title">
         <h2 id="travel-title" class="section-title">Travel Footprint</h2>
         <p class="section-copy">
-          A personal map-style view of countries tied to your study, life, travel, and photography experience.
+          A personal map-style view of the countries tied to your life, study, travel, and photography journey. You have lived and studied in China, the United Kingdom, and the United States, and you also want to mark Canada as part of your travel memory.
         </p>
 
         <div class="travel-layout">
@@ -993,7 +1039,7 @@
                 <h3 class="country-name">China</h3>
                 <span class="country-badge">Home + Studio</span>
               </div>
-              <p class="country-copy">A key part of my personal and creative identity, and the home base of 3H-Studio.</p>
+              <p class="country-copy">The strongest part of your personal and creative identity, and the home base of 3H-Studio and many of your visual memories.</p>
             </article>
 
             <article class="country-item">
@@ -1001,7 +1047,7 @@
                 <h3 class="country-name">United States</h3>
                 <span class="country-badge">Research + Study</span>
               </div>
-              <p class="country-copy">Where my current research life continues, with new places, academic work, and ongoing visual inspiration.</p>
+              <p class="country-copy">Where your PhD journey continues and where academic life, daily observation, and photography keep overlapping.</p>
             </article>
 
             <article class="country-item">
@@ -1009,7 +1055,7 @@
                 <h3 class="country-name">United Kingdom</h3>
                 <span class="country-badge">Study + Life</span>
               </div>
-              <p class="country-copy">Part of the broader international experience that shaped how I see culture, place, and atmosphere.</p>
+              <p class="country-copy">Part of the international experience that shaped how you see culture, architecture, place, and atmosphere.</p>
             </article>
 
             <article class="country-item">
@@ -1017,7 +1063,7 @@
                 <h3 class="country-name">Canada</h3>
                 <span class="country-badge">Travel</span>
               </div>
-              <p class="country-copy">A destination I want represented in this portfolio through travel memory and photography work.</p>
+              <p class="country-copy">A travel destination you want represented here through memory, movement, and photography work gathered on the road.</p>
             </article>
           </div>
         </div>
@@ -1025,7 +1071,7 @@
     </div>
 
     <footer class="footer-card">
-      <span>Portfolio page for personal interests, photography, travel, and 3H-Studio.</span>
+      <span>A portfolio page that connects photography, travel memory, and the creative identity behind 3H-Studio.</span>
       <div class="footer-links">
         <a href="mailto:jiajieh1@umbc.edu">Email</a>
         <a href="https://www.linkedin.com/in/jiajie-he-672673243/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
