@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio | Jiajie He</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     :root {
       --bg-1: #f8fbfc;
@@ -814,76 +815,69 @@
 
     .map-canvas {
       margin-top: 18px;
-      padding: 18px;
+      padding: 0;
       border-radius: 20px;
       background:
         radial-gradient(circle at 80% 10%, rgba(190, 90, 120, 0.08), transparent 32%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 246, 249, 0.98));
       border: 1px solid rgba(20, 37, 53, 0.08);
-      min-height: 360px;
+      min-height: 460px;
+      overflow: hidden;
     }
 
-    .map-canvas svg {
+    .real-country-map {
       width: 100%;
-      height: auto;
+      min-height: 460px;
+      height: 60vh;
+      max-height: 620px;
+    }
+
+    .leaflet-container {
+      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+      background: #cfe8f3;
+    }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 14px;
+      box-shadow: 0 14px 30px rgba(20, 37, 53, 0.16);
+    }
+
+    .leaflet-popup-content {
+      margin: 12px 14px;
+      color: #102434;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .map-popup-title {
       display: block;
-    }
-
-    .map-shape {
-      fill: rgba(15, 118, 110, 0.14);
-      stroke: #2c6475;
-      stroke-width: 4;
-      stroke-linejoin: round;
-      stroke-linecap: round;
-    }
-
-    .map-subshape {
-      fill: rgba(15, 118, 110, 0.12);
-      stroke: #2c6475;
-      stroke-width: 3;
-      stroke-linejoin: round;
-      stroke-linecap: round;
-    }
-
-    .map-highlight {
-      fill: rgba(190, 90, 120, 0.22);
-      stroke: rgba(190, 90, 120, 0.72);
-      stroke-width: 2.5;
-      stroke-linejoin: round;
-      stroke-linecap: round;
-    }
-
-    .map-highlight--secondary {
-      fill: rgba(2, 132, 199, 0.18);
-      stroke: rgba(2, 132, 199, 0.72);
-    }
-
-    .map-highlight--tertiary {
-      fill: rgba(245, 158, 11, 0.18);
-      stroke: rgba(245, 158, 11, 0.82);
-    }
-
-    .map-dot-marker {
-      fill: #be5a78;
-      stroke: #ffffff;
-      stroke-width: 3.5;
-    }
-
-    .map-region-label {
-      fill: #102434;
-      font-size: 14px;
       font-weight: 800;
-      paint-order: stroke;
-      stroke: rgba(255, 255, 255, 0.96);
-      stroke-width: 6;
-      stroke-linejoin: round;
     }
 
-    .map-label-soft {
-      fill: #506575;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+    .map-popup-copy {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+    }
+
+    .leaflet-control-attribution {
+      font-size: 0.72rem;
+    }
+
+    .map-fallback {
+      display: grid;
+      place-items: center;
+      min-height: 460px;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .map-fallback strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #102434;
     }
 
     .map-side-title {
@@ -907,6 +901,24 @@
       background: rgba(255, 255, 255, 0.88);
       border: 1px solid rgba(20, 37, 53, 0.08);
       box-shadow: 0 10px 18px rgba(20, 37, 53, 0.06);
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease;
+    }
+
+    .city-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 22px rgba(20, 37, 53, 0.09);
+      border-color: var(--ring);
+    }
+
+    .city-item.is-active {
+      background: rgba(2, 132, 199, 0.08);
+      border-color: rgba(2, 132, 199, 0.26);
+    }
+
+    .city-item:focus-visible {
+      outline: 3px solid rgba(2, 132, 199, 0.35);
+      outline-offset: 3px;
     }
 
     .city-item-head {
@@ -1359,7 +1371,9 @@
           <span class="map-pill" id="map-pill">Travel map</span>
           <h3 class="map-title" id="map-title">Country map</h3>
           <p class="map-copy" id="map-copy">Visited locations will appear here.</p>
-          <div class="map-canvas" id="map-canvas"></div>
+          <div class="map-canvas" id="map-canvas">
+            <div class="real-country-map" id="real-country-map"></div>
+          </div>
         </div>
         <aside>
           <h4 class="map-side-title" id="map-side-title">Visited Places</h4>
@@ -1376,6 +1390,7 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     const photoCards = document.querySelectorAll("[data-photo-card]");
     const mapTriggers = document.querySelectorAll("[data-country-map]");
@@ -1388,8 +1403,13 @@
     const mapTitle = document.getElementById("map-title");
     const mapCopy = document.getElementById("map-copy");
     const mapCanvas = document.getElementById("map-canvas");
+    const realCountryMap = document.getElementById("real-country-map");
     const mapSideTitle = document.getElementById("map-side-title");
     const cityList = document.getElementById("city-list");
+    let countryMapInstance = null;
+    let countryMarkersLayer = null;
+    let countryMarkerRefs = [];
+    let activeLocationIndex = -1;
 
     function escapeHtml(value) {
       return String(value).replace(/[&<>"']/g, (char) => ({
@@ -1401,167 +1421,159 @@
       })[char]);
     }
 
-    function renderDotMarkers(locations) {
-      return locations.map((location) => (
-        "<circle class=\"map-dot-marker\" cx=\"" + location.x + "\" cy=\"" + location.y + "\" r=\"" + (location.r || 5) + "\"></circle>"
-      )).join("");
-    }
-
     const ukLocations = [
-      { name: "Scotland", note: "Nation within the UK" },
-      { name: "England", note: "Nation within the UK" },
-      { name: "Wales", note: "Nation within the UK" }
+      { name: "Scotland", note: "Nation within the UK", lat: 56.4907, lng: -4.2026 },
+      { name: "England", note: "Nation within the UK", lat: 52.3555, lng: -1.1743 },
+      { name: "Wales", note: "Nation within the UK", lat: 52.1307, lng: -3.7837 }
     ];
 
     const canadaLocations = [
-      { name: "Ontario", note: "Province" }
+      { name: "Ontario", note: "Province", lat: 50.0000, lng: -85.0000 }
     ];
 
     const chinaLocations = [
-      { name: "Heilongjiang", note: "Province", x: 319, y: 68 },
-      { name: "Jilin", note: "Province", x: 296, y: 98 },
-      { name: "Shenyang", note: "City", x: 279, y: 121 },
-      { name: "Beijing", note: "Municipality", x: 243, y: 119 },
-      { name: "Shandong", note: "Province", x: 262, y: 145 },
-      { name: "Jiangsu", note: "Province", x: 276, y: 162 },
-      { name: "Zhejiang", note: "Province", x: 286, y: 184 },
-      { name: "Shanghai", note: "Municipality", x: 289, y: 172, r: 4.5 },
-      { name: "Anhui", note: "Province", x: 248, y: 167 },
-      { name: "Fujian", note: "Province", x: 279, y: 208 },
-      { name: "Guangdong", note: "Province", x: 249, y: 228 },
-      { name: "Yunnan", note: "Province", x: 146, y: 214 },
-      { name: "Hainan", note: "Province", x: 225, y: 270, r: 4.5 },
-      { name: "Hubei", note: "Province", x: 210, y: 181 },
-      { name: "Hong Kong", note: "Special administrative region", x: 256, y: 238, r: 4.5 },
-      { name: "Shanxi", note: "Province", x: 220, y: 140 },
-      { name: "Chongqing", note: "Municipality", x: 177, y: 187 }
+      { name: "Heilongjiang", note: "Province", lat: 47.8619, lng: 128.0847 },
+      { name: "Jilin", note: "Province", lat: 43.6661, lng: 126.1923 },
+      { name: "Shenyang", note: "City", lat: 41.8057, lng: 123.4315 },
+      { name: "Beijing", note: "Municipality", lat: 39.9042, lng: 116.4074 },
+      { name: "Shandong", note: "Province", lat: 36.6683, lng: 117.0204 },
+      { name: "Jiangsu", note: "Province", lat: 32.9711, lng: 119.4550 },
+      { name: "Zhejiang", note: "Province", lat: 29.1832, lng: 120.0934 },
+      { name: "Shanghai", note: "Municipality", lat: 31.2304, lng: 121.4737 },
+      { name: "Anhui", note: "Province", lat: 31.8612, lng: 117.2857 },
+      { name: "Fujian", note: "Province", lat: 26.1008, lng: 119.2965 },
+      { name: "Guangdong", note: "Province", lat: 23.1291, lng: 113.2644 },
+      { name: "Yunnan", note: "Province", lat: 25.0458, lng: 102.7097 },
+      { name: "Hainan", note: "Province", lat: 19.5664, lng: 109.9497 },
+      { name: "Hubei", note: "Province", lat: 30.5928, lng: 114.3055 },
+      { name: "Hong Kong", note: "Special administrative region", lat: 22.3193, lng: 114.1694 },
+      { name: "Shanxi", note: "Province", lat: 37.8706, lng: 112.5489 },
+      { name: "Chongqing", note: "Municipality", lat: 29.5630, lng: 106.5516 }
     ];
 
     const usaLocations = [
-      { name: "Alaska", note: "State", x: 78, y: 286 },
-      { name: "Hawaii", note: "State", x: 170, y: 297 },
-      { name: "Washington", note: "State", x: 100, y: 148 },
-      { name: "California", note: "State", x: 98, y: 205 },
-      { name: "Idaho", note: "State", x: 128, y: 169 },
-      { name: "Montana", note: "State", x: 160, y: 161 },
-      { name: "Arizona", note: "State", x: 150, y: 226 },
-      { name: "Utah", note: "State", x: 149, y: 199 },
-      { name: "Nevada", note: "State", x: 123, y: 196 },
-      { name: "New Mexico", note: "State", x: 196, y: 227 },
-      { name: "Texas", note: "State", x: 251, y: 247 },
-      { name: "Kansas", note: "State", x: 239, y: 198 },
-      { name: "Nebraska", note: "State", x: 236, y: 179 },
-      { name: "Oklahoma", note: "State", x: 240, y: 220 },
-      { name: "Missouri", note: "State", x: 279, y: 205 },
-      { name: "Louisiana", note: "State", x: 286, y: 262 },
-      { name: "Wisconsin", note: "State", x: 306, y: 172 },
-      { name: "Illinois", note: "State", x: 300, y: 194 },
-      { name: "Michigan", note: "State", x: 326, y: 170 },
-      { name: "Indiana", note: "State", x: 319, y: 194 },
-      { name: "Ohio", note: "State", x: 344, y: 191 },
-      { name: "Kentucky", note: "State", x: 336, y: 210 },
-      { name: "Tennessee", note: "State", x: 344, y: 223 },
-      { name: "West Virginia", note: "State", x: 361, y: 204 },
-      { name: "Virginia", note: "State", x: 379, y: 213 },
-      { name: "North Carolina", note: "State", x: 395, y: 224 },
-      { name: "South Carolina", note: "State", x: 394, y: 240 },
-      { name: "Pennsylvania", note: "State", x: 371, y: 185 },
-      { name: "Maryland", note: "State", x: 379, y: 196 },
-      { name: "Delaware", note: "State", x: 389, y: 194, r: 4.5 },
-      { name: "Georgia", note: "State", x: 379, y: 253 },
-      { name: "Florida", note: "State", x: 420, y: 281 },
-      { name: "New Jersey", note: "State", x: 392, y: 184, r: 4.5 },
-      { name: "New York", note: "State", x: 389, y: 163 },
-      { name: "Connecticut", note: "State", x: 405, y: 173, r: 4.5 },
-      { name: "Massachusetts", note: "State", x: 415, y: 169, r: 4.5 },
-      { name: "Iowa", note: "State", x: 275, y: 185 }
+      { name: "Alaska", note: "State", lat: 64.2008, lng: -149.4937 },
+      { name: "Hawaii", note: "State", lat: 19.8968, lng: -155.5828 },
+      { name: "Washington", note: "State", lat: 47.7511, lng: -120.7401 },
+      { name: "California", note: "State", lat: 36.7783, lng: -119.4179 },
+      { name: "Idaho", note: "State", lat: 44.0682, lng: -114.7420 },
+      { name: "Montana", note: "State", lat: 46.8797, lng: -110.3626 },
+      { name: "Arizona", note: "State", lat: 34.0489, lng: -111.0937 },
+      { name: "Utah", note: "State", lat: 39.3210, lng: -111.0937 },
+      { name: "Nevada", note: "State", lat: 38.8026, lng: -116.4194 },
+      { name: "New Mexico", note: "State", lat: 34.5199, lng: -105.8701 },
+      { name: "Texas", note: "State", lat: 31.9686, lng: -99.9018 },
+      { name: "Kansas", note: "State", lat: 39.0119, lng: -98.4842 },
+      { name: "Nebraska", note: "State", lat: 41.4925, lng: -99.9018 },
+      { name: "Oklahoma", note: "State", lat: 35.0078, lng: -97.0929 },
+      { name: "Missouri", note: "State", lat: 37.9643, lng: -91.8318 },
+      { name: "Louisiana", note: "State", lat: 30.9843, lng: -91.9623 },
+      { name: "Wisconsin", note: "State", lat: 43.7844, lng: -88.7879 },
+      { name: "Illinois", note: "State", lat: 40.6331, lng: -89.3985 },
+      { name: "Michigan", note: "State", lat: 44.3148, lng: -85.6024 },
+      { name: "Indianapolis", note: "City in Indiana", lat: 39.7684, lng: -86.1581 },
+      { name: "Ohio", note: "State", lat: 40.4173, lng: -82.9071 },
+      { name: "Kentucky", note: "State", lat: 37.8393, lng: -84.2700 },
+      { name: "Tennessee", note: "State", lat: 35.5175, lng: -86.5804 },
+      { name: "West Virginia", note: "State", lat: 38.5976, lng: -80.4549 },
+      { name: "Virginia", note: "State", lat: 37.4316, lng: -78.6569 },
+      { name: "North Carolina", note: "State", lat: 35.7596, lng: -79.0193 },
+      { name: "South Carolina", note: "State", lat: 33.8361, lng: -81.1637 },
+      { name: "Pennsylvania", note: "State", lat: 41.2033, lng: -77.1945 },
+      { name: "Maryland", note: "State", lat: 39.0458, lng: -76.6413 },
+      { name: "Delaware", note: "State", lat: 38.9108, lng: -75.5277 },
+      { name: "Georgia", note: "State", lat: 32.1656, lng: -82.9001 },
+      { name: "Florida", note: "State", lat: 27.6648, lng: -81.5158 },
+      { name: "New Jersey", note: "State", lat: 40.0583, lng: -74.4057 },
+      { name: "New York", note: "State", lat: 43.2994, lng: -74.2179 },
+      { name: "Connecticut", note: "State", lat: 41.6032, lng: -73.0877 },
+      { name: "Massachusetts", note: "State", lat: 42.4072, lng: -71.3824 },
+      { name: "Iowa", note: "State", lat: 41.8780, lng: -93.0977 }
     ];
-
-    function renderUkMap() {
-      return `
-        <svg viewBox="0 0 300 380" role="img" aria-label="United Kingdom map with Scotland, England, and Wales highlighted">
-          <path class="map-shape" d="M164 22 L182 35 L193 58 L191 84 L203 108 L199 136 L209 161 L203 183 L191 207 L195 232 L184 258 L169 283 L151 305 L138 331 L121 343 L108 328 L100 304 L87 285 L81 259 L89 232 L87 207 L98 181 L94 154 L104 128 L102 101 L111 75 L124 48 L143 32 Z" />
-          <path class="map-highlight" d="M145 40 L158 44 L171 57 L176 81 L173 104 L177 129 L168 144 L153 145 L142 127 L132 105 L128 82 L131 57 Z" />
-          <path class="map-highlight map-highlight--secondary" d="M137 149 L157 160 L167 180 L163 208 L151 243 L142 280 L131 312 L118 304 L109 271 L107 238 L112 208 L120 178 Z" />
-          <path class="map-highlight map-highlight--tertiary" d="M118 171 L131 179 L128 203 L118 225 L108 214 L106 191 Z" />
-          <text class="map-region-label" x="136" y="92">Scotland</text>
-          <text class="map-region-label" x="146" y="219">England</text>
-          <text class="map-region-label" x="80" y="201">Wales</text>
-        </svg>
-      `;
-    }
-
-    function renderCanadaMap() {
-      return `
-        <svg viewBox="0 0 520 300" role="img" aria-label="Canada map with Ontario highlighted">
-          <path class="map-shape" d="M24 164 L48 126 L87 101 L127 76 L174 84 L219 63 L264 75 L310 62 L358 76 L404 67 L447 83 L491 112 L486 140 L462 152 L438 168 L404 177 L365 186 L323 184 L283 198 L241 192 L201 202 L160 198 L121 206 L83 195 L51 189 L31 177 Z" />
-          <path class="map-highlight" d="M308 121 L334 116 L350 128 L347 154 L329 166 L303 162 L294 144 Z" />
-          <text class="map-region-label" x="313" y="151">Ontario</text>
-        </svg>
-      `;
-    }
-
-    function renderChinaMap(locations) {
-      return `
-        <svg viewBox="0 0 430 310" role="img" aria-label="China map with visited places marked">
-          <path class="map-shape" d="M36 156 L63 116 L104 95 L132 71 L178 61 L226 75 L269 66 L315 84 L352 114 L389 121 L374 149 L395 173 L371 199 L333 214 L303 239 L262 234 L221 248 L182 236 L153 249 L111 236 L80 210 L50 209 L60 180 Z" />
-          <ellipse class="map-subshape" cx="225" cy="272" rx="15" ry="9"></ellipse>
-          ${renderDotMarkers(locations)}
-          <text class="map-label-soft" x="194" y="295">Hainan is shown south of the mainland.</text>
-        </svg>
-      `;
-    }
-
-    function renderUsaMap(locations) {
-      return `
-        <svg viewBox="0 0 540 330" role="img" aria-label="United States map with visited states marked">
-          <path class="map-shape" d="M58 173 L72 142 L94 129 L122 130 L145 121 L176 128 L205 122 L238 128 L271 124 L303 133 L330 132 L356 139 L380 136 L405 143 L430 140 L456 153 L481 156 L497 169 L500 186 L489 196 L471 202 L459 212 L448 224 L434 237 L416 242 L396 240 L378 234 L359 227 L337 220 L319 214 L302 216 L283 219 L264 222 L250 232 L234 237 L220 241 L205 236 L190 227 L173 225 L156 226 L140 220 L121 219 L107 212 L90 209 L75 198 L64 188 Z" />
-          <path class="map-subshape" d="M31 274 L53 265 L79 269 L99 262 L121 274 L111 289 L94 292 L76 304 L52 301 L36 289 Z" />
-          <path class="map-subshape" d="M153 292 L163 288 L170 291 L177 297 L169 301 L160 299 Z" />
-          <path class="map-subshape" d="M180 300 L186 297 L191 300 L188 305 Z" />
-          <path class="map-subshape" d="M195 304 L200 301 L205 304 L202 308 Z" />
-          <path class="map-subshape" d="M417 242 L431 253 L433 279 L422 296 L412 276 L413 253 Z" />
-          ${renderDotMarkers(locations)}
-          <text class="map-label-soft" x="44" y="319">Alaska</text>
-          <text class="map-label-soft" x="150" y="319">Hawaii</text>
-        </svg>
-      `;
-    }
 
     const countryMaps = {
       uk: {
         pill: "United Kingdom",
         title: "United Kingdom travel map",
-        copy: "This map uses a UK silhouette and highlights the parts of Great Britain you have visited.",
+        copy: "A real map view of the United Kingdom centered on the nations you listed.",
         listTitle: "Visited nations",
         locations: ukLocations,
-        render: renderUkMap
+        bounds: [[49.7, -8.8], [58.9, 2.2]],
+        detailZoom: 6
       },
       china: {
         pill: "China",
         title: "China travel map",
-        copy: "Dots mark the provinces, municipalities, city, and special administrative region from your China travel footprint.",
+        copy: "A real map view of China with markers across the provinces, municipalities, city, and special administrative region you listed.",
         listTitle: "Visited places in China",
         locations: chinaLocations,
-        render: renderChinaMap
+        bounds: [[18.0, 73.0], [54.5, 135.5]],
+        detailZoom: 6
       },
       usa: {
         pill: "United States",
         title: "United States travel map",
-        copy: "Dots mark the states you have visited across the mainland US, plus Alaska and Hawaii shown as insets.",
-        listTitle: "Visited states",
+        copy: "A real map view of the United States with markers across the states and stopovers you listed, including Alaska and Hawaii.",
+        listTitle: "Visited places in the US",
         locations: usaLocations,
-        render: renderUsaMap
+        bounds: [[18.5, -171.8], [72.5, -65.0]],
+        detailZoom: 5
       },
       canada: {
         pill: "Canada",
         title: "Canada travel map",
-        copy: "This map uses a Canada silhouette and highlights Ontario, the province you listed in your travel history.",
+        copy: "A real map view of Canada focused on Ontario, the province you listed in your travel history.",
         listTitle: "Visited province",
         locations: canadaLocations,
-        render: renderCanadaMap
+        bounds: [[41.5, -141.5], [83.5, -52.0]],
+        detailZoom: 5
       }
     };
+
+    function setActiveLocation(index) {
+      activeLocationIndex = index;
+      cityList.querySelectorAll(".city-item").forEach((item, itemIndex) => {
+        item.classList.toggle("is-active", itemIndex === index);
+      });
+    }
+
+    function ensureCountryMap() {
+      if (typeof L === "undefined") {
+        mapCanvas.innerHTML = "<div class=\"map-fallback\"><div><strong>Map preview unavailable</strong>The real map could not load. Please check your internet connection and reload the page.</div></div>";
+        return null;
+      }
+
+      if (!countryMapInstance) {
+        countryMapInstance = L.map(realCountryMap, {
+          zoomControl: true,
+          scrollWheelZoom: true,
+          worldCopyJump: false
+        });
+
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+          subdomains: "abcd",
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
+        }).addTo(countryMapInstance);
+
+        countryMarkersLayer = L.layerGroup().addTo(countryMapInstance);
+      }
+
+      return countryMapInstance;
+    }
+
+    function focusLocation(index, config) {
+      const marker = countryMarkerRefs[index];
+      const location = config.locations[index];
+      if (!marker || !location || !countryMapInstance) return;
+
+      setActiveLocation(index);
+      countryMapInstance.flyTo([location.lat, location.lng], config.detailZoom || 6, {
+        animate: true,
+        duration: 0.75
+      });
+      marker.openPopup();
+    }
 
     photoCards.forEach((card) => {
       const img = card.querySelector("[data-photo]");
@@ -1610,32 +1622,83 @@
     function openCountryMap(countryKey) {
       const config = countryMaps[countryKey];
       if (!config) return;
+      const map = ensureCountryMap();
+      if (!map) return;
 
       mapPill.textContent = config.pill;
       mapTitle.textContent = config.title;
       mapCopy.textContent = config.copy;
       mapSideTitle.textContent = config.listTitle + " (" + config.locations.length + ")";
-      mapCanvas.innerHTML = config.render(config.locations);
       cityList.innerHTML = "";
+      countryMarkersLayer.clearLayers();
+      countryMarkerRefs = [];
+      activeLocationIndex = -1;
+
+      config.locations.forEach((location, index) => {
+        const marker = L.circleMarker([location.lat, location.lng], {
+          radius: 7,
+          color: "#ffffff",
+          weight: 2,
+          fillColor: "#be5a78",
+          fillOpacity: 0.92
+        });
+
+        marker.bindPopup(
+          "<span class=\"map-popup-title\">" + escapeHtml(location.name) + "</span>" +
+          "<span class=\"map-popup-copy\">" + escapeHtml(location.note) + "</span>"
+        );
+
+        marker.on("click", () => {
+          setActiveLocation(index);
+        });
+
+        marker.addTo(countryMarkersLayer);
+        countryMarkerRefs.push(marker);
+      });
 
       config.locations.forEach((city, index) => {
         const item = document.createElement("div");
         item.className = "city-item";
+        item.tabIndex = 0;
+        item.setAttribute("role", "button");
+        item.setAttribute("aria-label", "Focus " + city.name + " on map");
         item.innerHTML =
           "<div class=\"city-item-head\"><span class=\"city-index\">" + (index + 1) + "</span><strong>" + escapeHtml(city.name) + "</strong></div>" +
           "<span>" + escapeHtml(city.note) + "</span>";
+        item.addEventListener("click", () => {
+          focusLocation(index, config);
+        });
+        item.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            focusLocation(index, config);
+          }
+        });
         cityList.appendChild(item);
       });
 
       mapModal.classList.add("active");
       mapModal.setAttribute("aria-hidden", "false");
+
+      setTimeout(() => {
+        map.invalidateSize();
+        map.fitBounds(config.bounds, {
+          padding: [22, 22]
+        });
+      }, 30);
     }
 
     function closeCountryMap() {
       mapModal.classList.remove("active");
       mapModal.setAttribute("aria-hidden", "true");
       mapSideTitle.textContent = "Visited Places";
-      mapCanvas.innerHTML = "";
+      activeLocationIndex = -1;
+      cityList.querySelectorAll(".city-item").forEach((item) => {
+        item.classList.remove("is-active");
+      });
+      if (countryMapInstance) {
+        countryMapInstance.closePopup();
+      }
       cityList.innerHTML = "";
     }
 
