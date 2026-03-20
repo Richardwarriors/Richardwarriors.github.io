@@ -420,6 +420,28 @@
       text-transform: uppercase;
     }
 
+    .story-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--text);
+      font-weight: 800;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .story-action:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      border-color: var(--ring);
+      box-shadow: 0 10px 18px rgba(20, 37, 53, 0.08);
+    }
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -432,6 +454,11 @@
       padding: 0;
       border-radius: var(--radius-lg);
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .photo-card.map-card,
+    .photo-card.map-card.has-image {
+      cursor: pointer;
     }
 
     .photo-card:hover {
@@ -641,6 +668,18 @@
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
+    .country-item.map-item {
+      cursor: pointer;
+    }
+
+    .photo-card.map-card:focus-visible,
+    .country-item.map-item:focus-visible,
+    .map-close:focus-visible,
+    .lightbox-close:focus-visible {
+      outline: 3px solid rgba(2, 132, 199, 0.35);
+      outline-offset: 3px;
+    }
+
     .country-item:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 22px rgba(20, 37, 53, 0.08);
@@ -678,6 +717,169 @@
       margin: 8px 0 0;
       color: var(--muted);
       font-size: 0.93rem;
+    }
+
+    .country-hint {
+      display: inline-flex;
+      margin-top: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--brand-2);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .map-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(11, 20, 31, 0.84);
+      backdrop-filter: blur(10px);
+      z-index: 55;
+    }
+
+    .map-modal.active {
+      display: flex;
+    }
+
+    .map-dialog {
+      position: relative;
+      width: min(100%, 1080px);
+      max-height: 92vh;
+      overflow: auto;
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(242, 247, 250, 0.96));
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.28);
+    }
+
+    .map-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(20, 37, 53, 0.08);
+      color: #142535;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .map-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.1);
+      color: var(--brand);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .map-title {
+      margin: 14px 0 10px;
+      font-family: "Optima", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      line-height: 1.05;
+      color: #102434;
+    }
+
+    .map-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      max-width: 560px;
+    }
+
+    .map-canvas {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(190, 90, 120, 0.08), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 246, 249, 0.98));
+      border: 1px solid rgba(20, 37, 53, 0.08);
+      min-height: 360px;
+    }
+
+    .map-canvas svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .map-shape {
+      fill: rgba(15, 118, 110, 0.14);
+      stroke: #2c6475;
+      stroke-width: 4;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+
+    .map-marker {
+      fill: #be5a78;
+      stroke: #ffffff;
+      stroke-width: 6;
+    }
+
+    .map-label {
+      fill: #102434;
+      font-size: 14px;
+      font-weight: 800;
+      paint-order: stroke;
+      stroke: rgba(255, 255, 255, 0.96);
+      stroke-width: 6;
+      stroke-linejoin: round;
+    }
+
+    .map-side-title {
+      margin: 4px 0 0;
+      font-size: 1rem;
+      color: #102434;
+    }
+
+    .city-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .city-item {
+      padding: 14px 14px 13px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(20, 37, 53, 0.08);
+      box-shadow: 0 10px 18px rgba(20, 37, 53, 0.06);
+    }
+
+    .city-item strong {
+      display: block;
+      color: #102434;
+      font-size: 0.98rem;
+    }
+
+    .city-item span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
     .lightbox {
@@ -775,6 +977,10 @@
 
       .gallery-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .map-layout {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -893,6 +1099,7 @@
             I co-founded and help run 3H-Studio in China, where photography is both a creative practice and a way of building shared stories. This page brings that side of my life together with the places that shaped me.
           </p>
           <span class="mini-badge">Co-founder in China</span>
+          <a class="story-action" href="studio.html">Visit 3H-Studio</a>
         </article>
 
         <article class="story-card">
@@ -911,7 +1118,7 @@
         </p>
 
         <div class="gallery-grid">
-          <figure class="photo-card" data-photo-card data-tone="slate">
+          <figure class="photo-card map-card" data-photo-card data-country-map="uk" data-tone="slate" role="button" tabindex="0" aria-label="Open United Kingdom travel map">
             <div class="photo-frame">
               <img src="./photos/UK.png" alt="Photography work from the United Kingdom" data-photo />
               <div class="photo-fallback">
@@ -924,11 +1131,11 @@
             </div>
             <figcaption class="photo-meta">
               <h3 class="photo-title">United Kingdom</h3>
-              <p class="photo-caption">Images from a place connected to your study experience and a quieter visual mood.</p>
+              <p class="photo-caption">Images from a place connected to your study experience and a quieter visual mood. Click to open the UK travel map.</p>
             </figcaption>
           </figure>
 
-          <figure class="photo-card" data-photo-card data-tone="rose">
+          <figure class="photo-card map-card" data-photo-card data-country-map="canada" data-tone="rose" role="button" tabindex="0" aria-label="Open Canada travel map">
             <div class="photo-frame">
               <img src="./photos/canada.png" alt="Photography work from Canada" data-photo />
               <div class="photo-fallback">
@@ -941,11 +1148,11 @@
             </div>
             <figcaption class="photo-meta">
               <h3 class="photo-title">Canada</h3>
-              <p class="photo-caption">A travel memory slot for landscapes, city moments, and future photography work.</p>
+              <p class="photo-caption">A travel memory slot for landscapes, city moments, and future photography work. Click to open the Canada travel map.</p>
             </figcaption>
           </figure>
 
-          <figure class="photo-card" data-photo-card data-tone="amber">
+          <figure class="photo-card map-card" data-photo-card data-country-map="usa" data-tone="amber" role="button" tabindex="0" aria-label="Open United States travel map">
             <div class="photo-frame">
               <img src="./photos/USA.png" alt="Photography work from the United States" data-photo />
               <div class="photo-fallback">
@@ -958,11 +1165,11 @@
             </div>
             <figcaption class="photo-meta">
               <h3 class="photo-title">United States</h3>
-              <p class="photo-caption">Where your academic life and personal visual storytelling continue side by side.</p>
+              <p class="photo-caption">Where your academic life and personal visual storytelling continue side by side. Click to open the US travel map.</p>
             </figcaption>
           </figure>
 
-          <figure class="photo-card" data-photo-card>
+          <figure class="photo-card map-card" data-photo-card data-country-map="china" role="button" tabindex="0" aria-label="Open China travel map">
             <div class="photo-frame">
               <img src="./photos/China.png" alt="Photography work from China" data-photo />
               <div class="photo-fallback">
@@ -975,7 +1182,7 @@
             </div>
             <figcaption class="photo-meta">
               <h3 class="photo-title">China</h3>
-              <p class="photo-caption">The strongest anchor for your studio identity, home memories, and photography roots.</p>
+              <p class="photo-caption">The strongest anchor for your studio identity, home memories, and photography roots. Click to open the China travel map.</p>
             </figcaption>
           </figure>
 
@@ -1034,36 +1241,40 @@
           </article>
 
           <div class="travel-list">
-            <article class="country-item">
+            <article class="country-item map-item" data-country-map="china" role="button" tabindex="0" aria-label="Open China visited cities map">
               <div class="country-topline">
                 <h3 class="country-name">China</h3>
                 <span class="country-badge">Home + Studio</span>
               </div>
               <p class="country-copy">The strongest part of your personal and creative identity, and the home base of 3H-Studio and many of your visual memories.</p>
+              <span class="country-hint">Open visited cities map</span>
             </article>
 
-            <article class="country-item">
+            <article class="country-item map-item" data-country-map="usa" role="button" tabindex="0" aria-label="Open United States visited cities map">
               <div class="country-topline">
                 <h3 class="country-name">United States</h3>
                 <span class="country-badge">Research + Study</span>
               </div>
               <p class="country-copy">Where your PhD journey continues and where academic life, daily observation, and photography keep overlapping.</p>
+              <span class="country-hint">Open visited cities map</span>
             </article>
 
-            <article class="country-item">
+            <article class="country-item map-item" data-country-map="uk" role="button" tabindex="0" aria-label="Open United Kingdom visited cities map">
               <div class="country-topline">
                 <h3 class="country-name">United Kingdom</h3>
                 <span class="country-badge">Study + Life</span>
               </div>
               <p class="country-copy">Part of the international experience that shaped how you see culture, architecture, place, and atmosphere.</p>
+              <span class="country-hint">Open visited cities map</span>
             </article>
 
-            <article class="country-item">
+            <article class="country-item map-item" data-country-map="canada" role="button" tabindex="0" aria-label="Open Canada visited cities map">
               <div class="country-topline">
                 <h3 class="country-name">Canada</h3>
                 <span class="country-badge">Travel</span>
               </div>
               <p class="country-copy">A travel destination you want represented here through memory, movement, and photography work gathered on the road.</p>
+              <span class="country-hint">Open visited cities map</span>
             </article>
           </div>
         </div>
@@ -1080,6 +1291,24 @@
     </footer>
   </main>
 
+  <div class="map-modal" id="country-map-modal" aria-hidden="true">
+    <div class="map-dialog">
+      <button class="map-close" type="button" aria-label="Close country map">&times;</button>
+      <div class="map-layout">
+        <div>
+          <span class="map-pill" id="map-pill">Travel map</span>
+          <h3 class="map-title" id="map-title">Country map</h3>
+          <p class="map-copy" id="map-copy">Visited locations will appear here.</p>
+          <div class="map-canvas" id="map-canvas"></div>
+        </div>
+        <aside>
+          <h4 class="map-side-title">Visited Locations</h4>
+          <div class="city-list" id="city-list"></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-dialog">
       <button class="lightbox-close" type="button" aria-label="Close image view">&times;</button>
@@ -1089,9 +1318,107 @@
 
   <script>
     const photoCards = document.querySelectorAll("[data-photo-card]");
+    const mapTriggers = document.querySelectorAll("[data-country-map]");
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = document.getElementById("lightbox-image");
     const lightboxClose = document.querySelector(".lightbox-close");
+    const mapModal = document.getElementById("country-map-modal");
+    const mapClose = document.querySelector(".map-close");
+    const mapPill = document.getElementById("map-pill");
+    const mapTitle = document.getElementById("map-title");
+    const mapCopy = document.getElementById("map-copy");
+    const mapCanvas = document.getElementById("map-canvas");
+    const cityList = document.getElementById("city-list");
+
+    const countryMaps = {
+      uk: {
+        pill: "United Kingdom",
+        title: "United Kingdom travel map",
+        copy: "A quick visual of the UK locations you have visited so reviewers can see your travel footprint at a glance.",
+        cities: [
+          { name: "London", note: "Capital and major stop in the UK" },
+          { name: "Leeds", note: "Northern England city from your UK experience" },
+          { name: "Manchester", note: "Another major city marked in your travel map" }
+        ],
+        svg: `
+          <svg viewBox="0 0 260 320" role="img" aria-label="United Kingdom map with visited cities">
+            <path class="map-shape" d="M144 18 L164 30 L176 55 L171 83 L186 110 L178 136 L185 157 L174 181 L160 201 L164 224 L151 248 L132 269 L110 280 L95 265 L88 241 L73 225 L70 201 L83 182 L79 160 L93 135 L90 109 L102 88 L109 61 L127 41 Z" />
+            <circle class="map-marker" cx="128" cy="178" r="9"></circle>
+            <text class="map-label" x="142" y="174">London</text>
+            <circle class="map-marker" cx="112" cy="136" r="9"></circle>
+            <text class="map-label" x="126" y="131">Leeds</text>
+            <circle class="map-marker" cx="98" cy="142" r="9"></circle>
+            <text class="map-label" x="14" y="137">Manchester</text>
+          </svg>
+        `
+      },
+      china: {
+        pill: "China",
+        title: "China travel map",
+        copy: "The China view highlights cities that connect your home base, study, research, and studio identity.",
+        cities: [
+          { name: "Changchun", note: "University years and hometown connection" },
+          { name: "Hefei", note: "USTC research collaboration period" },
+          { name: "Shanghai", note: "Quant internship experience" }
+        ],
+        svg: `
+          <svg viewBox="0 0 420 300" role="img" aria-label="China map with visited cities">
+            <path class="map-shape" d="M36 150 L63 112 L102 94 L132 70 L178 62 L227 76 L268 66 L315 85 L351 115 L386 122 L372 149 L392 171 L370 198 L332 212 L303 238 L262 233 L221 247 L183 235 L154 248 L112 235 L80 208 L51 208 L61 178 Z" />
+            <circle class="map-marker" cx="124" cy="102" r="9"></circle>
+            <text class="map-label" x="20" y="97">Changchun</text>
+            <circle class="map-marker" cx="207" cy="156" r="9"></circle>
+            <text class="map-label" x="221" y="151">Hefei</text>
+            <circle class="map-marker" cx="255" cy="175" r="9"></circle>
+            <text class="map-label" x="269" y="170">Shanghai</text>
+          </svg>
+        `
+      },
+      usa: {
+        pill: "United States",
+        title: "United States travel map",
+        copy: "The US view marks cities that shaped your study, research, and work experience across different regions.",
+        cities: [
+          { name: "Baltimore", note: "Current research base at UMBC" },
+          { name: "Los Angeles", note: "USC years and study experience" },
+          { name: "Milwaukee", note: "Research period at Marquette University" },
+          { name: "Jersey City", note: "Industry internship period" }
+        ],
+        svg: `
+          <svg viewBox="0 0 460 260" role="img" aria-label="United States map with visited cities">
+            <path class="map-shape" d="M34 130 L54 101 L83 91 L104 103 L131 92 L173 101 L214 94 L247 104 L284 99 L325 111 L362 105 L406 120 L423 143 L401 162 L366 169 L334 185 L300 191 L259 185 L217 191 L172 183 L129 186 L92 175 L64 158 L44 156 Z" />
+            <circle class="map-marker" cx="154" cy="141" r="9"></circle>
+            <text class="map-label" x="46" y="136">Los Angeles</text>
+            <circle class="map-marker" cx="314" cy="138" r="9"></circle>
+            <text class="map-label" x="328" y="133">Milwaukee</text>
+            <circle class="map-marker" cx="357" cy="150" r="9"></circle>
+            <text class="map-label" x="371" y="145">Jersey City</text>
+            <circle class="map-marker" cx="349" cy="159" r="9"></circle>
+            <text class="map-label" x="362" y="175">Baltimore</text>
+          </svg>
+        `
+      },
+      canada: {
+        pill: "Canada",
+        title: "Canada travel map",
+        copy: "The Canada view can highlight your main travel stops and can be updated any time as you add more locations.",
+        cities: [
+          { name: "Toronto", note: "Assumed major travel stop for the first Canada map draft" },
+          { name: "Montreal", note: "Assumed eastern Canada stop for the first draft" },
+          { name: "Vancouver", note: "Assumed west coast stop for the first draft" }
+        ],
+        svg: `
+          <svg viewBox="0 0 460 250" role="img" aria-label="Canada map with visited cities">
+            <path class="map-shape" d="M28 132 L52 102 L92 91 L124 74 L163 82 L202 67 L244 77 L283 70 L328 84 L366 79 L406 95 L432 117 L421 140 L390 147 L357 161 L317 157 L284 170 L246 164 L206 174 L166 167 L126 174 L95 164 L61 160 L42 150 Z" />
+            <circle class="map-marker" cx="314" cy="136" r="9"></circle>
+            <text class="map-label" x="328" y="131">Toronto</text>
+            <circle class="map-marker" cx="342" cy="128" r="9"></circle>
+            <text class="map-label" x="356" y="123">Montreal</text>
+            <circle class="map-marker" cx="96" cy="146" r="9"></circle>
+            <text class="map-label" x="14" y="141">Vancouver</text>
+          </svg>
+        `
+      }
+    };
 
     photoCards.forEach((card) => {
       const img = card.querySelector("[data-photo]");
@@ -1115,12 +1442,66 @@
         markFallback();
       }
 
-      card.addEventListener("click", () => {
+      const handleCardActivate = () => {
+        if (card.dataset.countryMap) {
+          openCountryMap(card.dataset.countryMap);
+          return;
+        }
+
         if (!card.classList.contains("has-image")) return;
         lightboxImage.src = img.src;
         lightboxImage.alt = img.alt;
         lightbox.classList.add("active");
         lightbox.setAttribute("aria-hidden", "false");
+      };
+
+      card.addEventListener("click", handleCardActivate);
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          handleCardActivate();
+        }
+      });
+    });
+
+    function openCountryMap(countryKey) {
+      const config = countryMaps[countryKey];
+      if (!config) return;
+
+      mapPill.textContent = config.pill;
+      mapTitle.textContent = config.title;
+      mapCopy.textContent = config.copy;
+      mapCanvas.innerHTML = config.svg;
+      cityList.innerHTML = "";
+
+      config.cities.forEach((city) => {
+        const item = document.createElement("div");
+        item.className = "city-item";
+        item.innerHTML = "<strong>" + city.name + "</strong><span>" + city.note + "</span>";
+        cityList.appendChild(item);
+      });
+
+      mapModal.classList.add("active");
+      mapModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeCountryMap() {
+      mapModal.classList.remove("active");
+      mapModal.setAttribute("aria-hidden", "true");
+      mapCanvas.innerHTML = "";
+      cityList.innerHTML = "";
+    }
+
+    mapTriggers.forEach((trigger) => {
+      if (!trigger.classList.contains("country-item")) return;
+      trigger.addEventListener("click", () => {
+        openCountryMap(trigger.dataset.countryMap);
+      });
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openCountryMap(trigger.dataset.countryMap);
+        }
       });
     });
 
@@ -1130,12 +1511,20 @@
       lightboxImage.src = "";
     }
 
+    mapClose.addEventListener("click", closeCountryMap);
+    mapModal.addEventListener("click", (event) => {
+      if (event.target === mapModal) closeCountryMap();
+    });
+
     lightboxClose.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", (event) => {
       if (event.target === lightbox) closeLightbox();
     });
 
     document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mapModal.classList.contains("active")) {
+        closeCountryMap();
+      }
       if (event.key === "Escape" && lightbox.classList.contains("active")) {
         closeLightbox();
       }
