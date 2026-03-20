@@ -488,6 +488,10 @@
       cursor: zoom-in;
     }
 
+    .photo-card.map-card.has-image {
+      cursor: pointer;
+    }
+
     .photo-card.has-image:hover .photo-frame img {
       transform: scale(1.04);
     }
@@ -833,13 +837,39 @@
       stroke-linecap: round;
     }
 
-    .map-marker {
-      fill: #be5a78;
-      stroke: #ffffff;
-      stroke-width: 6;
+    .map-subshape {
+      fill: rgba(15, 118, 110, 0.12);
+      stroke: #2c6475;
+      stroke-width: 3;
+      stroke-linejoin: round;
+      stroke-linecap: round;
     }
 
-    .map-label {
+    .map-highlight {
+      fill: rgba(190, 90, 120, 0.22);
+      stroke: rgba(190, 90, 120, 0.72);
+      stroke-width: 2.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+
+    .map-highlight--secondary {
+      fill: rgba(2, 132, 199, 0.18);
+      stroke: rgba(2, 132, 199, 0.72);
+    }
+
+    .map-highlight--tertiary {
+      fill: rgba(245, 158, 11, 0.18);
+      stroke: rgba(245, 158, 11, 0.82);
+    }
+
+    .map-dot-marker {
+      fill: #be5a78;
+      stroke: #ffffff;
+      stroke-width: 3.5;
+    }
+
+    .map-region-label {
       fill: #102434;
       font-size: 14px;
       font-weight: 800;
@@ -847,6 +877,13 @@
       stroke: rgba(255, 255, 255, 0.96);
       stroke-width: 6;
       stroke-linejoin: round;
+    }
+
+    .map-label-soft {
+      fill: #506575;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
     .map-side-title {
@@ -859,6 +896,9 @@
       display: grid;
       gap: 12px;
       margin-top: 14px;
+      max-height: 62vh;
+      overflow: auto;
+      padding-right: 4px;
     }
 
     .city-item {
@@ -869,6 +909,26 @@
       box-shadow: 0 10px 18px rgba(20, 37, 53, 0.06);
     }
 
+    .city-item-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .city-index {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--rose));
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      box-shadow: 0 8px 14px rgba(20, 37, 53, 0.12);
+    }
+
     .city-item strong {
       display: block;
       color: #102434;
@@ -877,7 +937,7 @@
 
     .city-item span {
       display: block;
-      margin-top: 4px;
+      margin-top: 6px;
       color: var(--muted);
       font-size: 0.9rem;
     }
@@ -1099,7 +1159,7 @@
             I co-founded and help run 3H-Studio in China, where photography is both a creative practice and a way of building shared stories. This page brings that side of my life together with the places that shaped me.
           </p>
           <span class="mini-badge">Co-founder in China</span>
-          <a class="story-action" href="https://richardwarriors.github.io/3Hstudio/index.html">Visit 3H-Studio</a>
+          <a class="story-action" href="studio.html">Visit 3H-Studio</a>
         </article>
 
         <article class="story-card">
@@ -1241,40 +1301,40 @@
           </article>
 
           <div class="travel-list">
-            <article class="country-item map-item" data-country-map="china" role="button" tabindex="0" aria-label="Open China visited cities map">
+            <article class="country-item map-item" data-country-map="china" role="button" tabindex="0" aria-label="Open China visited places map">
               <div class="country-topline">
                 <h3 class="country-name">China</h3>
                 <span class="country-badge">Home + Studio</span>
               </div>
               <p class="country-copy">The strongest part of your personal and creative identity, and the home base of 3H-Studio and many of your visual memories.</p>
-              <span class="country-hint">Open visited cities map</span>
+              <span class="country-hint">Open visited places map</span>
             </article>
 
-            <article class="country-item map-item" data-country-map="usa" role="button" tabindex="0" aria-label="Open United States visited cities map">
+            <article class="country-item map-item" data-country-map="usa" role="button" tabindex="0" aria-label="Open United States visited places map">
               <div class="country-topline">
                 <h3 class="country-name">United States</h3>
                 <span class="country-badge">Research + Study</span>
               </div>
               <p class="country-copy">Where your PhD journey continues and where academic life, daily observation, and photography keep overlapping.</p>
-              <span class="country-hint">Open visited cities map</span>
+              <span class="country-hint">Open visited places map</span>
             </article>
 
-            <article class="country-item map-item" data-country-map="uk" role="button" tabindex="0" aria-label="Open United Kingdom visited cities map">
+            <article class="country-item map-item" data-country-map="uk" role="button" tabindex="0" aria-label="Open United Kingdom visited places map">
               <div class="country-topline">
                 <h3 class="country-name">United Kingdom</h3>
                 <span class="country-badge">Study + Life</span>
               </div>
               <p class="country-copy">Part of the international experience that shaped how you see culture, architecture, place, and atmosphere.</p>
-              <span class="country-hint">Open visited cities map</span>
+              <span class="country-hint">Open visited places map</span>
             </article>
 
-            <article class="country-item map-item" data-country-map="canada" role="button" tabindex="0" aria-label="Open Canada visited cities map">
+            <article class="country-item map-item" data-country-map="canada" role="button" tabindex="0" aria-label="Open Canada visited places map">
               <div class="country-topline">
                 <h3 class="country-name">Canada</h3>
                 <span class="country-badge">Travel</span>
               </div>
               <p class="country-copy">A travel destination you want represented here through memory, movement, and photography work gathered on the road.</p>
-              <span class="country-hint">Open visited cities map</span>
+              <span class="country-hint">Open visited places map</span>
             </article>
           </div>
         </div>
@@ -1302,7 +1362,7 @@
           <div class="map-canvas" id="map-canvas"></div>
         </div>
         <aside>
-          <h4 class="map-side-title">Visited Locations</h4>
+          <h4 class="map-side-title" id="map-side-title">Visited Places</h4>
           <div class="city-list" id="city-list"></div>
         </aside>
       </div>
@@ -1328,95 +1388,178 @@
     const mapTitle = document.getElementById("map-title");
     const mapCopy = document.getElementById("map-copy");
     const mapCanvas = document.getElementById("map-canvas");
+    const mapSideTitle = document.getElementById("map-side-title");
     const cityList = document.getElementById("city-list");
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function renderDotMarkers(locations) {
+      return locations.map((location) => (
+        "<circle class=\"map-dot-marker\" cx=\"" + location.x + "\" cy=\"" + location.y + "\" r=\"" + (location.r || 5) + "\"></circle>"
+      )).join("");
+    }
+
+    const ukLocations = [
+      { name: "Scotland", note: "Nation within the UK" },
+      { name: "England", note: "Nation within the UK" },
+      { name: "Wales", note: "Nation within the UK" }
+    ];
+
+    const canadaLocations = [
+      { name: "Ontario", note: "Province" }
+    ];
+
+    const chinaLocations = [
+      { name: "Heilongjiang", note: "Province", x: 319, y: 68 },
+      { name: "Jilin", note: "Province", x: 296, y: 98 },
+      { name: "Shenyang", note: "City", x: 279, y: 121 },
+      { name: "Beijing", note: "Municipality", x: 243, y: 119 },
+      { name: "Shandong", note: "Province", x: 262, y: 145 },
+      { name: "Jiangsu", note: "Province", x: 276, y: 162 },
+      { name: "Zhejiang", note: "Province", x: 286, y: 184 },
+      { name: "Shanghai", note: "Municipality", x: 289, y: 172, r: 4.5 },
+      { name: "Anhui", note: "Province", x: 248, y: 167 },
+      { name: "Fujian", note: "Province", x: 279, y: 208 },
+      { name: "Guangdong", note: "Province", x: 249, y: 228 },
+      { name: "Yunnan", note: "Province", x: 146, y: 214 },
+      { name: "Hainan", note: "Province", x: 225, y: 270, r: 4.5 },
+      { name: "Hubei", note: "Province", x: 210, y: 181 },
+      { name: "Hong Kong", note: "Special administrative region", x: 256, y: 238, r: 4.5 },
+      { name: "Shanxi", note: "Province", x: 220, y: 140 },
+      { name: "Chongqing", note: "Municipality", x: 177, y: 187 }
+    ];
+
+    const usaLocations = [
+      { name: "Alaska", note: "State", x: 78, y: 286 },
+      { name: "Hawaii", note: "State", x: 170, y: 297 },
+      { name: "Washington", note: "State", x: 100, y: 148 },
+      { name: "California", note: "State", x: 98, y: 205 },
+      { name: "Idaho", note: "State", x: 128, y: 169 },
+      { name: "Montana", note: "State", x: 160, y: 161 },
+      { name: "Arizona", note: "State", x: 150, y: 226 },
+      { name: "Utah", note: "State", x: 149, y: 199 },
+      { name: "Nevada", note: "State", x: 123, y: 196 },
+      { name: "New Mexico", note: "State", x: 196, y: 227 },
+      { name: "Texas", note: "State", x: 251, y: 247 },
+      { name: "Kansas", note: "State", x: 239, y: 198 },
+      { name: "Nebraska", note: "State", x: 236, y: 179 },
+      { name: "Oklahoma", note: "State", x: 240, y: 220 },
+      { name: "Missouri", note: "State", x: 279, y: 205 },
+      { name: "Louisiana", note: "State", x: 286, y: 262 },
+      { name: "Wisconsin", note: "State", x: 306, y: 172 },
+      { name: "Illinois", note: "State", x: 300, y: 194 },
+      { name: "Michigan", note: "State", x: 326, y: 170 },
+      { name: "Indiana", note: "State", x: 319, y: 194 },
+      { name: "Ohio", note: "State", x: 344, y: 191 },
+      { name: "Kentucky", note: "State", x: 336, y: 210 },
+      { name: "Tennessee", note: "State", x: 344, y: 223 },
+      { name: "West Virginia", note: "State", x: 361, y: 204 },
+      { name: "Virginia", note: "State", x: 379, y: 213 },
+      { name: "North Carolina", note: "State", x: 395, y: 224 },
+      { name: "South Carolina", note: "State", x: 394, y: 240 },
+      { name: "Pennsylvania", note: "State", x: 371, y: 185 },
+      { name: "Maryland", note: "State", x: 379, y: 196 },
+      { name: "Delaware", note: "State", x: 389, y: 194, r: 4.5 },
+      { name: "Georgia", note: "State", x: 379, y: 253 },
+      { name: "Florida", note: "State", x: 420, y: 281 },
+      { name: "New Jersey", note: "State", x: 392, y: 184, r: 4.5 },
+      { name: "New York", note: "State", x: 389, y: 163 },
+      { name: "Connecticut", note: "State", x: 405, y: 173, r: 4.5 },
+      { name: "Massachusetts", note: "State", x: 415, y: 169, r: 4.5 },
+      { name: "Iowa", note: "State", x: 275, y: 185 }
+    ];
+
+    function renderUkMap() {
+      return `
+        <svg viewBox="0 0 300 380" role="img" aria-label="United Kingdom map with Scotland, England, and Wales highlighted">
+          <path class="map-shape" d="M164 22 L182 35 L193 58 L191 84 L203 108 L199 136 L209 161 L203 183 L191 207 L195 232 L184 258 L169 283 L151 305 L138 331 L121 343 L108 328 L100 304 L87 285 L81 259 L89 232 L87 207 L98 181 L94 154 L104 128 L102 101 L111 75 L124 48 L143 32 Z" />
+          <path class="map-highlight" d="M145 40 L158 44 L171 57 L176 81 L173 104 L177 129 L168 144 L153 145 L142 127 L132 105 L128 82 L131 57 Z" />
+          <path class="map-highlight map-highlight--secondary" d="M137 149 L157 160 L167 180 L163 208 L151 243 L142 280 L131 312 L118 304 L109 271 L107 238 L112 208 L120 178 Z" />
+          <path class="map-highlight map-highlight--tertiary" d="M118 171 L131 179 L128 203 L118 225 L108 214 L106 191 Z" />
+          <text class="map-region-label" x="136" y="92">Scotland</text>
+          <text class="map-region-label" x="146" y="219">England</text>
+          <text class="map-region-label" x="80" y="201">Wales</text>
+        </svg>
+      `;
+    }
+
+    function renderCanadaMap() {
+      return `
+        <svg viewBox="0 0 520 300" role="img" aria-label="Canada map with Ontario highlighted">
+          <path class="map-shape" d="M24 164 L48 126 L87 101 L127 76 L174 84 L219 63 L264 75 L310 62 L358 76 L404 67 L447 83 L491 112 L486 140 L462 152 L438 168 L404 177 L365 186 L323 184 L283 198 L241 192 L201 202 L160 198 L121 206 L83 195 L51 189 L31 177 Z" />
+          <path class="map-highlight" d="M308 121 L334 116 L350 128 L347 154 L329 166 L303 162 L294 144 Z" />
+          <text class="map-region-label" x="313" y="151">Ontario</text>
+        </svg>
+      `;
+    }
+
+    function renderChinaMap(locations) {
+      return `
+        <svg viewBox="0 0 430 310" role="img" aria-label="China map with visited places marked">
+          <path class="map-shape" d="M36 156 L63 116 L104 95 L132 71 L178 61 L226 75 L269 66 L315 84 L352 114 L389 121 L374 149 L395 173 L371 199 L333 214 L303 239 L262 234 L221 248 L182 236 L153 249 L111 236 L80 210 L50 209 L60 180 Z" />
+          <ellipse class="map-subshape" cx="225" cy="272" rx="15" ry="9"></ellipse>
+          ${renderDotMarkers(locations)}
+          <text class="map-label-soft" x="194" y="295">Hainan is shown south of the mainland.</text>
+        </svg>
+      `;
+    }
+
+    function renderUsaMap(locations) {
+      return `
+        <svg viewBox="0 0 540 330" role="img" aria-label="United States map with visited states marked">
+          <path class="map-shape" d="M58 173 L72 142 L94 129 L122 130 L145 121 L176 128 L205 122 L238 128 L271 124 L303 133 L330 132 L356 139 L380 136 L405 143 L430 140 L456 153 L481 156 L497 169 L500 186 L489 196 L471 202 L459 212 L448 224 L434 237 L416 242 L396 240 L378 234 L359 227 L337 220 L319 214 L302 216 L283 219 L264 222 L250 232 L234 237 L220 241 L205 236 L190 227 L173 225 L156 226 L140 220 L121 219 L107 212 L90 209 L75 198 L64 188 Z" />
+          <path class="map-subshape" d="M31 274 L53 265 L79 269 L99 262 L121 274 L111 289 L94 292 L76 304 L52 301 L36 289 Z" />
+          <path class="map-subshape" d="M153 292 L163 288 L170 291 L177 297 L169 301 L160 299 Z" />
+          <path class="map-subshape" d="M180 300 L186 297 L191 300 L188 305 Z" />
+          <path class="map-subshape" d="M195 304 L200 301 L205 304 L202 308 Z" />
+          <path class="map-subshape" d="M417 242 L431 253 L433 279 L422 296 L412 276 L413 253 Z" />
+          ${renderDotMarkers(locations)}
+          <text class="map-label-soft" x="44" y="319">Alaska</text>
+          <text class="map-label-soft" x="150" y="319">Hawaii</text>
+        </svg>
+      `;
+    }
 
     const countryMaps = {
       uk: {
         pill: "United Kingdom",
         title: "United Kingdom travel map",
-        copy: "A quick visual of the UK locations you have visited so reviewers can see your travel footprint at a glance.",
-        cities: [
-          { name: "London", note: "Capital and major stop in the UK" },
-          { name: "Leeds", note: "Northern England city from your UK experience" },
-          { name: "Manchester", note: "Another major city marked in your travel map" }
-        ],
-        svg: `
-          <svg viewBox="0 0 260 320" role="img" aria-label="United Kingdom map with visited cities">
-            <path class="map-shape" d="M144 18 L164 30 L176 55 L171 83 L186 110 L178 136 L185 157 L174 181 L160 201 L164 224 L151 248 L132 269 L110 280 L95 265 L88 241 L73 225 L70 201 L83 182 L79 160 L93 135 L90 109 L102 88 L109 61 L127 41 Z" />
-            <circle class="map-marker" cx="128" cy="178" r="9"></circle>
-            <text class="map-label" x="142" y="174">London</text>
-            <circle class="map-marker" cx="112" cy="136" r="9"></circle>
-            <text class="map-label" x="126" y="131">Leeds</text>
-            <circle class="map-marker" cx="98" cy="142" r="9"></circle>
-            <text class="map-label" x="14" y="137">Manchester</text>
-          </svg>
-        `
+        copy: "This map uses a UK silhouette and highlights the parts of Great Britain you have visited.",
+        listTitle: "Visited nations",
+        locations: ukLocations,
+        render: renderUkMap
       },
       china: {
         pill: "China",
         title: "China travel map",
-        copy: "The China view highlights cities that connect your home base, study, research, and studio identity.",
-        cities: [
-          { name: "Changchun", note: "University years and hometown connection" },
-          { name: "Hefei", note: "USTC research collaboration period" },
-          { name: "Shanghai", note: "Quant internship experience" }
-        ],
-        svg: `
-          <svg viewBox="0 0 420 300" role="img" aria-label="China map with visited cities">
-            <path class="map-shape" d="M36 150 L63 112 L102 94 L132 70 L178 62 L227 76 L268 66 L315 85 L351 115 L386 122 L372 149 L392 171 L370 198 L332 212 L303 238 L262 233 L221 247 L183 235 L154 248 L112 235 L80 208 L51 208 L61 178 Z" />
-            <circle class="map-marker" cx="124" cy="102" r="9"></circle>
-            <text class="map-label" x="20" y="97">Changchun</text>
-            <circle class="map-marker" cx="207" cy="156" r="9"></circle>
-            <text class="map-label" x="221" y="151">Hefei</text>
-            <circle class="map-marker" cx="255" cy="175" r="9"></circle>
-            <text class="map-label" x="269" y="170">Shanghai</text>
-          </svg>
-        `
+        copy: "Dots mark the provinces, municipalities, city, and special administrative region from your China travel footprint.",
+        listTitle: "Visited places in China",
+        locations: chinaLocations,
+        render: renderChinaMap
       },
       usa: {
         pill: "United States",
         title: "United States travel map",
-        copy: "The US view marks cities that shaped your study, research, and work experience across different regions.",
-        cities: [
-          { name: "Baltimore", note: "Current research base at UMBC" },
-          { name: "Los Angeles", note: "USC years and study experience" },
-          { name: "Milwaukee", note: "Research period at Marquette University" },
-          { name: "Jersey City", note: "Industry internship period" }
-        ],
-        svg: `
-          <svg viewBox="0 0 460 260" role="img" aria-label="United States map with visited cities">
-            <path class="map-shape" d="M34 130 L54 101 L83 91 L104 103 L131 92 L173 101 L214 94 L247 104 L284 99 L325 111 L362 105 L406 120 L423 143 L401 162 L366 169 L334 185 L300 191 L259 185 L217 191 L172 183 L129 186 L92 175 L64 158 L44 156 Z" />
-            <circle class="map-marker" cx="154" cy="141" r="9"></circle>
-            <text class="map-label" x="46" y="136">Los Angeles</text>
-            <circle class="map-marker" cx="314" cy="138" r="9"></circle>
-            <text class="map-label" x="328" y="133">Milwaukee</text>
-            <circle class="map-marker" cx="357" cy="150" r="9"></circle>
-            <text class="map-label" x="371" y="145">Jersey City</text>
-            <circle class="map-marker" cx="349" cy="159" r="9"></circle>
-            <text class="map-label" x="362" y="175">Baltimore</text>
-          </svg>
-        `
+        copy: "Dots mark the states you have visited across the mainland US, plus Alaska and Hawaii shown as insets.",
+        listTitle: "Visited states",
+        locations: usaLocations,
+        render: renderUsaMap
       },
       canada: {
         pill: "Canada",
         title: "Canada travel map",
-        copy: "The Canada view can highlight your main travel stops and can be updated any time as you add more locations.",
-        cities: [
-          { name: "Toronto", note: "Assumed major travel stop for the first Canada map draft" },
-          { name: "Montreal", note: "Assumed eastern Canada stop for the first draft" },
-          { name: "Vancouver", note: "Assumed west coast stop for the first draft" }
-        ],
-        svg: `
-          <svg viewBox="0 0 460 250" role="img" aria-label="Canada map with visited cities">
-            <path class="map-shape" d="M28 132 L52 102 L92 91 L124 74 L163 82 L202 67 L244 77 L283 70 L328 84 L366 79 L406 95 L432 117 L421 140 L390 147 L357 161 L317 157 L284 170 L246 164 L206 174 L166 167 L126 174 L95 164 L61 160 L42 150 Z" />
-            <circle class="map-marker" cx="314" cy="136" r="9"></circle>
-            <text class="map-label" x="328" y="131">Toronto</text>
-            <circle class="map-marker" cx="342" cy="128" r="9"></circle>
-            <text class="map-label" x="356" y="123">Montreal</text>
-            <circle class="map-marker" cx="96" cy="146" r="9"></circle>
-            <text class="map-label" x="14" y="141">Vancouver</text>
-          </svg>
-        `
+        copy: "This map uses a Canada silhouette and highlights Ontario, the province you listed in your travel history.",
+        listTitle: "Visited province",
+        locations: canadaLocations,
+        render: renderCanadaMap
       }
     };
 
@@ -1471,13 +1614,16 @@
       mapPill.textContent = config.pill;
       mapTitle.textContent = config.title;
       mapCopy.textContent = config.copy;
-      mapCanvas.innerHTML = config.svg;
+      mapSideTitle.textContent = config.listTitle + " (" + config.locations.length + ")";
+      mapCanvas.innerHTML = config.render(config.locations);
       cityList.innerHTML = "";
 
-      config.cities.forEach((city) => {
+      config.locations.forEach((city, index) => {
         const item = document.createElement("div");
         item.className = "city-item";
-        item.innerHTML = "<strong>" + city.name + "</strong><span>" + city.note + "</span>";
+        item.innerHTML =
+          "<div class=\"city-item-head\"><span class=\"city-index\">" + (index + 1) + "</span><strong>" + escapeHtml(city.name) + "</strong></div>" +
+          "<span>" + escapeHtml(city.note) + "</span>";
         cityList.appendChild(item);
       });
 
@@ -1488,6 +1634,7 @@
     function closeCountryMap() {
       mapModal.classList.remove("active");
       mapModal.setAttribute("aria-hidden", "true");
+      mapSideTitle.textContent = "Visited Places";
       mapCanvas.innerHTML = "";
       cityList.innerHTML = "";
     }
