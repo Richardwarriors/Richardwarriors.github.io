@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>刘浩存 | 专题页面</title>
+  <style>
+    :root {
+      --bg: #f6f2eb;
+      --paper: rgba(255, 250, 245, 0.78);
+      --paper-strong: rgba(255, 255, 255, 0.9);
+      --ink: #1f2430;
+      --muted: #5f6472;
+      --gold: #b8893d;
+      --wine: #7f3f53;
+      --rose: #d9a6b2;
+      --sea: #6b8ca4;
+      --line: rgba(31, 36, 48, 0.12);
+      --shadow: 0 24px 60px rgba(31, 36, 48, 0.14);
+      --radius-lg: 22px;
+      --radius-xl: 30px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(900px circle at -12% -18%, rgba(184, 137, 61, 0.18) 0%, transparent 42%),
+        radial-gradient(820px circle at 100% 0%, rgba(127, 63, 83, 0.12) 0%, transparent 34%),
+        linear-gradient(180deg, #f8f4ee 0%, #efe8de 100%);
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(31, 36, 48, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 36, 48, 0.025) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(248, 244, 238, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-family: "STSong", "Songti SC", "Noto Serif SC", serif;
+      font-size: 1.28rem;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-list a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #2e3340;
+      transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+    }
+
+    .nav-list a:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.78);
+      border-color: rgba(31, 36, 48, 0.08);
+    }
+
+    .page-shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 26px 20px 52px;
+    }
+
+    .hero,
+    .section-card,
+    .gallery-card,
+    .timeline-card,
+    .works-card,
+    .footer-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px, 4vw, 42px);
+      animation: fade-up 580ms ease both;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -140px -160px auto;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 137, 61, 0.18) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(184, 137, 61, 0.12);
+      color: #8a6324;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      margin: 16px 0 12px;
+      font-family: "STSong", "Songti SC", "Noto Serif SC", serif;
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-lead {
+      margin: 0;
+      max-width: 720px;
+      color: #354154;
+      font-size: 1.03rem;
+    }
+
+    .chip-row,
+    .jump-links,
+    .tag-row,
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip-row {
+      margin-top: 22px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 36, 48, 0.08);
+      background: rgba(255, 255, 255, 0.72);
+      color: #273041;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .chip-mark {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--wine));
+      box-shadow: 0 0 0 5px rgba(184, 137, 61, 0.08);
+    }
+
+    .jump-links {
+      margin-top: 18px;
+    }
+
+    .jump-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      font-weight: 700;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .jump-links a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(107, 140, 164, 0.45);
+      box-shadow: 0 14px 26px rgba(31, 36, 48, 0.1);
+    }
+
+    .hero-media {
+      position: relative;
+      min-height: 520px;
+    }
+
+    .hero-frame-main {
+      position: absolute;
+      inset: 0 34px 76px 0;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 26px 50px rgba(31, 36, 48, 0.18);
+    }
+
+    .hero-frame-side {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 38%;
+      height: 54%;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 5px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 40px rgba(31, 36, 48, 0.14);
+    }
+
+    .float-note {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      max-width: 260px;
+      border-radius: 18px;
+      background: rgba(255, 248, 241, 0.88);
+      border: 1px solid rgba(31, 36, 48, 0.08);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 26px rgba(31, 36, 48, 0.12);
+    }
+
+    .float-note strong {
+      display: block;
+      margin-bottom: 4px;
+      font-family: "STSong", "Songti SC", "Noto Serif SC", serif;
+      font-size: 1rem;
+    }
+
+    .float-note span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .stat-row {
+      margin-top: 22px;
+    }
+
+    .stat-card {
+      flex: 1 1 0;
+      min-width: 130px;
+      padding: 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(31, 36, 48, 0.08);
+      background: rgba(255, 255, 255, 0.74);
+      text-align: center;
+    }
+
+    .stat-value {
+      display: block;
+      font-family: "STSong", "Songti SC", "Noto Serif SC", serif;
+      font-size: 1.5rem;
+      color: #1f2839;
+    }
+
+    .stat-label {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .section-card,
+    .gallery-card,
+    .timeline-card,
+    .works-card {
+      padding: 28px clamp(18px, 4vw, 34px);
+      animation: fade-up 600ms ease both;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "STSong", "Songti SC", "Noto Serif SC", serif;
+      font-size: clamp(1.45rem, 2vw, 1.9rem);
+      line-height: 1.2;
+    }
+
+    .section-title::after {
+      content: "";
+      width: 44px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold), var(--wine));
+    }
+
+    .section-copy {
+      margin: 0;
+      max-width: 820px;
+      color: var(--muted);
+    }
+
+    .intro-grid,
+    .works-grid,
+    .detail-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .intro-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .note-card,
+    .work-card,
+    .detail-card {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(31, 36, 48, 0.08);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .note-card:hover,
+    .work-card:hover,
+    .detail-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 28px rgba(31, 36, 48, 0.1);
+      border-color: rgba(107, 140, 164, 0.4);
+    }
+
+    .card-kicker {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(127, 63, 83, 0.09);
+      color: var(--wine);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      margin: 14px 0 8px;
+      font-size: 1.04rem;
+      color: #1f2a39;
+    }
+
+    .card-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .gallery-shell {
+      margin-top: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .marquee {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.46);
+      border: 1px solid rgba(31, 36, 48, 0.08);
+      padding: 12px 0;
+    }
+
+    .marquee::before,
+    .marquee::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 90px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .marquee::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(246, 242, 235, 0.98), transparent);
+    }
+
+    .marquee::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(246, 242, 235, 0.98), transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 14px;
+      animation: marquee-left 28s linear infinite;
+    }
+
+    .marquee.reverse .marquee-track {
+      animation-name: marquee-right;
+      animation-duration: 32s;
+    }
+
+    .gallery-item {
+      flex: 0 0 260px;
+      height: 360px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 16px 28px rgba(31, 36, 48, 0.14);
+    }
+
+    .gallery-item.wide {
+      flex-basis: 420px;
+    }
+
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 40%;
+      background: linear-gradient(180deg, transparent, rgba(15, 17, 24, 0.74));
+    }
+
+    .gallery-caption {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      z-index: 1;
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .detail-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .works-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .work-poster {
+      height: 220px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #ddd;
+    }
+
+    .tag-row {
+      margin-top: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(31, 36, 48, 0.1);
+      color: #2b3646;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .timeline-list {
+      list-style: none;
+      margin: 22px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(31, 36, 48, 0.08);
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .timeline-year {
+      color: var(--gold);
+      font-size: 0.94rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .timeline-text {
+      color: #344152;
+    }
+
+    .source-list {
+      margin: 18px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .source-list li + li {
+      margin-top: 10px;
+    }
+
+    .source-list a {
+      color: #2a4f69;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .footer-card {
+      margin-top: 22px;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-links a {
+      font-weight: 700;
+    }
+
+    @keyframes marquee-left {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes marquee-right {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .intro-grid,
+      .detail-grid,
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-media {
+        min-height: 440px;
+      }
+
+      .hero-frame-main {
+        inset: 0 22px 66px 0;
+      }
+
+      .gallery-item {
+        flex-basis: 220px;
+        height: 300px;
+      }
+
+      .gallery-item.wide {
+        flex-basis: 340px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-list {
+        width: 100%;
+      }
+
+      .nav-list li {
+        flex: 1 1 auto;
+      }
+
+      .nav-list a {
+        width: 100%;
+      }
+
+      .timeline-item,
+      .footer-card {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-media {
+        min-height: 360px;
+      }
+
+      .hero-frame-side {
+        width: 42%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-title">刘浩存专题页</span>
+        <span class="brand-subtitle">Feature Page</span>
+      </a>
+      <nav aria-label="Page Sections">
+        <ul class="nav-list">
+          <li><a href="#overview">概览</a></li>
+          <li><a href="#gallery">图像画廊</a></li>
+          <li><a href="#works">作品切面</a></li>
+          <li><a href="#timeline">时间线</a></li>
+          <li><a href="index.html">返回主页</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section id="overview" class="hero" aria-labelledby="page-title">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Liu Haocun</span>
+          <h1 id="page-title" class="hero-title">刘浩存：在清透气质与镜头张力之间，长出属于自己的银幕辨识度。</h1>
+          <p class="hero-lead">
+            这是一页偏杂志风格的人物专题。相比于简单的资料罗列，我更想把刘浩存呈现成一种“影像气质”本身：她身上有舞蹈训练带来的控制力，也有在镜头前非常容易被放大的灵气与脆感。从《一秒钟》进入大众视野，到《送你一朵小红花》《悬崖之上》《四海》《灿烂的她》再到《想飞的女孩》，她的银幕路径始终带着一种轻、亮、又略微疏离的个人质感。
+          </p>
+          <div class="chip-row" aria-label="关键词">
+            <span class="chip"><span class="chip-mark" aria-hidden="true"></span>北舞出身</span>
+            <span class="chip"><span class="chip-mark" aria-hidden="true"></span>00后银幕面孔</span>
+            <span class="chip"><span class="chip-mark" aria-hidden="true"></span>舞蹈底子</span>
+            <span class="chip"><span class="chip-mark" aria-hidden="true"></span>清冷灵动</span>
+          </div>
+          <div class="jump-links">
+            <a href="#gallery">看滚动画廊</a>
+            <a href="#works">看代表作品</a>
+            <a href="#sources">看资料来源</a>
+          </div>
+          <div class="stat-row" aria-label="人物信息">
+            <div class="stat-card">
+              <span class="stat-value">2000</span>
+              <span class="stat-label">出生年份</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">北舞</span>
+              <span class="stat-label">毕业院校</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">《一秒钟》</span>
+              <span class="stat-label">进入大众视野</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-media" aria-label="刘浩存图像拼贴">
+          <div class="hero-frame-main">
+            <img src="liuhaocun/liuhaocun_1.jpg" alt="刘浩存活动照片" loading="eager" />
+          </div>
+          <div class="hero-frame-side">
+            <img src="liuhaocun/liuhaocun_2.jpg" alt="刘浩存写真" loading="lazy" />
+          </div>
+          <div class="float-note">
+            <strong>一种很适合大银幕的脸</strong>
+            <span>不是单纯“漂亮”，而是会随着光线、构图和情绪不断改变质地。</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <section class="section-card" aria-labelledby="intro-title">
+        <h2 id="intro-title" class="section-title">为什么她容易被记住</h2>
+        <p class="section-copy">
+          公开资料显示，刘浩存出生于吉林通化，毕业于北京舞蹈学院中国民族民间舞系，早期因被张艺谋选中主演《一秒钟》而进入大众视线。舞蹈背景给她带来的，不只是体态上的轻盈，更是一种身体表达上的完整性：站姿、回头、奔跑、停顿，都比一般演员更容易留下“镜头痕迹”。
+        </p>
+        <div class="intro-grid">
+          <article class="note-card">
+            <span class="card-kicker">气质</span>
+            <h3 class="card-title">轻盈，但不是没有力量</h3>
+            <p class="card-copy">
+              她身上的“轻”并不是单薄，而是一种镜头里非常罕见的通透感。情绪不需要被说得很满，观众也能从表情和肢体里接收到细微变化。
+            </p>
+          </article>
+          <article class="note-card">
+            <span class="card-kicker">训练</span>
+            <h3 class="card-title">舞蹈底子让动作更会说话</h3>
+            <p class="card-copy">
+              受过系统舞蹈训练的演员，往往更知道怎样把情绪落到身体上。她很多镜头的美感，来自动作的秩序感和线条感，而不只是五官本身。
+            </p>
+          </article>
+          <article class="note-card">
+            <span class="card-kicker">银幕</span>
+            <h3 class="card-title">适合被镜头放大</h3>
+            <p class="card-copy">
+              她不是那种“信息量很大”的表演型演员，反而更适合被特写慢慢推近。镜头越近，人物的脆弱、倔强和冷感越容易显出来。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="gallery" class="gallery-card" aria-labelledby="gallery-title">
+        <h2 id="gallery-title" class="section-title">图像画廊</h2>
+        <p class="section-copy">
+          这里做成了自动滚动播放的双轨画廊。你打开页面后，图片会持续横向流动，像一个小型人物影像带，整体气质会更“fancy”一些。
+        </p>
+        <div class="gallery-shell">
+          <div class="marquee">
+            <div class="marquee-track">
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_3.jpg" alt="刘浩存柏林活动照 1" loading="lazy" /><figcaption class="gallery-caption">柏林首映活动图像</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_4.jpg" alt="刘浩存肖像 1" loading="lazy" /><figcaption class="gallery-caption">近距离人像</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_5.jpg" alt="刘浩存肖像 2" loading="lazy" /><figcaption class="gallery-caption">柔和而清透的镜头感</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_6.jpg" alt="刘浩存柏林活动照 2" loading="lazy" /><figcaption class="gallery-caption">红毯与电影节时刻</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_7.jpg" alt="《送你一朵小红花》海报" loading="lazy" /><figcaption class="gallery-caption">《送你一朵小红花》</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_8.jpg" alt="刘浩存肖像 3" loading="lazy" /><figcaption class="gallery-caption">静态人像里的氛围感</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_9.jpg" alt="刘浩存柏林活动照 3" loading="lazy" /><figcaption class="gallery-caption">新作品时期的公开露面</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_10.jpg" alt="刘浩存肖像 4" loading="lazy" /><figcaption class="gallery-caption">简洁明亮的画面气质</figcaption></figure>
+
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_11.jpg" alt="刘浩存柏林活动照 1 重复" loading="lazy" /><figcaption class="gallery-caption">柏林首映活动图像</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_12.jpg" alt="刘浩存肖像 1 重复" loading="lazy" /><figcaption class="gallery-caption">近距离人像</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_13.jpg" alt="刘浩存肖像 2 重复" loading="lazy" /><figcaption class="gallery-caption">柔和而清透的镜头感</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_14.jpg" alt="刘浩存柏林活动照 2 重复" loading="lazy" /><figcaption class="gallery-caption">红毯与电影节时刻</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_15.jpg" alt="《送你一朵小红花》海报 重复" loading="lazy" /><figcaption class="gallery-caption">《送你一朵小红花》</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_16.jpg" alt="刘浩存肖像 3 重复" loading="lazy" /><figcaption class="gallery-caption">静态人像里的氛围感</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_17.jpg" alt="刘浩存柏林活动照 3 重复" loading="lazy" /><figcaption class="gallery-caption">新作品时期的公开露面</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_18.jpg" alt="刘浩存肖像 4 重复" loading="lazy" /><figcaption class="gallery-caption">简洁明亮的画面气质</figcaption></figure>
+            </div>
+          </div>
+
+          <div class="marquee reverse">
+            <div class="marquee-track">
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_19.jpg" alt="刘浩存肖像 2 第二轨" loading="lazy" /><figcaption class="gallery-caption">清爽、克制、带一点疏离</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_20.jpg" alt="刘浩存柏林活动照 3 第二轨" loading="lazy" /><figcaption class="gallery-caption">更成熟阶段的公开形象</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_21.jpg" alt="刘浩存肖像 1 第二轨" loading="lazy" /><figcaption class="gallery-caption">镜头前的留白感</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_22.jpg" alt="《送你一朵小红花》海报 第二轨" loading="lazy" /><figcaption class="gallery-caption">角色与大众认知的连接点</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_23.jpg" alt="刘浩存柏林活动照 2 第二轨" loading="lazy" /><figcaption class="gallery-caption">电影节亮相画面</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_24.jpg" alt="刘浩存肖像 3 第二轨" loading="lazy" /><figcaption class="gallery-caption">柔和轮廓里的故事感</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_25.jpg" alt="刘浩存柏林活动照 1 第二轨" loading="lazy" /><figcaption class="gallery-caption">人物专题的封面氛围</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_26.jpg" alt="刘浩存肖像 4 第二轨" loading="lazy" /><figcaption class="gallery-caption">清冷中带一点温柔</figcaption></figure>
+
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_1.jpg" alt="刘浩存肖像 2 第二轨重复" loading="lazy" /><figcaption class="gallery-caption">清爽、克制、带一点疏离</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_2.jpg" alt="刘浩存柏林活动照 3 第二轨重复" loading="lazy" /><figcaption class="gallery-caption">更成熟阶段的公开形象</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_3.jpg" alt="刘浩存肖像 1 第二轨重复" loading="lazy" /><figcaption class="gallery-caption">镜头前的留白感</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_4.jpg" alt="《送你一朵小红花》海报 第二轨重复" loading="lazy" /><figcaption class="gallery-caption">角色与大众认知的连接点</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_5.jpg" alt="刘浩存柏林活动照 2 第二轨重复" loading="lazy" /><figcaption class="gallery-caption">电影节亮相画面</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_6.jpg" alt="刘浩存肖像 3 第二轨重复" loading="lazy" /><figcaption class="gallery-caption">柔和轮廓里的故事感</figcaption></figure>
+              <figure class="gallery-item wide"><img src="liuhaocun/liuhaocun_7.jpg" alt="刘浩存柏林活动照 1 第二轨重复" loading="lazy" /><figcaption class="gallery-caption">人物专题的封面氛围</figcaption></figure>
+              <figure class="gallery-item"><img src="liuhaocun/liuhaocun_8.jpg" alt="刘浩存肖像 4 第二轨重复" loading="lazy" /><figcaption class="gallery-caption">清冷中带一点温柔</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="works-card" aria-labelledby="works-title">
+        <h2 id="works-title" class="section-title">作品切面</h2>
+        <p class="section-copy">
+          如果把她的银幕印象拆开看，大概可以粗略分成几个方向：脆感、青春感、清冷感，以及在近年逐渐长出来的更成熟的情绪承载力。下面这几部作品，比较能看出这种变化路径。
+        </p>
+        <div class="works-grid">
+          <article class="work-card">
+            <div class="work-poster">
+              <img src="liuhaocun/liuhaocun_9.jpg" alt="送你一朵小红花海报" loading="lazy" />
+            </div>
+            <span class="card-kicker">角色感受</span>
+            <h3 class="card-title">《送你一朵小红花》</h3>
+            <p class="card-copy">
+              很多人对刘浩存的“易碎感”印象，都是从这部作品进一步建立起来的。角色既明亮又带伤，情绪不靠外放来完成，而是靠眼神和状态慢慢渗出来。
+            </p>
+            <div class="tag-row">
+              <span class="tag">治愈</span>
+              <span class="tag">青春</span>
+              <span class="tag">共情</span>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-poster">
+              <img src="liuhaocun/liuhaocun_10.jpg" alt="想飞的女孩活动图" loading="lazy" />
+            </div>
+            <span class="card-kicker">近期关注</span>
+            <h3 class="card-title">《想飞的女孩》</h3>
+            <p class="card-copy">
+              这一阶段更能看到她往更复杂人物上走的趋势。公开信息显示，这部作品入围了柏林电影节主竞赛单元，也让她的银幕阶段显得更成熟、更具作者电影气质。
+            </p>
+            <div class="tag-row">
+              <span class="tag">作者表达</span>
+              <span class="tag">成长</span>
+              <span class="tag">电影节气质</span>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-poster">
+              <img src="liuhaocun/liuhaocun_11.jpg" alt="刘浩存近照" loading="lazy" />
+            </div>
+            <span class="card-kicker">人物气质</span>
+            <h3 class="card-title">从少女感到银幕感</h3>
+            <p class="card-copy">
+              她最特别的地方，也许不是“某一个角色”本身，而是她始终保留着一种非常适合镜头的清冷感。随着作品增多，这种感觉开始从“青涩”慢慢转向“有厚度”。
+            </p>
+            <div class="tag-row">
+              <span class="tag">镜头感</span>
+              <span class="tag">辨识度</span>
+              <span class="tag">银幕气质</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-card" aria-labelledby="detail-title">
+        <h2 id="detail-title" class="section-title">关于她的几条描述</h2>
+        <p class="section-copy">
+          如果用比较感性的方式去概括，刘浩存给人的吸引力并不只是“年轻女演员”的新鲜感，而是她很容易在镜头里形成一种独立的温度和速度。这也是为什么她很适合被做成一页偏视觉型的人物专题。
+        </p>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <span class="card-kicker">镜头前</span>
+            <h3 class="card-title">她的“留白”是有效的</h3>
+            <p class="card-copy">
+              有些演员必须依赖对白和强动作来完成情绪，有些演员则能让观众在一个停顿、一个侧脸里读到层次。刘浩存更接近后者，所以很适合大银幕和特写。
+            </p>
+          </article>
+          <article class="detail-card">
+            <span class="card-kicker">形体感</span>
+            <h3 class="card-title">舞蹈训练改变了她的表达方式</h3>
+            <p class="card-copy">
+              公开资料写到她毕业于北京舞蹈学院中国民族民间舞系。这个背景不只意味着“会跳舞”，更意味着身体控制、线条意识、节奏感和镜头里的姿态完成度。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="timeline" class="timeline-card" aria-labelledby="timeline-title">
+        <h2 id="timeline-title" class="section-title">时间线</h2>
+        <p class="section-copy">
+          这一部分做得相对克制一些，只保留最容易帮助观众建立印象的几个节点。
+        </p>
+        <ol class="timeline-list">
+          <li class="timeline-item">
+            <div class="timeline-year">2000</div>
+            <div class="timeline-text">公开资料显示，刘浩存出生于吉林省通化市，后进入系统舞蹈训练路径。</div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-year">北舞时期</div>
+            <div class="timeline-text">毕业于北京舞蹈学院中国民族民间舞系。舞蹈训练为她之后的镜头表现打下了非常直观的基础。</div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-year">《一秒钟》</div>
+            <div class="timeline-text">被张艺谋选中并进入大众视野，也因为这部作品在第15届亚洲电影大奖中获得最佳新演员相关荣誉。</div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-year">之后</div>
+            <div class="timeline-text">从《送你一朵小红花》《悬崖之上》《四海》到《灿烂的她》《想飞的女孩》，作品风格在青春、商业和更作者化的类型之间逐渐展开。</div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="sources" class="section-card" aria-labelledby="sources-title">
+        <h2 id="sources-title" class="section-title">资料来源</h2>
+        <p class="section-copy">
+          这页的基础信息和部分图片，来自公开可访问的电影资料页与新闻页。为了避免信息写得太散，我主要参考了下面这些来源。
+        </p>
+        <ul class="source-list">
+          <li><a href="https://www.1905.com/mdb/star/3143354" target="_blank" rel="noopener noreferrer">1905电影网：刘浩存人物资料</a></li>
+          <li><a href="https://m.1905.com/m/star/info/3143354/" target="_blank" rel="noopener noreferrer">1905电影网：刘浩存人物资料（移动页）</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/One_Second_(film)" target="_blank" rel="noopener noreferrer">Wikipedia：One Second（用于作品与奖项节点交叉参考）</a></li>
+          <li><a href="https://m.1905.com/m/news/touch/1714963.shtml?fr=newsmjyh5_xgxw_01" target="_blank" rel="noopener noreferrer">1905电影网：《想飞的女孩》柏林首映图文</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Asian_Film_Award_for_Best_Newcomer" target="_blank" rel="noopener noreferrer">Asian Film Award for Best Newcomer</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <footer class="footer-card">
+      <span>这是一个风格化人物专题页，重点在视觉氛围、图像滚动和人物印象呈现。</span>
+      <div class="footer-links">
+        <a href="#overview">回到顶部</a>
+        <a href="index.html">返回主页</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
