@@ -87,6 +87,16 @@ select {
   overflow: clip;
 }
 
+.title-letter {
+  animation: title-rise 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(180ms + (var(--char-index, 0) * 80ms));
+}
+
+.hero-fade {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
 .ambient-blob {
   position: fixed;
   border-radius: 999px;
@@ -102,6 +112,7 @@ select {
   width: 28rem;
   height: 28rem;
   background: radial-gradient(circle, rgba(123, 57, 255, 0.34) 0%, transparent 72%);
+  animation: blob-float-one 22s ease-in-out infinite;
 }
 
 .ambient-blob-two {
@@ -110,6 +121,7 @@ select {
   width: 32rem;
   height: 32rem;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
+  animation: blob-float-two 28s ease-in-out infinite;
 }
 
 .ambient-blob-three {
@@ -118,6 +130,7 @@ select {
   width: 26rem;
   height: 26rem;
   background: radial-gradient(circle, rgba(255, 102, 212, 0.18) 0%, transparent 72%);
+  animation: blob-float-three 25s ease-in-out infinite;
 }
 
 .page-frame {
@@ -345,6 +358,14 @@ select {
   z-index: 0;
   pointer-events: none;
   filter: blur(10px);
+  background-image: radial-gradient(
+    circle at 50% 48%,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(173, 114, 255, 0.18) 14%,
+    rgba(90, 34, 138, 0.08) 28%,
+    transparent 52%
+  );
+  transition: background-image 260ms ease;
 }
 
 .portrait-stage,
@@ -355,6 +376,7 @@ select {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 28px 64px rgba(0, 0, 0, 0.34);
+  transition: transform 320ms ease;
 }
 
 .portrait-stage {
@@ -469,6 +491,7 @@ select {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   box-shadow: var(--shadow);
   isolation: isolate;
+  transition: transform 450ms ease, opacity 700ms ease;
 }
 
 .gallery-card::before {
@@ -556,6 +579,10 @@ select {
   filter: saturate(1.08) blur(1px);
 }
 
+.gallery-card:hover {
+  transform: translateY(-10px);
+}
+
 .gallery-card:hover .gallery-copy {
   opacity: 1;
   transform: translateY(0);
@@ -603,6 +630,100 @@ select {
 .layout-h {
   grid-column: span 4;
   grid-row: span 5;
+}
+
+@keyframes title-rise {
+  from {
+    opacity: 0;
+    transform: translateY(112%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blob-float-one {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate3d(26px, -22px, 0) scale(1.08);
+  }
+
+  66% {
+    transform: translate3d(-12px, 14px, 0) scale(0.96);
+  }
+}
+
+@keyframes blob-float-two {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate3d(-34px, 24px, 0) scale(0.94);
+  }
+
+  66% {
+    transform: translate3d(12px, -18px, 0) scale(1.06);
+  }
+}
+
+@keyframes blob-float-three {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate3d(12px, -18px, 0) scale(1.05);
+  }
+
+  66% {
+    transform: translate3d(-20px, 8px, 0) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob-one,
+  .ambient-blob-two,
+  .ambient-blob-three,
+  .title-letter,
+  .hero-fade {
+    animation: none;
+  }
+
+  .title-letter,
+  .hero-fade {
+    opacity: 1;
+    transform: none;
+  }
+
+  .portrait-stage,
+  .floating-frame,
+  .gallery-card,
+  .gallery-media img,
+  .gallery-copy,
+  .gallery-overlay {
+    transition: none;
+  }
 }
 
 @media (max-width: 1180px) {
