@@ -19,9 +19,16 @@
       <div aria-hidden="true" class="ambient-blob ambient-blob-one"></div>
       <div aria-hidden="true" class="ambient-blob ambient-blob-two"></div>
       <div aria-hidden="true" class="ambient-blob ambient-blob-three"></div>
+      <div aria-hidden="true" class="cursor-aura"></div>
 
       <main class="page-frame">
         <section id="hero" class="hero-section">
+          <div class="hero-cinema-wall" aria-hidden="true">
+            <img src="liuhaocun/liuhaocun_12.jpg" alt="" />
+            <img src="liuhaocun/liuhaocun_17.jpg" alt="" />
+            <img src="liuhaocun/liuhaocun_25.jpg" alt="" />
+            <img src="liuhaocun/liuhaocun_1.jpg" alt="" />
+          </div>
           <div class="hero-chrome hero-fade" style="--delay: 80ms">
             <span class="chrome-brand">Liu Haocun / Edition</span>
             <div class="chrome-links">
@@ -33,7 +40,7 @@
                 aria-controls="music-dock"
                 aria-expanded="false"
               >
-                Music
+                Play Music
               </button>
             </div>
           </div>
@@ -74,6 +81,12 @@
               <div class="cta-row hero-fade" style="--delay: 720ms">
                 <a class="button button-primary" href="#gallery">Explore Gallery</a>
                 <a class="button button-secondary" href="#highlights">Watch Story</a>
+              </div>
+
+              <div class="mood-switcher hero-fade" aria-label="Visual mood" style="--delay: 760ms">
+                <button class="mood-button is-active" type="button" data-mood="aurora">Aurora</button>
+                <button class="mood-button" type="button" data-mood="rose">Rose</button>
+                <button class="mood-button" type="button" data-mood="noir">Noir</button>
               </div>
 
               <div id="highlights" class="hero-highlights hero-fade" style="--delay: 820ms">
@@ -127,22 +140,41 @@
           </div>
         </section>
 
+        <section class="cinema-strip-section" aria-label="Liu Haocun moving photo reel">
+          <div class="cinema-strip" data-reveal style="--reveal-index: 0">
+            <div class="reel-track">
+              <img src="liuhaocun/liuhaocun_1.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_2.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_3.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_5.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_8.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_11.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_1.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_2.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_3.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_5.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_8.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+              <img src="liuhaocun/liuhaocun_11.jpg" alt="Liu Haocun portrait in the moving photo reel" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </section>
+
         <section id="gallery" class="gallery-section">
           <div class="gallery-heading" data-reveal style="--reveal-index: 0">
             <div>
               <span class="eyebrow">Gallery selection</span>
-              <h2>Selected frames with magazine-spread rhythm.</h2>
+              <h2>Portrait frames with full-photo clarity.</h2>
             </div>
             <p>
-              Eight looks, arranged as an editorial mosaic with depth, hover glow, and smooth
-              reveal timing shaped for a cinematic scrolling experience.
+              Eight looks from the local Liu Haocun photo folder, resized for clearer portrait viewing
+              with hover motion and an expanded gallery viewer.
             </p>
           </div>
 
           <div class="gallery-grid">
-            <article class="gallery-card layout-a" data-reveal style="--reveal-index: 1">
+            <article class="gallery-card layout-a" data-gallery-card data-reveal role="button" tabindex="0" style="--reveal-index: 1" aria-label="Open Editorial Shoot portrait">
               <div class="gallery-media">
-                <img src="liuhaocun/liuhaocun_24.jpg" alt="Editorial Shoot portrait of Liu Haocun" />
+                <img src="liuhaocun/liuhaocun_24.jpg" alt="Editorial Shoot portrait of Liu Haocun" loading="lazy" decoding="async" />
               </div>
               <div class="gallery-overlay"></div>
               <span class="gallery-index">01</span>
@@ -152,9 +184,9 @@
               </div>
             </article>
 
-            <article class="gallery-card layout-b" data-reveal style="--reveal-index: 2">
+            <article class="gallery-card layout-b" data-gallery-card data-reveal role="button" tabindex="0" style="--reveal-index: 2" aria-label="Open Atelier Diary portrait">
               <div class="gallery-media">
-                <img src="liuhaocun/liuhaocun_15.jpg" alt="Atelier Diary portrait of Liu Haocun" />
+                <img src="liuhaocun/liuhaocun_15.jpg" alt="Atelier Diary portrait of Liu Haocun" loading="lazy" decoding="async" />
               </div>
               <div class="gallery-overlay"></div>
               <span class="gallery-index">02</span>
@@ -164,9 +196,9 @@
               </div>
             </article>
 
-            <article class="gallery-card layout-c" data-reveal style="--reveal-index: 3">
+            <article class="gallery-card layout-c" data-gallery-card data-reveal role="button" tabindex="0" style="--reveal-index: 3" aria-label="Open Red Carpet portrait">
               <div class="gallery-media">
-                <img src="liuhaocun/liuhaocun_21.jpg" alt="Red Carpet portrait of Liu Haocun" />
+                <img src="liuhaocun/liuhaocun_25.jpg" alt="Red Carpet portrait of Liu Haocun" loading="lazy" decoding="async" />
               </div>
               <div class="gallery-overlay"></div>
               <span class="gallery-index">03</span>
@@ -176,9 +208,9 @@
               </div>
             </article>
 
-            <article class="gallery-card layout-d" data-reveal style="--reveal-index: 4">
+            <article class="gallery-card layout-d" data-gallery-card data-reveal role="button" tabindex="0" style="--reveal-index: 4" aria-label="Open Magazine Cover portrait">
               <div class="gallery-media">
-                <img src="liuhaocun/liuhaocun_18.jpg" alt="Magazine Cover portrait of Liu Haocun" />
+                <img src="liuhaocun/liuhaocun_18.jpg" alt="Magazine Cover portrait of Liu Haocun" loading="lazy" decoding="async" />
               </div>
               <div class="gallery-overlay"></div>
               <span class="gallery-index">04</span>
@@ -188,9 +220,9 @@
               </div>
             </article>
 
-            <article class="gallery-card layout-e" data-reveal style="--reveal-index: 5">
+            <article class="gallery-card layout-e" data-gallery-card data-reveal role="button" tabindex="0" style="--reveal-index: 5" aria-label="Open World Tour portrait">
               <div class="gallery-media">
-                <img src="liuhaocun/liuhaocun_23.jpg" alt="World Tour portrait of Liu Haocun" />
+                <img src="liuhaocun/liuhaocun_23.jpg" alt="World Tour portrait of Liu Haocun" loading="lazy" decoding="async" />
               </div>
               <div class="gallery-overlay"></div>
               <span class="gallery-index">05</span>
@@ -200,9 +232,9 @@
               </div>
             </article>
 
-            <article class="gallery-card layout-f" data-reveal style="--reveal-index: 6">
+            <article class="gallery-card layout-f" data-gallery-card data-reveal role="button" tabindex="0" style="--reveal-index: 6" aria-label="Open Celebration Night portrait">
               <div class="gallery-media">
-                <img src="liuhaocun/liuhaocun_22.jpg" alt="Celebration Night portrait of Liu Haocun" />
+                <img src="liuhaocun/liuhaocun_22.jpg" alt="Celebration Night portrait of Liu Haocun" loading="lazy" decoding="async" />
               </div>
               <div class="gallery-overlay"></div>
               <span class="gallery-index">06</span>
@@ -212,9 +244,9 @@
               </div>
             </article>
 
-            <article class="gallery-card layout-g" data-reveal style="--reveal-index: 7">
+            <article class="gallery-card layout-g" data-gallery-card data-reveal role="button" tabindex="0" style="--reveal-index: 7" aria-label="Open Off-Duty Glow portrait">
               <div class="gallery-media">
-                <img src="liuhaocun/liuhaocun_20.jpg" alt="Off-Duty Glow portrait of Liu Haocun" />
+                <img src="liuhaocun/liuhaocun_20.jpg" alt="Off-Duty Glow portrait of Liu Haocun" loading="lazy" decoding="async" />
               </div>
               <div class="gallery-overlay"></div>
               <span class="gallery-index">07</span>
@@ -224,9 +256,9 @@
               </div>
             </article>
 
-            <article class="gallery-card layout-h" data-reveal style="--reveal-index: 8">
+            <article class="gallery-card layout-h" data-gallery-card data-reveal role="button" tabindex="0" style="--reveal-index: 8" aria-label="Open Behind the Scenes portrait">
               <div class="gallery-media">
-                <img src="liuhaocun/liuhaocun_10.jpg" alt="Behind the Scenes portrait of Liu Haocun" />
+                <img src="liuhaocun/liuhaocun_26.jpg" alt="Behind the Scenes portrait of Liu Haocun" loading="lazy" decoding="async" />
               </div>
               <div class="gallery-overlay"></div>
               <span class="gallery-index">08</span>
@@ -243,18 +275,40 @@
     <aside class="music-dock" id="music-dock" aria-label="Background music player">
       <div class="music-dock-header">
         <span>Now playing</span>
-        <strong>Actor Harmony Version</strong>
+        <strong>演员 · 和声氛围版</strong>
+        <small id="music-state">YouTube player ready</small>
       </div>
+      <audio id="local-music" src="music/actor-harmony.mp3" loop preload="none" data-local-ready="false"></audio>
       <div class="music-frame">
         <iframe
           id="music-player"
-          title="Actor Harmony Version music player"
+          title="演员 和声氛围版 music player"
           src=""
-          allow="autoplay; encrypted-media; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
         ></iframe>
       </div>
+      <div class="music-actions">
+        <a href="https://www.youtube.com/watch?v=LGl7-v7dxp4" target="_blank" rel="noopener noreferrer">Open YouTube</a>
+        <span aria-hidden="true" class="equalizer">
+          <i></i><i></i><i></i><i></i>
+        </span>
+      </div>
     </aside>
+
+    <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Expanded gallery image">
+      <button class="lightbox-button lightbox-close" type="button" aria-label="Close expanded image">&times;</button>
+      <button class="lightbox-button lightbox-prev" type="button" aria-label="Previous image">&#8249;</button>
+      <figure class="lightbox-figure">
+        <img id="lightbox-image" src="" alt="" />
+        <figcaption class="lightbox-caption">
+          <span id="lightbox-kicker"></span>
+          <strong id="lightbox-title"></strong>
+        </figcaption>
+      </figure>
+      <button class="lightbox-button lightbox-next" type="button" aria-label="Next image">&#8250;</button>
+    </div>
 
     <script>
       window.addEventListener("DOMContentLoaded", function () {
@@ -280,22 +334,169 @@
           revealTargets.forEach((target) => target.classList.add("is-visible"));
         }
 
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const moodButtons = document.querySelectorAll("[data-mood]");
+        const cursorAura = document.querySelector(".cursor-aura");
         const musicToggle = document.querySelector(".music-toggle");
         const musicDock = document.getElementById("music-dock");
         const musicPlayer = document.getElementById("music-player");
+        const localMusic = document.getElementById("local-music");
+        const musicState = document.getElementById("music-state");
         const musicUrl =
-          "https://www.youtube-nocookie.com/embed/LGl7-v7dxp4?autoplay=1&loop=1&playlist=LGl7-v7dxp4&playsinline=1&rel=0";
+          "https://www.youtube.com/embed/LGl7-v7dxp4?autoplay=1&controls=1&playsinline=1&rel=0";
 
-        if (musicToggle && musicDock && musicPlayer) {
-          musicToggle.addEventListener("click", () => {
-            const isActive = musicToggle.classList.toggle("is-active");
+        moodButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            moodButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+            document.body.dataset.mood = button.dataset.mood;
+          });
+        });
 
-            musicDock.classList.toggle("is-open", isActive);
-            musicToggle.setAttribute("aria-expanded", String(isActive));
-            musicToggle.textContent = isActive ? "Stop Music" : "Music";
-            musicPlayer.src = isActive ? musicUrl : "";
+        if (!prefersReducedMotion && cursorAura) {
+          window.addEventListener("pointermove", (event) => {
+            document.documentElement.style.setProperty("--cursor-x", event.clientX + "px");
+            document.documentElement.style.setProperty("--cursor-y", event.clientY + "px");
           });
         }
+
+        if (musicToggle && musicDock && musicPlayer && localMusic) {
+          const stopMusic = () => {
+            localMusic.pause();
+            localMusic.currentTime = 0;
+            musicPlayer.src = "";
+            musicDock.classList.remove("is-open", "is-playing");
+            musicToggle.classList.remove("is-active");
+            musicToggle.setAttribute("aria-expanded", "false");
+            musicToggle.textContent = "Play Music";
+            if (musicState) musicState.textContent = "YouTube player ready";
+          };
+
+          const startYouTubeMusic = () => {
+            musicDock.classList.add("is-open", "is-playing");
+            musicPlayer.src = musicUrl;
+            if (musicState) musicState.textContent = "Playing from YouTube";
+          };
+
+          musicToggle.addEventListener("click", async () => {
+            const isActive = musicToggle.classList.toggle("is-active");
+
+            if (!isActive) {
+              stopMusic();
+              return;
+            }
+
+            musicDock.classList.add("is-open");
+            musicToggle.setAttribute("aria-expanded", String(isActive));
+            musicToggle.textContent = "Stop Music";
+
+            if (localMusic.dataset.localReady === "true") {
+              try {
+                await localMusic.play();
+                musicDock.classList.add("is-playing");
+                if (musicState) musicState.textContent = "Playing local audio";
+              } catch (error) {
+                startYouTubeMusic();
+              }
+            } else {
+              startYouTubeMusic();
+            }
+          });
+        }
+
+        const galleryCards = Array.from(document.querySelectorAll("[data-gallery-card]"));
+        const lightbox = document.getElementById("gallery-lightbox");
+        const lightboxImage = document.getElementById("lightbox-image");
+        const lightboxKicker = document.getElementById("lightbox-kicker");
+        const lightboxTitle = document.getElementById("lightbox-title");
+        const lightboxClose = document.querySelector(".lightbox-close");
+        const lightboxPrev = document.querySelector(".lightbox-prev");
+        const lightboxNext = document.querySelector(".lightbox-next");
+        let activeGalleryIndex = 0;
+
+        const getGalleryItem = (index) => {
+          const card = galleryCards[index];
+          const image = card.querySelector("img");
+          const kicker = card.querySelector(".gallery-copy span");
+          const title = card.querySelector(".gallery-copy h3");
+
+          return {
+            src: image ? image.currentSrc || image.src : "",
+            alt: image ? image.alt : "",
+            kicker: kicker ? kicker.textContent : "",
+            title: title ? title.textContent : "",
+          };
+        };
+
+        const openLightbox = (index) => {
+          if (!lightbox || !lightboxImage || !galleryCards.length) return;
+
+          activeGalleryIndex = (index + galleryCards.length) % galleryCards.length;
+          const item = getGalleryItem(activeGalleryIndex);
+
+          lightboxImage.src = item.src;
+          lightboxImage.alt = item.alt;
+          lightboxKicker.textContent = item.kicker;
+          lightboxTitle.textContent = item.title;
+          lightbox.classList.add("is-open");
+          lightbox.setAttribute("aria-hidden", "false");
+          document.body.classList.add("is-lightbox-open");
+          lightboxClose.focus();
+        };
+
+        const closeLightbox = () => {
+          if (!lightbox || !lightboxImage) return;
+
+          lightbox.classList.remove("is-open");
+          lightbox.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("is-lightbox-open");
+          lightboxImage.src = "";
+          galleryCards[activeGalleryIndex]?.focus();
+        };
+
+        const moveLightbox = (direction) => {
+          openLightbox(activeGalleryIndex + direction);
+        };
+
+        galleryCards.forEach((card, index) => {
+          card.addEventListener("click", () => openLightbox(index));
+          card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openLightbox(index);
+            }
+          });
+
+          if (!prefersReducedMotion) {
+            card.addEventListener("mousemove", (event) => {
+              const bounds = card.getBoundingClientRect();
+              const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+              const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+              card.style.setProperty("--tilt-x", x * 5 + "deg");
+              card.style.setProperty("--tilt-y", y * -5 + "deg");
+            });
+
+            card.addEventListener("mouseleave", () => {
+              card.style.removeProperty("--tilt-x");
+              card.style.removeProperty("--tilt-y");
+            });
+          }
+        });
+
+        lightboxClose?.addEventListener("click", closeLightbox);
+        lightboxPrev?.addEventListener("click", () => moveLightbox(-1));
+        lightboxNext?.addEventListener("click", () => moveLightbox(1));
+        lightbox?.addEventListener("click", (event) => {
+          if (event.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (!lightbox?.classList.contains("is-open")) return;
+
+          if (event.key === "Escape") closeLightbox();
+          if (event.key === "ArrowLeft") moveLightbox(-1);
+          if (event.key === "ArrowRight") moveLightbox(1);
+        });
 
         const hero = document.querySelector(".hero-section");
         const primary = document.querySelector(".parallax-primary");
@@ -306,8 +507,6 @@
         if (!hero || !primary || !detail || !accent || !spotlight) {
           return;
         }
-
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         if (prefersReducedMotion) {
           return;
