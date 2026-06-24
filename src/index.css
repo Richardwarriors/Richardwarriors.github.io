@@ -173,7 +173,8 @@ select {
 }
 
 .chrome-brand,
-.chrome-links a {
+.chrome-links a,
+.music-toggle {
   display: inline-flex;
   align-items: center;
   min-height: 2.6rem;
@@ -188,20 +189,85 @@ select {
   text-transform: uppercase;
 }
 
+.music-toggle {
+  appearance: none;
+  cursor: pointer;
+}
+
 .chrome-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
 }
 
-.chrome-links a {
+.chrome-links a,
+.music-toggle {
   transition: border-color 250ms ease, transform 250ms ease, background-color 250ms ease;
 }
 
-.chrome-links a:hover {
+.chrome-links a:hover,
+.music-toggle:hover,
+.music-toggle.is-active {
   transform: translateY(-1px);
   border-color: rgba(255, 255, 255, 0.24);
   background: rgba(255, 255, 255, 0.08);
+}
+
+.music-dock {
+  position: fixed;
+  right: clamp(1rem, 2vw, 1.6rem);
+  bottom: clamp(1rem, 2vw, 1.6rem);
+  z-index: 20;
+  width: min(21rem, calc(100vw - 2rem));
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(12, 7, 19, 0.9);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1rem);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.music-dock.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.music-dock-header {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.25rem 0.35rem 0.7rem;
+}
+
+.music-dock-header span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.music-dock-header strong {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.music-frame {
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  aspect-ratio: 16 / 9;
+}
+
+.music-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .hero-grid {
@@ -885,6 +951,7 @@ select {
   .button,
   .chrome-brand,
   .chrome-links a,
+  .music-toggle,
   .eyebrow {
     width: 100%;
     justify-content: center;

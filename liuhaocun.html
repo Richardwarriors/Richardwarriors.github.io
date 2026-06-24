@@ -27,6 +27,14 @@
             <div class="chrome-links">
               <a href="#gallery">Gallery</a>
               <a href="portfolio.html">Portfolio</a>
+              <button
+                class="music-toggle"
+                type="button"
+                aria-controls="music-dock"
+                aria-expanded="false"
+              >
+                Music
+              </button>
             </div>
           </div>
 
@@ -232,6 +240,22 @@
       </main>
     </div>
 
+    <aside class="music-dock" id="music-dock" aria-label="Background music player">
+      <div class="music-dock-header">
+        <span>Now playing</span>
+        <strong>Actor Harmony Version</strong>
+      </div>
+      <div class="music-frame">
+        <iframe
+          id="music-player"
+          title="Actor Harmony Version music player"
+          src=""
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </aside>
+
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         document.body.classList.add("is-ready");
@@ -254,6 +278,23 @@
           revealTargets.forEach((target) => observer.observe(target));
         } else {
           revealTargets.forEach((target) => target.classList.add("is-visible"));
+        }
+
+        const musicToggle = document.querySelector(".music-toggle");
+        const musicDock = document.getElementById("music-dock");
+        const musicPlayer = document.getElementById("music-player");
+        const musicUrl =
+          "https://www.youtube-nocookie.com/embed/LGl7-v7dxp4?autoplay=1&loop=1&playlist=LGl7-v7dxp4&playsinline=1&rel=0";
+
+        if (musicToggle && musicDock && musicPlayer) {
+          musicToggle.addEventListener("click", () => {
+            const isActive = musicToggle.classList.toggle("is-active");
+
+            musicDock.classList.toggle("is-open", isActive);
+            musicToggle.setAttribute("aria-expanded", String(isActive));
+            musicToggle.textContent = isActive ? "Stop Music" : "Music";
+            musicPlayer.src = isActive ? musicUrl : "";
+          });
         }
 
         const hero = document.querySelector(".hero-section");
