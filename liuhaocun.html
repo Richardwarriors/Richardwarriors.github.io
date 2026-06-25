@@ -37,8 +37,8 @@
               <button
                 class="music-toggle"
                 type="button"
-                aria-controls="music-dock"
-                aria-expanded="false"
+                aria-controls="background-music"
+                aria-pressed="false"
               >
                 Play Music
               </button>
@@ -304,30 +304,7 @@
       </main>
     </div>
 
-    <aside class="music-dock" id="music-dock" aria-label="Background music player">
-      <div class="music-dock-header">
-        <span>Now playing</span>
-        <strong>演员 · 和声氛围版</strong>
-        <small id="music-state">YouTube player ready</small>
-      </div>
-      <audio id="local-music" src="music/actor-harmony.mp3" loop preload="none" data-local-ready="false"></audio>
-      <div class="music-frame">
-        <iframe
-          id="music-player"
-          title="演员 和声氛围版 music player"
-          src=""
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
-      </div>
-      <div class="music-actions">
-        <a href="https://www.youtube.com/watch?v=LGl7-v7dxp4" target="_blank" rel="noopener noreferrer">Open YouTube</a>
-        <span aria-hidden="true" class="equalizer">
-          <i></i><i></i><i></i><i></i>
-        </span>
-      </div>
-    </aside>
+    <audio id="background-music" src="music/actor-harmony.mp3" autoplay loop preload="auto"></audio>
 
     <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Expanded gallery image">
       <button class="lightbox-button lightbox-close" type="button" aria-label="Close expanded image">&times;</button>
@@ -370,12 +347,7 @@
         const moodButtons = document.querySelectorAll("[data-mood]");
         const cursorAura = document.querySelector(".cursor-aura");
         const musicToggle = document.querySelector(".music-toggle");
-        const musicDock = document.getElementById("music-dock");
-        const musicPlayer = document.getElementById("music-player");
-        const localMusic = document.getElementById("local-music");
-        const musicState = document.getElementById("music-state");
-        const musicUrl =
-          "https://www.youtube.com/embed/LGl7-v7dxp4?autoplay=1&controls=1&playsinline=1&rel=0";
+        const backgroundMusic = document.getElementById("background-music");
 
         moodButtons.forEach((button) => {
           button.addEventListener("click", () => {
@@ -391,48 +363,38 @@
           });
         }
 
-        if (musicToggle && musicDock && musicPlayer && localMusic) {
-          const stopMusic = () => {
-            localMusic.pause();
-            localMusic.currentTime = 0;
-            musicPlayer.src = "";
-            musicDock.classList.remove("is-open", "is-playing");
-            musicToggle.classList.remove("is-active");
-            musicToggle.setAttribute("aria-expanded", "false");
-            musicToggle.textContent = "Play Music";
-            if (musicState) musicState.textContent = "YouTube player ready";
+        if (musicToggle && backgroundMusic) {
+          backgroundMusic.volume = 0.42;
+
+          const syncMusicButton = () => {
+            const isPlaying = !backgroundMusic.paused;
+            musicToggle.classList.toggle("is-active", isPlaying);
+            musicToggle.setAttribute("aria-pressed", String(isPlaying));
+            musicToggle.textContent = isPlaying ? "Pause Music" : "Play Music";
           };
 
-          const startYouTubeMusic = () => {
-            musicDock.classList.add("is-open", "is-playing");
-            musicPlayer.src = musicUrl;
-            if (musicState) musicState.textContent = "Playing from YouTube";
+          const tryPlayBackgroundMusic = async () => {
+            try {
+              await backgroundMusic.play();
+            } catch (error) {
+              syncMusicButton();
+            }
           };
+
+          backgroundMusic.addEventListener("play", syncMusicButton);
+          backgroundMusic.addEventListener("pause", syncMusicButton);
+          backgroundMusic.addEventListener("ended", syncMusicButton);
 
           musicToggle.addEventListener("click", async () => {
-            const isActive = musicToggle.classList.toggle("is-active");
-
-            if (!isActive) {
-              stopMusic();
-              return;
-            }
-
-            musicDock.classList.add("is-open");
-            musicToggle.setAttribute("aria-expanded", String(isActive));
-            musicToggle.textContent = "Stop Music";
-
-            if (localMusic.dataset.localReady === "true") {
-              try {
-                await localMusic.play();
-                musicDock.classList.add("is-playing");
-                if (musicState) musicState.textContent = "Playing local audio";
-              } catch (error) {
-                startYouTubeMusic();
-              }
+            if (backgroundMusic.paused) {
+              await tryPlayBackgroundMusic();
             } else {
-              startYouTubeMusic();
+              backgroundMusic.pause();
             }
+            syncMusicButton();
           });
+
+          tryPlayBackgroundMusic();
         }
 
         const galleryCards = Array.from(document.querySelectorAll("[data-gallery-card]"));
