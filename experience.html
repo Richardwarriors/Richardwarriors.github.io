@@ -12,11 +12,14 @@
       --text-2: #6e6e73;
       --text-3: #86868b;
       --accent: #0071e3;
-      --border: rgba(0, 0, 0, 0.08);
+      --border: rgba(0, 0, 0, 0.07);
+      --hairline: rgba(0, 0, 0, 0.055);
       --radius: 18px;
       --radius-lg: 28px;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03), 0 1px 1px rgba(0, 0, 0, 0.02);
+      --shadow-lift: 0 4px 18px rgba(0, 0, 0, 0.055);
       --maxw: 1040px;
+      --ease: cubic-bezier(0.28, 0.11, 0.32, 1);
       --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
         "Helvetica Neue", "Segoe UI", "PingFang SC", "Hiragino Sans GB",
         "Microsoft YaHei", sans-serif;
@@ -46,11 +49,6 @@
     a {
       color: var(--accent);
       text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
     }
 
     :focus-visible {
@@ -85,13 +83,12 @@
     .brand {
       font-size: 1.0625rem;
       font-weight: 600;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.012em;
       color: var(--text);
     }
 
     .brand:hover {
-      text-decoration: none;
-      opacity: 0.7;
+      opacity: 0.65;
     }
 
     .nav-list {
@@ -109,13 +106,13 @@
       border-radius: 980px;
       font-size: 0.8125rem;
       font-weight: 500;
+      letter-spacing: -0.005em;
       color: var(--text);
-      opacity: 0.82;
+      opacity: 0.8;
       transition: opacity 200ms ease, background-color 200ms ease;
     }
 
     .nav-list a:hover {
-      text-decoration: none;
       opacity: 1;
       background: rgba(0, 0, 0, 0.05);
     }
@@ -131,18 +128,13 @@
     .page-shell {
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: 0 22px 80px;
-    }
-
-    .section {
-      padding: 60px 0 0;
+      padding: 0 22px 96px;
     }
 
     h1,
     h2,
     h3 {
       color: var(--text);
-      letter-spacing: -0.02em;
     }
 
     /* ---------- Page label ---------- */
@@ -152,31 +144,38 @@
       padding: 60px 0 0;
       font-size: 0.8125rem;
       font-weight: 600;
+      letter-spacing: -0.005em;
       line-height: 1.6;
-      letter-spacing: 0;
       color: var(--accent);
     }
 
-    /* ---------- Section headings ---------- */
+    /* ---------- Sections ---------- */
+
+    .section {
+      padding: 64px 0 0;
+    }
 
     .section h2 {
       margin: 0 0 22px;
-      font-size: clamp(1.5rem, 2.6vw, 2rem);
-      line-height: 1.1;
+      font-size: clamp(1.5rem, 2.6vw, 1.9375rem);
+      line-height: 1.12;
       font-weight: 700;
+      letter-spacing: -0.021em;
     }
 
     /* ---------- Grouped list ---------- */
 
     .group + .group {
-      margin-top: 26px;
+      margin-top: 30px;
     }
 
     .group-label {
       margin: 0 0 10px;
-      padding-left: 2px;
-      font-size: 0.8125rem;
+      padding-left: 3px;
+      font-size: 0.6875rem;
       font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--text-3);
     }
 
@@ -186,15 +185,20 @@
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
       overflow: hidden;
+      transition: box-shadow 400ms var(--ease);
+    }
+
+    .list:hover {
+      box-shadow: var(--shadow-lift);
     }
 
     .row {
-      padding: 24px 28px;
-      transition: background-color 220ms ease;
+      padding: 26px 32px;
+      transition: background-color 250ms ease;
     }
 
     .row + .row {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--hairline);
     }
 
     .row:hover {
@@ -210,32 +214,68 @@
 
     .row-title {
       margin: 0;
-      font-size: 1.0625rem;
+      font-size: 1.125rem;
       font-weight: 600;
-      letter-spacing: -0.01em;
+      line-height: 1.35;
+      letter-spacing: -0.014em;
     }
 
     .row-org {
-      margin: 5px 0 0;
-      color: var(--text-2);
+      margin: 6px 0 0;
       font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--text-2);
+    }
+
+    .row-org a {
+      color: var(--text-2);
+      transition: color 200ms ease;
+    }
+
+    .row-org a:hover {
+      color: var(--accent);
+    }
+
+    /* external-link affordance on company sites */
+    .row-org a[target="_blank"]::after {
+      content: " \2197";
+      font-size: 0.85em;
+      opacity: 0.5;
+      transition: opacity 200ms ease;
+    }
+
+    .row-org a[target="_blank"]:hover::after {
+      opacity: 1;
     }
 
     .row-meta {
       flex-shrink: 0;
       text-align: right;
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
+      line-height: 1.55;
       color: var(--text-3);
-      line-height: 1.5;
     }
 
     .row-meta span {
       display: block;
+      white-space: nowrap;
     }
 
     .row-date {
       font-weight: 500;
       color: var(--text-2);
+      letter-spacing: -0.005em;
+    }
+
+    .row-date.is-current::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      vertical-align: 1px;
     }
 
     /* ---------- Tags ---------- */
@@ -254,12 +294,13 @@
       color: var(--text-2);
       font-size: 0.8125rem;
       font-weight: 500;
+      letter-spacing: -0.005em;
     }
 
     /* ---------- Footer ---------- */
 
     .footer {
-      margin-top: 72px;
+      margin-top: 80px;
       padding-top: 28px;
       border-top: 1px solid var(--border);
       display: flex;
@@ -267,7 +308,6 @@
       align-items: center;
       justify-content: flex-end;
       gap: 16px;
-      color: var(--text-3);
       font-size: 0.8125rem;
     }
 
@@ -279,6 +319,7 @@
 
     .footer-links a {
       color: var(--text-2);
+      transition: color 200ms ease;
     }
 
     .footer-links a:hover {
@@ -300,7 +341,7 @@
 
     .page-label,
     .section {
-      animation: fade-up 700ms cubic-bezier(0.28, 0.11, 0.32, 1) both;
+      animation: fade-up 700ms var(--ease) both;
     }
 
     .section {
@@ -309,9 +350,13 @@
 
     /* ---------- Responsive ---------- */
 
-    @media (max-width: 640px) {
+    @media (max-width: 700px) {
       body {
         font-size: 16px;
+      }
+
+      .page-shell {
+        padding-bottom: 72px;
       }
 
       .page-label {
@@ -323,12 +368,12 @@
       }
 
       .row {
-        padding: 20px 22px;
+        padding: 22px 24px;
       }
 
       .row-split {
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
       }
 
       .row-meta {
@@ -337,10 +382,12 @@
 
       .row-meta span {
         display: inline;
+        white-space: normal;
       }
 
       .row-meta span + span::before {
         content: " · ";
+        color: var(--text-3);
       }
 
       .header-inner {
@@ -353,6 +400,10 @@
       .nav-list {
         width: 100%;
         justify-content: center;
+      }
+
+      .footer {
+        justify-content: flex-start;
       }
     }
 
@@ -398,11 +449,11 @@
             <div>
               <h3 class="row-title">Researcher Intern</h3>
               <p class="row-org">
-                <a href="https://www.ainvest.com/dashboard/" target="_blank" rel="noopener noreferrer">Hithink Royal Flush – AInvest</a>
+                <a href="https://www.ainvest.com/" target="_blank" rel="noopener noreferrer">Hithink Royal Flush – AInvest</a>
               </p>
             </div>
             <div class="row-meta">
-              <span class="row-date">07/2026 – Present</span>
+              <span class="row-date is-current">07/2026 – Present</span>
               <span>New York, New York</span>
             </div>
           </article>
@@ -428,7 +479,9 @@
           <article class="row row-split">
             <div>
               <h3 class="row-title">Computer Science Researcher</h3>
-              <p class="row-org">Marquette University</p>
+              <p class="row-org">
+                <a href="https://www.marquette.edu/" target="_blank" rel="noopener noreferrer">Marquette University</a>
+              </p>
             </div>
             <div class="row-meta">
               <span class="row-date">05/2024 – 07/2024</span>
@@ -444,7 +497,9 @@
           <article class="row row-split">
             <div>
               <h3 class="row-title">Data Scientist</h3>
-              <p class="row-org">CodersData</p>
+              <p class="row-org">
+                <a href="https://codersdata.com/" target="_blank" rel="noopener noreferrer">CodersData</a>
+              </p>
             </div>
             <div class="row-meta">
               <span class="row-date">06/2023 – 03/2024</span>
@@ -455,7 +510,9 @@
           <article class="row row-split">
             <div>
               <h3 class="row-title">Data Scientist Intern</h3>
-              <p class="row-org">Hirebeat Inc</p>
+              <p class="row-org">
+                <a href="https://hirebeat.co/" target="_blank" rel="noopener noreferrer">Hirebeat Inc</a>
+              </p>
             </div>
             <div class="row-meta">
               <span class="row-date">01/2023 – 05/2023</span>
