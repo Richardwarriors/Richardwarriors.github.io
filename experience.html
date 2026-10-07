@@ -155,6 +155,11 @@
       padding: 64px 0 0;
     }
 
+    /* the first block has no heading, so it needs less breathing room */
+    .section-lead {
+      padding-top: 48px;
+    }
+
     .section h2 {
       margin: 0 0 22px;
       font-size: clamp(1.5rem, 2.6vw, 1.9375rem);
@@ -367,6 +372,10 @@
         padding-top: 48px;
       }
 
+      .section-lead {
+        padding-top: 40px;
+      }
+
       .row {
         padding: 22px 24px;
       }
@@ -439,8 +448,7 @@
   <main class="page-shell">
     <h1 class="page-label" id="page-title">Experience</h1>
 
-    <section id="work" class="section" aria-labelledby="work-title">
-      <h2 id="work-title">Work &amp; Research</h2>
+    <section id="work" class="section section-lead" aria-label="Work &amp; Research">
 
       <div class="group">
         <p class="group-label">2026</p>
@@ -530,9 +538,10 @@
         <article class="row">
           <h3 class="row-title">Program Committee</h3>
           <div class="tags" aria-label="Program committee venues">
+            <span class="tag">ACM SIGSPATIAL 2026</span>
             <span class="tag">IEEE CogMI 2026</span>
-            <span class="tag">IEEE CogMI 2025</span>
             <span class="tag">IEEE BigData 2026</span>
+            <span class="tag">IEEE CogMI 2025</span>
           </div>
         </article>
 
