@@ -6,20 +6,20 @@
   <title>Publications | Jiajie He</title>
   <style>
     :root {
-      --bg-1: #f8fbfc;
-      --bg-2: #eef4f7;
-      --surface: rgba(255, 255, 255, 0.84);
-      --surface-strong: #ffffff;
-      --text: #142535;
-      --muted: #506575;
-      --brand: #0f766e;
-      --brand-2: #0284c7;
-      --accent: #f59e0b;
-      --line: rgba(20, 37, 53, 0.12);
-      --ring: rgba(2, 132, 199, 0.2);
-      --shadow: 0 18px 42px rgba(20, 37, 53, 0.12);
-      --radius-lg: 18px;
-      --radius-xl: 24px;
+      --bg: #fbfbfd;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --text-2: #6e6e73;
+      --text-3: #86868b;
+      --accent: #0071e3;
+      --border: rgba(0, 0, 0, 0.08);
+      --radius: 18px;
+      --radius-lg: 28px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+      --maxw: 1040px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+        "Helvetica Neue", "Segoe UI", "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei", sans-serif;
     }
 
     * {
@@ -28,34 +28,23 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+      font-family: var(--font);
+      font-size: 17px;
+      line-height: 1.6;
       color: var(--text);
-      line-height: 1.65;
-      background:
-        radial-gradient(920px circle at -8% -12%, #d9f5ff 0%, transparent 42%),
-        radial-gradient(780px circle at 100% 0%, #d5fbec 0%, transparent 38%),
-        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(20, 37, 53, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(20, 37, 53, 0.03) 1px, transparent 1px);
-      background-size: 28px 28px;
-      pointer-events: none;
-      z-index: -1;
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     a {
-      color: var(--brand);
+      color: var(--accent);
       text-decoration: none;
     }
 
@@ -64,19 +53,29 @@
       text-underline-offset: 3px;
     }
 
+    :focus-visible {
+      outline: 3px solid rgba(0, 113, 227, 0.5);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* ---------- Navigation ---------- */
+
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(12px);
-      background: rgba(248, 251, 252, 0.8);
-      border-bottom: 1px solid var(--line);
+      z-index: 100;
+      background: rgba(251, 251, 253, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
-      max-width: 1180px;
+      max-width: var(--maxw);
       margin: 0 auto;
-      padding: 16px 20px;
+      padding: 0 22px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -84,16 +83,15 @@
     }
 
     .brand {
-      font-family: "Optima", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
-      font-size: 1.42rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       color: var(--text);
     }
 
     .brand:hover {
       text-decoration: none;
-      opacity: 0.88;
+      opacity: 0.7;
     }
 
     .nav-list {
@@ -101,392 +99,297 @@
       margin: 0;
       padding: 0;
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      align-items: center;
+      gap: 2px;
     }
 
     .nav-list a {
       display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
+      padding: 7px 13px;
+      border-radius: 980px;
+      font-size: 0.8125rem;
+      font-weight: 500;
       color: var(--text);
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+      opacity: 0.82;
+      transition: opacity 200ms ease, background-color 200ms ease;
     }
 
     .nav-list a:hover {
       text-decoration: none;
-      background: #ffffff;
-      transform: translateY(-1px);
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.05);
     }
 
     .nav-list a[aria-current="page"] {
-      background: linear-gradient(135deg, rgba(15, 118, 110, 0.14), rgba(2, 132, 199, 0.14));
-      box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.16);
+      opacity: 1;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.06);
     }
+
+    /* ---------- Layout ---------- */
 
     .page-shell {
-      max-width: 1180px;
+      max-width: var(--maxw);
       margin: 0 auto;
-      padding: 28px 20px 48px;
+      padding: 0 22px 80px;
     }
 
-    .hero-card,
-    .section-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
+    .section {
+      padding: 60px 0 0;
     }
 
-    .hero-card {
-      padding: clamp(24px, 4vw, 40px);
-      overflow: hidden;
-      position: relative;
-      animation: fade-up 520ms ease both;
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      right: -100px;
-      top: -120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(15, 118, 110, 0.16) 0%, transparent 66%);
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(15, 118, 110, 0.09);
-      color: var(--brand);
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hero-title {
-      margin: 16px 0 12px;
-      max-width: 760px;
-      font-family: "Optima", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
-      font-size: clamp(2rem, 5vw, 3.3rem);
-      line-height: 1.05;
+    h1,
+    h2,
+    h3 {
+      color: var(--text);
       letter-spacing: -0.02em;
     }
 
-    .hero-text {
-      max-width: 760px;
+    /* ---------- Page label ---------- */
+
+    .page-label {
       margin: 0;
-      color: #294154;
-      font-size: 1.02rem;
+      padding: 60px 0 0;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      line-height: 1.6;
+      letter-spacing: 0;
+      color: var(--accent);
     }
 
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
+    /* ---------- Year sections ---------- */
 
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 13px;
-      border-radius: 999px;
-      border: 1px solid rgba(20, 37, 53, 0.1);
-      background: rgba(255, 255, 255, 0.72);
-      color: #223a4d;
-      font-size: 0.92rem;
+    .section h2 {
+      margin: 0 0 18px;
+      font-size: 1.5rem;
+      line-height: 1.1;
       font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: 0.01em;
     }
 
-    .chip-mark {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      box-shadow: 0 0 0 5px rgba(2, 132, 199, 0.12);
-    }
-
-    .jump-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .jump-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      background: var(--surface-strong);
-      border: 1px solid var(--line);
-      color: var(--text);
-      font-weight: 700;
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
-    }
-
-    .jump-links a:hover {
-      text-decoration: none;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(20, 37, 53, 0.12);
-      border-color: var(--ring);
-    }
-
-    .content-grid {
-      display: grid;
-      gap: 22px;
-      margin-top: 22px;
-    }
-
-    .section-card {
-      padding: 28px clamp(18px, 4vw, 34px);
-      animation: fade-up 560ms ease both;
-    }
-
-    .section-title {
-      margin: 0 0 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: "Optima", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
-      font-size: clamp(1.45rem, 2vw, 1.8rem);
-      line-height: 1.2;
-    }
-
-    .section-title::after {
-      content: "";
-      width: 44px;
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--brand), var(--brand-2));
-    }
-
-    .section-copy {
-      margin: 0 0 22px;
-      color: var(--muted);
-      max-width: 760px;
-    }
-
-    .year-group + .year-group {
-      margin-top: 28px;
-    }
-
-    .year-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-
-    .year-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 84px;
-      min-height: 44px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(15, 118, 110, 0.14), rgba(2, 132, 199, 0.14));
-      color: var(--brand);
-      font-size: 0.94rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.14);
-    }
-
-    .year-rule {
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, rgba(15, 118, 110, 0.2), rgba(2, 132, 199, 0.04));
-    }
-
-    .pub-grid {
-      display: grid;
-      gap: 14px;
-    }
-
-    .pub-card {
-      padding: 18px;
+    .list {
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(20, 37, 53, 0.11);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 251, 252, 0.98) 100%);
-      box-shadow: 0 10px 22px rgba(20, 37, 53, 0.08);
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
     }
 
-    .pub-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 28px rgba(20, 37, 53, 0.11);
-      border-color: var(--ring);
+    .row {
+      padding: 26px 28px;
+      transition: background-color 220ms ease;
     }
 
-    .pub-topline {
+    .row + .row {
+      border-top: 1px solid var(--border);
+    }
+
+    .row:hover {
+      background: #fafafc;
+    }
+
+    /* ---------- Publication entry ---------- */
+
+    .pub-head {
       display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
+      gap: 10px 18px;
     }
 
     .pub-title {
       margin: 0;
-      font-size: 1.08rem;
-      line-height: 1.35;
-      color: #102434;
+      flex: 1 1 420px;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
     }
 
-    .badge-row {
+    .badges {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-end;
       gap: 8px;
       flex-shrink: 0;
     }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 980px;
+      font-size: 0.75rem;
+      font-weight: 500;
       white-space: nowrap;
     }
 
     .badge.venue {
-      background: rgba(2, 132, 199, 0.1);
-      color: var(--brand-2);
+      background: rgba(0, 0, 0, 0.045);
+      color: var(--text-2);
+    }
+
+    a.badge.venue {
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    a.badge.venue:hover {
+      background: rgba(0, 0, 0, 0.09);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    a.badge.venue::after {
+      content: " \2197";
+      font-size: 0.9em;
+      opacity: 0.55;
     }
 
     .badge.status {
-      background: rgba(245, 158, 11, 0.12);
-      color: #9a5f00;
+      background: rgba(0, 113, 227, 0.1);
+      color: var(--accent);
+      font-weight: 600;
     }
 
-    .pub-authors {
+    .authors {
       margin: 10px 0 0;
-      color: #294154;
-      font-size: 0.96rem;
+      color: var(--text-2);
+      font-size: 0.9375rem;
+      line-height: 1.55;
     }
 
-    .pub-note {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 0.94rem;
+    .authors strong {
+      color: var(--text);
+      font-weight: 600;
     }
 
-    .action-row {
+    .note {
+      margin: 8px 0 0;
+      color: var(--text-3);
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .note strong {
+      color: var(--text-2);
+      font-weight: 600;
+    }
+
+    .links {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
+      gap: 18px;
+      margin: 14px 0 0;
     }
 
-    .action-link {
-      display: inline-flex;
+    .links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .links a::after {
+      content: " ↗";
+      font-size: 0.8em;
+      opacity: 0.7;
+    }
+
+    /* ---------- Footer ---------- */
+
+    .footer {
+      margin-top: 72px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: var(--surface-strong);
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--text-3);
+      font-size: 0.8125rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    .footer-links a {
+      color: var(--text-2);
+    }
+
+    .footer-links a:hover {
       color: var(--text);
-      font-size: 0.92rem;
-      font-weight: 700;
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
-    .action-link:hover {
-      text-decoration: none;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(20, 37, 53, 0.12);
-      border-color: var(--ring);
-    }
-
-    .action-link.is-muted,
-    .action-link[aria-disabled="true"] {
-      color: var(--muted);
-      border-style: dashed;
-      cursor: default;
-    }
-
-    .action-link.is-muted:hover,
-    .action-link[aria-disabled="true"]:hover {
-      transform: none;
-      box-shadow: none;
-      text-decoration: none;
-      border-color: var(--line);
-    }
-
-    .footer-note {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
+    /* ---------- Motion ---------- */
 
     @keyframes fade-up {
       from {
         opacity: 0;
-        transform: translateY(14px);
+        transform: translateY(16px);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: none;
       }
     }
 
-    @media (max-width: 820px) {
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .pub-topline {
-        flex-direction: column;
-      }
-
-      .badge-row {
-        justify-content: flex-start;
-      }
+    .page-label,
+    .section {
+      animation: fade-up 700ms cubic-bezier(0.28, 0.11, 0.32, 1) both;
     }
+
+    .section {
+      animation-delay: 90ms;
+    }
+
+    /* ---------- Responsive ---------- */
 
     @media (max-width: 640px) {
+      body {
+        font-size: 16px;
+      }
+
+      .page-label {
+        padding-top: 48px;
+      }
+
+      .section {
+        padding-top: 48px;
+      }
+
+      .row {
+        padding: 22px;
+      }
+
+      .pub-title {
+        flex: 1 1 100%;
+      }
+
+      .header-inner {
+        height: auto;
+        padding: 12px 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
       .nav-list {
         width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
-      .nav-list li {
-        flex: 1 1 auto;
-      }
-
-      .nav-list a {
-        width: 100%;
-        text-align: center;
-      }
-
-      .year-header {
-        flex-wrap: wrap;
-      }
-
-      .year-rule {
-        display: none;
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
       }
     }
   </style>
@@ -507,239 +410,203 @@
   </header>
 
   <main class="page-shell">
-    <section class="hero-card" aria-labelledby="page-title">
-      <span class="eyebrow">Publications</span>
-      <h1 id="page-title" class="hero-title">Selected publications across privacy, recommender systems, machine learning, and medical imaging.</h1>
-      <p class="hero-text">
-        A curated list of recent and earlier publications, including conference papers, journal work, and manuscripts currently under review.
-      </p>
-      <div class="chip-row" aria-label="Highlights">
-        <span class="chip"><span class="chip-mark" aria-hidden="true"></span>12 selected publications</span>
-        <span class="chip"><span class="chip-mark" aria-hidden="true"></span>Privacy and RecSys focus</span>
-        <span class="chip"><span class="chip-mark" aria-hidden="true"></span>Conference, journal, and review-stage work</span>
-      </div>
-      <div class="jump-links">
-        <a href="#year-2026">2026</a>
-        <a href="#year-2025">2025</a>
-        <a href="#year-2024">2024</a>
-        <a href="#year-2021">2021</a>
-        <a href="#year-2020">2020</a>
+    <h1 class="page-label" id="page-title">Publications</h1>
+
+    <section class="section" aria-labelledby="year-2026">
+      <h2 id="year-2026">2026</h2>
+      <div class="list">
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">Membership Inference Attacks on LLM-based Recommender Systems</h3>
+            <div class="badges">
+              <a class="badge venue" href="https://recsys.acm.org/recsys26/" target="_blank" rel="noopener noreferrer">ACM RecSys 2026</a>
+            </div>
+          </div>
+          <p class="authors"><strong>Jiajie He</strong>, Yuechun Gu, Min-chun Chen, and Keke Chen</p>
+          <p class="links">
+            <a href="https://arxiv.org/abs/2508.18665" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
+
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">Privacy Déjà Vu: Re-emergence of Sensitive Samples in Continual Fine-tuning</h3>
+            <div class="badges">
+              <span class="badge venue">AAAI</span>
+              <span class="badge status">Under Review</span>
+            </div>
+          </div>
+          <p class="authors">Qizhen Yang, Yuechun Gu, <strong>Jiajie He</strong>, et al.</p>
+          <p class="links">
+            <a href="https://openreview.net/pdf?id=xYujfy5hFA" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
+
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">TIEM: Temporal Integration of Hypergraph Evidence and Skill Memory for Event-Driven Financial Forecasting</h3>
+            <div class="badges">
+              <span class="badge venue">ICLR</span>
+              <span class="badge status">Under Review</span>
+            </div>
+          </div>
+          <p class="authors">Wenjin Liu, Shen Pang, Chenxi Wang, Tiesunlong Shen, <strong>Jiajie He</strong>, et al.</p>
+          <p class="links">
+            <a href="https://arxiv.org/pdf/2608.13024" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
+
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">Secure-by-Disguise: A Systematic Evaluation of Image Disguising for Confidential Medical Image Modeling</h3>
+          </div>
+          <p class="authors">Jason Rojas, <strong>Jiajie He</strong>, et al.</p>
+          <p class="note">
+            Guided undergraduate student
+            <a href="https://www.linkedin.com/in/jasonrojas04/" target="_blank" rel="noopener noreferrer"><strong>Jason Rojas</strong></a>,
+            now at IBM.
+          </p>
+          <p class="links">
+            <a href="https://arxiv.org/pdf/2607.08867" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
       </div>
     </section>
 
-    <div class="content-grid">
-      <section class="section-card" aria-labelledby="pub-list-title">
-        <h2 id="pub-list-title" class="section-title">Publication List</h2>
-        <p class="section-copy">
-          Entries are grouped by year and styled for quick scanning of title, venue, status, authors, and available links.
-        </p>
-
-        <div id="year-2026" class="year-group">
-          <div class="year-header">
-            <span class="year-pill">2026</span>
-            <div class="year-rule" aria-hidden="true"></div>
+    <section class="section" aria-labelledby="year-2025">
+      <h2 id="year-2025">2025</h2>
+      <div class="list">
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">Membership Inference Attacks on Recommender System: A Survey</h3>
+            <div class="badges">
+              <span class="badge venue">ACM Computing Surveys</span>
+              <span class="badge status">Under Review</span>
+            </div>
           </div>
-          <div class="pub-grid">
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">Membership Inference Attacks on LLM-based Recommender Systems</h3>
-                <div class="badge-row">
-                  <span class="badge venue">ACM RecSys 2026</span>
-                </div>
-              </div>
-              <p class="pub-authors"><strong>Jiajie He</strong>, Yuechun Gu, Min-chun Chen, and Keke Chen</p>
-              <div class="action-row">
-                <a class="action-link" href="https://arxiv.org/abs/2508.18665" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
+          <p class="authors"><strong>Jiajie He</strong>, <strong>Xintong Chen</strong>, Xinyang Fang, Min-chun Chen, Yuechun Gu, and Keke Chen</p>
+          <p class="note">Collaborating institutions: <strong>University of Cincinnati</strong>, <strong>University of Southern California</strong></p>
+          <p class="links">
+            <a href="https://github.com/Richardwarriors/Membership-Inference-Attacks-on-Recommendation-System" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </p>
+        </article>
 
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">Privacy Déjà Vu: Re-emergence of Sensitive Samples in Continual Fine-tuning</h3>
-                <div class="badge-row">
-                  <span class="badge venue">AAAI</span>
-                  <span class="badge status">Under Review</span>
-                </div>
-              </div>
-              <p class="pub-authors">Qizhen Yang, Yuechun Gu, <strong>Jiajie He</strong>, et al.</p>
-              <div class="action-row">
-                <a class="action-link" href="https://openreview.net/pdf?id=xYujfy5hFA" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
-
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">TIEM: Temporal Integration of Hypergraph Evidence and Skill Memory for Event-Driven Financial Forecasting</h3>
-                <div class="badge-row">
-                  <span class="badge venue">ICLR</span>
-                  <span class="badge status">Under Review</span>
-                </div>
-              </div>
-              <p class="pub-authors">Wenjin Liu, Shen Pang, Chenxi Wang, Tiesunlong Shen, <strong>Jiajie He</strong>, et al.</p>
-              <div class="action-row">
-                <a class="action-link" href="https://arxiv.org/pdf/2608.13024" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
-
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">Secure-by-Disguise: A Systematic Evaluation of Image Disguising for Confidential Medical Image Modeling</h3>
-              </div>
-              <p class="pub-authors">Jason Rojas, <strong>Jiajie He</strong>, et al.</p>
-              <p class="pub-note">Guided undergraduate student
-                <a href="https://www.linkedin.com/in/jasonrojas04/" target="_blank" rel="noopener noreferrer"><strong>Jason Rojas</strong></a>,
-                now at IBM.</p>
-              <div class="action-row">
-                <a class="action-link" href="https://arxiv.org/pdf/2607.08867" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">Auditing Approximate Machine Unlearning for Differentially Private Models</h3>
+            <div class="badges">
+              <a class="badge venue" href="https://www3.cs.stonybrook.edu/~icdm2025/" target="_blank" rel="noopener noreferrer">IEEE ICDM 2025</a>
+            </div>
           </div>
-        </div>
+          <p class="authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</p>
+          <p class="links">
+            <a href="https://arxiv.org/abs/2508.18671" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
 
-        <div id="year-2025" class="year-group">
-          <div class="year-header">
-            <span class="year-pill">2025</span>
-            <div class="year-rule" aria-hidden="true"></div>
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">RecPS: Privacy Risk Scoring for Recommender Systems</h3>
+            <div class="badges">
+              <a class="badge venue" href="https://recsys.acm.org/recsys25/" target="_blank" rel="noopener noreferrer">ACM RecSys 2025</a>
+            </div>
           </div>
-          <div class="pub-grid">
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">Membership Inference Attacks on Recommender System: A Survey</h3>
-                <div class="badge-row">
-                  <span class="badge venue">ACM Computing Surveys</span>
-                  <span class="badge status">Under Review</span>
-                </div>
-              </div>
-              <p class="pub-authors"><strong>Jiajie He</strong>, <strong>Xintong Chen</strong>, Xinyang Fang, Min-chun Chen, Yuechun Gu, and Keke Chen</p>
-              <p class="pub-note">Collaborating institutions: <strong>University of Cincinnati</strong>, <strong>University of Southern California</strong></p>
-              <div class="action-row">
-                <span class="action-link is-muted" aria-disabled="true">PDF pending</span>
-                <a class="action-link" href="https://github.com/Richardwarriors/Membership-Inference-Attacks-on-Recommendation-System" target="_blank" rel="noopener noreferrer">GitHub</a>
-              </div>
-            </article>
+          <p class="authors"><strong>Jiajie He</strong>, Yuechun Gu, and Keke Chen</p>
+          <p class="links">
+            <a href="https://arxiv.org/abs/2507.18365" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
 
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">Auditing Approximate Machine Unlearning for Differentially Private Models</h3>
-                <div class="badge-row">
-                  <span class="badge venue">IEEE ICDM 2025</span>
-                </div>
-              </div>
-              <p class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</p>
-              <div class="action-row">
-                <a class="action-link" href="https://arxiv.org/abs/2508.18671" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
-
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">RecPS: Privacy Risk Scoring for Recommender Systems</h3>
-                <div class="badge-row">
-                  <span class="badge venue">ACM RecSys 2025</span>
-                </div>
-              </div>
-              <p class="pub-authors"><strong>Jiajie He</strong>, Yuechun Gu, and Keke Chen</p>
-              <div class="action-row">
-                <a class="action-link" href="https://arxiv.org/abs/2507.18365" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
-
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">Adaptive Domain Inference Attack with Concept Hierarchy</h3>
-                <div class="badge-row">
-                  <span class="badge venue">SIGKDD 2025</span>
-                </div>
-              </div>
-              <p class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</p>
-              <div class="action-row">
-                <a class="action-link" href="https://dl.acm.org/doi/abs/10.1145/3690624.3709332" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
-
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">Volume-Wise Task fMRI Decoding with Deep Learning</h3>
-                <div class="badge-row">
-                  <span class="badge status">Under Review</span>
-                </div>
-              </div>
-              <p class="pub-authors">Yueyang Wu, Sinan Yang, Yanming Wang, <strong>Jiajie He</strong>, et al.</p>
-              <div class="action-row">
-                <a class="action-link" href="https://arxiv.org/abs/2503.01925" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">Adaptive Domain Inference Attack with Concept Hierarchy</h3>
+            <div class="badges">
+              <a class="badge venue" href="https://kdd2025.kdd.org/" target="_blank" rel="noopener noreferrer">SIGKDD 2025</a>
+            </div>
           </div>
-        </div>
+          <p class="authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</p>
+          <p class="links">
+            <a href="https://dl.acm.org/doi/abs/10.1145/3690624.3709332" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
 
-        <div id="year-2024" class="year-group">
-          <div class="year-header">
-            <span class="year-pill">2024</span>
-            <div class="year-rule" aria-hidden="true"></div>
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">Volume-Wise Task fMRI Decoding with Deep Learning</h3>
+            <div class="badges">
+              <span class="badge status">Under Review</span>
+            </div>
           </div>
-          <div class="pub-grid">
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">FT-PrivacyScore: Personalized Privacy Scoring Service for Machine Learning Participation</h3>
-                <div class="badge-row">
-                  <span class="badge venue">ACM CCS 2024</span>
-                </div>
-              </div>
-              <p class="pub-authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</p>
-              <div class="action-row">
-                <a class="action-link" href="https://dl.acm.org/doi/abs/10.1145/3658644.3691366" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
-          </div>
-        </div>
+          <p class="authors">Yueyang Wu, Sinan Yang, Yanming Wang, <strong>Jiajie He</strong>, et al.</p>
+          <p class="links">
+            <a href="https://arxiv.org/abs/2503.01925" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
+      </div>
+    </section>
 
-        <div id="year-2021" class="year-group">
-          <div class="year-header">
-            <span class="year-pill">2021</span>
-            <div class="year-rule" aria-hidden="true"></div>
+    <section class="section" aria-labelledby="year-2024">
+      <h2 id="year-2024">2024</h2>
+      <div class="list">
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">FT-PrivacyScore: Personalized Privacy Scoring Service for Machine Learning Participation</h3>
+            <div class="badges">
+              <a class="badge venue" href="https://www.sigsac.org/ccs/CCS2024/" target="_blank" rel="noopener noreferrer">ACM CCS 2024</a>
+            </div>
           </div>
-          <div class="pub-grid">
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">White Matter Hyperintensities Induce Distal Deficits in the Connected Fibers</h3>
-                <div class="badge-row">
-                  <span class="badge venue">Human Brain Mapping</span>
-                </div>
-              </div>
-              <p class="pub-authors">Yanpeng Liu, Yiwei Xia, Xiaoxiao Wang, <strong>Jiajie He</strong>, et al.</p>
-              <div class="action-row">
-                <a class="action-link" href="https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.25338" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
-          </div>
-        </div>
+          <p class="authors">Yuechun Gu, <strong>Jiajie He</strong>, and Keke Chen</p>
+          <p class="links">
+            <a href="https://dl.acm.org/doi/abs/10.1145/3658644.3691366" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
+      </div>
+    </section>
 
-        <div id="year-2020" class="year-group">
-          <div class="year-header">
-            <span class="year-pill">2020</span>
-            <div class="year-rule" aria-hidden="true"></div>
+    <section class="section" aria-labelledby="year-2021">
+      <h2 id="year-2021">2021</h2>
+      <div class="list">
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">White Matter Hyperintensities Induce Distal Deficits in the Connected Fibers</h3>
+            <div class="badges">
+              <a class="badge venue" href="https://onlinelibrary.wiley.com/journal/10970193" target="_blank" rel="noopener noreferrer">Human Brain Mapping</a>
+            </div>
           </div>
-          <div class="pub-grid">
-            <article class="pub-card">
-              <div class="pub-topline">
-                <h3 class="pub-title">Comparison between the Ultra-wide Band Gap Semiconductor AlGaN and GaN</h3>
-                <div class="badge-row">
-                  <span class="badge venue">IOP Conference Series</span>
-                </div>
-              </div>
-              <p class="pub-authors"><strong>Jiajie He</strong></p>
-              <div class="action-row">
-                <a class="action-link" href="https://iopscience.iop.org/article/10.1088/1757-899X/738/1/012009" target="_blank" rel="noopener noreferrer">PDF</a>
-              </div>
-            </article>
-          </div>
-        </div>
+          <p class="authors">Yanpeng Liu, Yiwei Xia, Xiaoxiao Wang, <strong>Jiajie He</strong>, et al.</p>
+          <p class="links">
+            <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.25338" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
+      </div>
+    </section>
 
-        <p class="footer-note">
-          This page is intentionally standalone, so it opens directly from a local file without depending on external fonts, icon libraries, or scripts.
-        </p>
-      </section>
-    </div>
+    <section class="section" aria-labelledby="year-2020">
+      <h2 id="year-2020">2020</h2>
+      <div class="list">
+        <article class="row">
+          <div class="pub-head">
+            <h3 class="pub-title">Comparison between the Ultra-wide Band Gap Semiconductor AlGaN and GaN</h3>
+            <div class="badges">
+              <a class="badge venue" href="https://iopscience.iop.org/journal/1757-899X" target="_blank" rel="noopener noreferrer">IOP Conference Series</a>
+            </div>
+          </div>
+          <p class="authors"><strong>Jiajie He</strong></p>
+          <p class="links">
+            <a href="https://iopscience.iop.org/article/10.1088/1757-899X/738/1/012009" target="_blank" rel="noopener noreferrer">PDF</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Privacy, recommender systems, and medical imaging.</span>
+      <div class="footer-links">
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=LJQkxOUAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href="mailto:jiajieh1@umbc.edu">Email</a>
+        <a href="index.html">Back Home</a>
+      </div>
+    </footer>
   </main>
 </body>
 </html>
